@@ -1348,6 +1348,15 @@ true	true	true	no option
 .in
 .ft P
 \}
+.PP
+The log file describing the build is named in the form
+\f[CB]package_version_arch-YYYY-MM-DDTHH:MM:SSZ.build\f[R] and saved
+in the \fB--build-dir\fR, usually defaulting to the current working directory.
+As a special case, if sbuild is in buildd mode, the default log directory
+is \fB$HOME/logs\fR and the \f[CB].build\f[R] extension is omitted.
+The version is omitted if it is not known at the start of the build,
+for example when the package is specified as a package name without version
+and downloaded from the apt archive during build.
 .SH EXTERNAL COMMANDS
 Support to run external commands during an sbuild run is provided. A set of
 external commands can be run at various stages of a build. Providing commands to
