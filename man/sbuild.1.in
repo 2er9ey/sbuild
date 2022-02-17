@@ -1298,6 +1298,10 @@ of a Debian-specific kernel patch. On these systems, root is required for
 enabling them. This can also done permanently by setting
 kernel.unprivileged_userns_clone=1 in /etc/sysctl.d/.
 .SH BUILD ARTIFACTS
+Artifacts produced by the build are saved into the directory specified by
+the \fB--build-dir\fR command-line parameter or the \fBBUILD_DIR\fR
+configuration variable.
+.PP
 Sbuild is meant to be used to build architecture specific binary packages from
 a given source package. In addition, sbuild is also able to generate
 architecture independent binary packages as well as to rebuild the original
