@@ -258,6 +258,13 @@ env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-source --build .
 run_sbuild ''  -d "$release" test-pkg_1.0.dsc
 verify orig deb bin_changes commands_log
 
+# Test symlinked .dsc (see https://bugs.debian.org/1012856)
+env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-source --build .
+mv "${AUTOPKGTEST_TMP}/test-pkg_1.0.dsc" "${AUTOPKGTEST_TMP}/test-pkg_1.0_symlink.txt"
+ln -s test-pkg_1.0_symlink.txt "${AUTOPKGTEST_TMP}/test-pkg_1.0.dsc"
+run_sbuild '' -d "$release" test-pkg_1.0.dsc
+verify orig deb bin_changes commands_log
+
 
 gpgconf --kill all || :
 rm -r -- "${AUTOPKGTEST_TMP}/gpghome/" "${AUTOPKGTEST_TMP}/key.asc"
