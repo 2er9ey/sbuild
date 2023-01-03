@@ -121,6 +121,11 @@ verify_src_changes() {
 		"${AUTOPKGTEST_TMP}/test-pkg_1.0_source.changes"
 }
 
+verify_commands_log() {
+	echo "verifying absolute path in --pre-build-commands" >&2
+	! grep -v / "${AUTOPKGTEST_TMP}/pre-build-commands.log"
+}
+
 verify() {
 	for thing in "$@"; do
 		"verify_$thing"
@@ -133,7 +138,8 @@ verify() {
 	rm -f "${AUTOPKGTEST_TMP}/test-pkg_1.0_${nativearch}.changes" \
 		"${AUTOPKGTEST_TMP}/test-pkg_1.0_source.changes" \
 		"${AUTOPKGTEST_TMP}/test-pkg_1.0_${nativearch}.buildinfo" \
-		"${AUTOPKGTEST_TMP}/test-pkg_1.0_source.buildinfo"
+		"${AUTOPKGTEST_TMP}/test-pkg_1.0_source.buildinfo" \
+		"${AUTOPKGTEST_TMP}/pre-build-commands.log"
 }
 
 sqop generate-key "sbuild fake uploader <fake-uploader@debian.org>" > "${AUTOPKGTEST_TMP}/key.asc"
@@ -230,6 +236,7 @@ run_sbuild() {
 		--no-source-only-changes --nolog \
 		--chroot="${AUTOPKGTEST_TMP}/chroot.tar" --chroot-mode=unshare \
 		--keyid="sbuild fake uploader <fake-uploader@debian.org>" \
+		--pre-build-commands="echo %SBUILD_DSC > ${AUTOPKGTEST_TMP}/pre-build-commands.log" \
 		--no-run-lintian --no-run-autopkgtest \
 		--no-apt-upgrade --no-apt-distupgrade --no-apt-update \
 		"$@"
@@ -237,19 +244,19 @@ run_sbuild() {
 
 # Test running sbuild from the unpacked source
 run_sbuild test-pkg-1.0 --source
-verify orig deb dsc bin_changes
+verify orig deb dsc bin_changes commands_log
 
 run_sbuild test-pkg-1.0
-verify orig deb bin_changes
+verify orig deb bin_changes commands_log
 
 # Test running sbuild on the dsc
 env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-source --build .
 run_sbuild '' --source -d "$release" test-pkg_1.0.dsc
-verify orig deb dsc bin_changes
+verify orig deb dsc bin_changes commands_log
 
 env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-source --build .
 run_sbuild ''  -d "$release" test-pkg_1.0.dsc
-verify orig deb bin_changes
+verify orig deb bin_changes commands_log
 
 
 gpgconf --kill all || :
