@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
-# Copyright © 2020-2022 Christian Kastner <ckk@debian.org>
+# Copyright © 2020-2024 Christian Kastner <ckk@debian.org>
+#             2024      Johannes Schauer Marin Rodrigues <josch@debian.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -142,6 +143,13 @@ def main():
              "qemu(1) command string that would be executed, and then exit.",
     )
     parser.add_argument(
+        '--boot',
+        choices=['auto', 'bios', 'efi', 'ieee1275', 'none'],
+        default='auto',
+        help="How the image should boot. Default is BIOS on amd64 and i386, "
+             "EFI on arm64 and armhf, and IEEE1275 on ppc64el.",
+        )
+    parser.add_argument(
         'distribution',
         action='store',
         help="The distribution to debootstrap.",
@@ -207,6 +215,7 @@ def main():
         '--mirror',         parsed.mirror,
         '--size',           parsed.size,
         '--script',         '/usr/share/sbuild/sbuild-qemu-create-modscript',
+        '--boot',           parsed.boot,
         dist,
         out_file,
     ]
