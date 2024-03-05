@@ -26,6 +26,7 @@ use warnings;
 use English;
 use Sbuild::Utility;
 use File::Temp qw(mkdtemp tempfile);
+use File::Path qw(make_path);
 use File::Copy;
 use Cwd qw(abs_path);
 use Sbuild qw(shellescape);
@@ -40,6 +41,8 @@ BEGIN {
     @EXPORT = qw();
 }
 
+
+
 sub new {
     my $class = shift;
     my $conf = shift;
@@ -51,55 +54,275 @@ sub new {
     return $self;
 }
 
-sub begin_session {
-    my $self = shift;
-    my $chroot = $self->get('Chroot ID');
+sub find_tarball {
+    my $self           = shift;
+    my ($chroot)       = @_;
+    my $tarball        = undef;
+    my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+    if (defined($ENV{'XDG_CACHE_HOME'})) {
+        $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
+    }
+    if (opendir my $dh, $xdg_cache_home) {
+        while (defined(my $file = readdir $dh)) {
+            next if $file eq '.' || $file eq '..';
+            my $path = "$xdg_cache_home/$file";
+            next if -z $path;
+            if ($file =~ /^$chroot\.t.+$/) {
+                $tarball = $path;
+                last;
+            }
+        }
+        closedir $dh;
+    }
+    return $tarball;
+}
 
-    return 0 if !defined $chroot;
+sub chroot_tarball_if_too_old {
+    my $self   = shift;
+    my $chroot = shift;
+    if ($chroot =~ '/') {
+        # if the user passed a tarball explicitly, never update it
+        return undef;
+    }
+    my $tarball = $self->find_tarball($chroot);
+    if (defined($tarball)) {
+        # negative max-age indicates to never update
+        # if an existing tarball is too young, don't update
+        my $age     = time - (stat($tarball))[9];
+        my $max_age = $self->get_conf('UNSHARE_MMDEBSTRAP_MAX_AGE');
+        if ($max_age >= 0 && $age >= $max_age) {
+            print STDERR "I: Existing chroot tarball is too old ("
+              . (
+                sprintf '%.2f >= %.2f',
+                ($age / 60 / 60 / 24),
+                ($max_age / 60 / 60 / 24)) . " days):\n";
+            print STDERR ("I: Change the maximum age by setting "
+                  . "\$unshare_mmdebstrap_max_age (in seconds) in your "
+                  . "~/.sbuildrc or disable it by setting it to a "
+                  . "negative value.\n");
+            return $tarball;
+        }
+        return undef;
+    }
+    # this should never happen because $chroot was computed by
+    # ChrootInfo.pm and should thus be an already existing path
+    print STDERR ("W: Existing chroot tarball was not "
+          . "found even though it should've been.\n");
+    print STDERR ("W: THIS SHOULD NEVER HAPPEN."
+          . "Please file a bug if you are seeing this.\n");
+    my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+    if (defined($ENV{'XDG_CACHE_HOME'})) {
+        $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
+    }
+    return "$xdg_cache_home/$chroot.tar";
+}
 
-    my $namespace = undef;
-    if ($chroot =~ m/^(chroot|source):(.+)$/) {
-	$namespace = $1;
-	$chroot = $2;
+sub chroot_auto_create {
+    my $self    = shift;
+    my $chroot  = shift;
+    my $rootdir = shift;
+    my $dist    = $self->get_conf('DISTRIBUTION');
+    my $arch    = $self->get_conf('BUILD_ARCH');
+
+    my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+    if (defined($ENV{'XDG_CACHE_HOME'})) {
+        $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
     }
 
-    my $tarball = undef;
-    if ($chroot =~ '/') {
-	if (! -e $chroot) {
-	    print STDERR "Chroot $chroot does not exist\n";
-	    return 0;
-	}
-	$tarball = abs_path($chroot);
-    } else {
-	my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-	if (defined($ENV{'XDG_CACHE_HOME'})) {
-	    $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
-	}
+    if ($dist eq "UNRELEASED") {
+        print STDERR "W: translating UNRELEASED to unstable";
+        $dist = "unstable";
+    }
 
-	if (opendir my $dh, $xdg_cache_home) {
-	    while (defined(my $file = readdir $dh)) {
-		next if $file eq '.' || $file eq '..';
-		my $path = "$xdg_cache_home/$file";
-		# FIXME: support directory chroots
-		#if (-d $path) {
-		#    if ($file eq $chroot) {
-		#	$tarball = $path;
-		#	last;
-		#    }
-		#} else {
-		    if ($file =~ /^$chroot\.t.+$/) {
-			$tarball = $path;
-			last;
-		    }
-		#}
-	    }
-	    closedir $dh;
-	}
+    # mmdebstrap chooses Essential:yes packages from the given
+    # distribution, so for experimental or backports, we have to
+    # pass a different dist (unstable and stable, respectively). We could
+    # also pass an empty dist string but then mmdebstrap cannot anymore
+    # choose the stable mirrors for us.
+    my $basedist = $dist;
+    if ($dist eq "experimental" or $dist eq "rc-buggy") {
+        print STDERR "I: choosing unstable as base distribution for $dist\n";
+        $basedist = "unstable";
+    } elsif ($dist =~ m/^(.*)-backports$/) {
+        print STDERR "I: choosing $1 as base distribution for $dist\n";
+        $basedist = $1;
+    }
 
-	if (!defined($tarball)) {
-	    print STDERR "Unable to find $chroot in $xdg_cache_home\n";
-	    return 0;
-	}
+    my @commonargs = (
+        "mmdebstrap",   "--variant=buildd",
+        "--arch=$arch", "--skip=output/mknod",
+        "--format=tar", $basedist,
+    );
+    my $extraargs = [];
+    {
+        my $ea_conf = $self->get_conf('UNSHARE_MMDEBSTRAP_EXTRA_ARGS');
+        next if !defined $ea_conf;
+        # more specific entries overwrite less specific entries
+        foreach my $arg ("*", $dist, "$dist-$arch", $chroot) {
+            next if !defined $arg;
+            next if !exists ${$ea_conf}{$arg};
+            next if ref(${$ea_conf}{$arg}) ne "ARRAY";
+            $extraargs = ${$ea_conf}{$arg};
+        }
+    }
+
+    if ($self->get_conf('UNSHARE_MMDEBSTRAP_KEEP_TARBALL')) {
+        # the tarball is supposed to be kept but maybe we don't need to
+        # create one because the existing one is new enough
+
+        make_path($xdg_cache_home, { error => \my $err });
+        if (@$err) {
+            print STDERR "W: failed to create $xdg_cache_home\n";
+        }
+
+        my $tarball = undef;
+        if (defined $chroot) {
+            $tarball = $self->chroot_tarball_if_too_old($chroot);
+            if (!defined $tarball) {
+                return $chroot;
+            }
+        } else {
+            # chroot was not found by Sbuild::ChrootInfoUnshare, so we
+            # build a new one
+            $tarball = "$xdg_cache_home/$dist-$arch.tar";
+            $chroot  = "$xdg_cache_home/$dist-$arch.tar";
+            $self->set('Chroot ID', $chroot);
+            print STDERR ("I: Creating new chroot tarball:\n"
+                  . join(" ", (@commonargs, $tarball, @{$extraargs}))
+                  . "\n");
+        }
+
+        my $exit_code = system @commonargs, $tarball, @{$extraargs};
+        if ($exit_code != 0) {
+            print STDERR "mmdebstrap failed\n";
+            return undef;
+        }
+
+        print STDERR "I: Placed new chroot tarball at $tarball\n";
+
+        return $chroot;
+    }
+
+    # UNSHARE_MMDEBSTRAP_AUTO_CREATE is true
+    # UNSHARE_MMDEBSTRAP_KEEP_TARBALL is false
+    #
+    # This means we want to automatically create the chroot but not
+    # keep the tarball.
+
+    if (defined $chroot && !defined $self->chroot_tarball_if_too_old($chroot))
+    {
+        return $chroot;
+    }
+
+    # chroot was found but UNSHARE_MMDEBSTRAP_KEEP_TARBALL was
+    # false so if the existing tarball is too old, don't use it
+    # if Chroot ID was undefined, then Sbuild::ChrootInfoUnshare
+    # was unable to find a chroot tarball and
+    # UNSHARE_MMDEBSTRAP_KEEP_TARBALL is false. In that case, we
+    # create a chroot environment on-demand using mmdebstrap
+    {
+        # we do not create a directory with mmdebstrap directly but pipe a
+        # tarball to /usr/libexec/sbuild-usernsexec so that the uid range
+        # chosen by mmdebstrap is independent from the uid range allocation
+        # algorithm as implemented by /usr/libexec/sbuild-usernsexec
+
+        pipe my $tar_reader, my $mm_writer;
+
+        my $mmpid = fork();
+        if ($mmpid == 0) {
+            # child process
+            open(STDOUT, '>&', $mm_writer) or die "cannot open STDOUT: $!";
+            close $tar_reader or die "cannot close tar_reader: $!";
+            my @cmdline = (@commonargs, "-", @{$extraargs});
+
+            print STDERR ("I: Creating chroot on-demand by running:\n"
+                  . join(" ", @cmdline)
+                  . "\n");
+            exec @commonargs;
+        }
+        my $tarpid = fork();
+        if ($tarpid == 0) {
+            # child process
+            open(STDIN, '<&', $tar_reader) or die "cannot open STDIN: $!";
+            close $mm_writer               or die "cannot close mm_writer: $!";
+            print STDERR "I: Unpacking tarball from STDIN to $rootdir...\n";
+            my @idmap   = read_subuid_subgid;
+            my @cmdline = (
+                "/usr/libexec/sbuild-usernsexec",
+                (map { join ":", @{$_} } @idmap),
+                '--', 'tar', '--directory', $rootdir, '--extract'
+            );
+
+            if ($self->get_conf('DEBUG')) {
+                printf STDERR "running " . join(" ", @cmdline) . "\n";
+            }
+
+            exec @cmdline;
+        }
+        close($tar_reader);
+        close($mm_writer);
+        waitpid($mmpid, 0);
+        if ($? != 0) {
+            print STDERR "mmdebstrap failed\n";
+            return undef;
+        }
+        waitpid($tarpid, 0);
+        if ($? != 0) {
+            print STDERR "mmdebstrap failed\n";
+            return undef;
+        }
+    }
+
+    $chroot = "$xdg_cache_home/$dist-$arch.tar";
+    print STDERR ("I: The chroot directory at $rootdir will be removed "
+          . "at the end of the build\n");
+    print STDERR ("I: To avoid creating a new chroot from "
+          . "scratch every time, either:\n");
+    print STDERR (
+            "I:  - place a chroot tarball at $chroot and update it manually, "
+          . "for example by running: ");
+    print STDERR (
+          (join " ", @commonargs)
+        . " $chroot "
+          . (
+            scalar @{$extraargs} > 0
+            ? (join " ", @{$extraargs})
+            : ""
+          )
+          . "\n"
+    );
+    print STDERR ("I:  - or let sbuild take care of this via the setting "
+          . "UNSHARE_MMDEBSTRAP_KEEP_TARBALL by adding "
+          . "'\$unshare_mmdebstrap_keep_tarball = 1;' to your ~/.sbuildrc.\n");
+    print STDERR ("I:  - or completely disable this behaviour via the setting "
+          . "UNSHARE_MMDEBSTRAP_AUTO_CREATE by adding "
+          . "'\$unshare_mmdebstrap_auto_create = 0;' to your ~/.sbuildrc.\n");
+    print STDERR (
+            "I: Refer to UNSHARE_MMDEBSTRAP_KEEP_TARBALL in sbuild.conf(5) "
+          . "for more information\n");
+    $chroot = $rootdir;
+    $self->set('Chroot ID', $chroot);
+
+    return $chroot;
+}
+
+sub begin_session {
+    my $self   = shift;
+    my $chroot = $self->get('Chroot ID');
+
+    my $rootdir = mkdtemp($self->get_conf('UNSHARE_TMPDIR_TEMPLATE'));
+
+    my $namespace = undef;
+    if (defined $chroot && $chroot =~ m/^(chroot|source):(.+)$/) {
+        $namespace = $1;
+        $chroot    = $2;
+    }
+
+    if (!$self->get_conf('UNSHARE_MMDEBSTRAP_AUTO_CREATE') && !defined $chroot)
+    {
+        print STDERR ("E: unable to find chroot and "
+              . "UNSHARE_MMDEBSTRAP_AUTO_CREATE is disabled\n");
+        return 0;
     }
 
     my @idmap = read_subuid_subgid;
@@ -111,8 +334,7 @@ sub begin_session {
         || length $idmap[0][1] == 0
         || length $idmap[0][2] == 0
         || length $idmap[1][1] == 0
-        || length $idmap[1][2] == 0)
-    {
+        || length $idmap[1][2] == 0) {
         printf STDERR "invalid idmap\n";
         return 0;
     }
@@ -122,12 +344,10 @@ sub begin_session {
     my @cmd;
     my $exit;
 
-    if(!test_unshare) {
-	print STDERR "E: unable to to unshare\n";
-	return 0;
+    if (!test_unshare) {
+        print STDERR "E: unable to to unshare\n";
+        return 0;
     }
-
-    my $rootdir = mkdtemp($self->get_conf('UNSHARE_TMPDIR_TEMPLATE'));
 
     @cmd = (
         'unshare',
@@ -139,57 +359,100 @@ sub begin_session {
         'chown',        '1:1', $rootdir
     );
     if ($self->get_conf('DEBUG')) {
-	printf STDERR "running @cmd\n";
+        printf STDERR "running @cmd\n";
     }
     system(@cmd);
     $exit = $? >> 8;
     if ($exit) {
-	print STDERR "bad exit status ($exit): @cmd\n";
-	return 0;
+        print STDERR "bad exit status ($exit): @cmd\n";
+        return 0;
     }
 
-    if (! -e $tarball) {
-	print STDERR "$tarball does not exist, check \$unshare_tarball config option\n";
-	return 0;
+    if ($self->get_conf('UNSHARE_MMDEBSTRAP_AUTO_CREATE')) {
+        # in this branch we maybe are either:
+        #  - creating a new chroot tarball if $chroot is undefined or
+        #  - update an existing tarball or
+        #  - create a temporary chroot directory
+        $chroot = $self->chroot_auto_create($chroot, $rootdir);
+        if (!defined $chroot) {
+            print STDERR "E: auto-creating chroot failed\n";
+            return 0;
+        }
     }
 
-    # The tarball might be in a location where it cannot be accessed by the
-    # user from within the unshared namespace
-    if (! -r $tarball) {
-	print STDERR "$tarball is not readable\n";
-	return 0;
+    my $tarball = undef;
+    if ($chroot =~ '/') {
+        if (!-e $chroot) {
+            print STDERR "Chroot $chroot does not exist\n";
+            return 0;
+        }
+        $tarball = abs_path($chroot);
+    } else {
+        $tarball = $self->find_tarball($chroot);
+        if (!defined($tarball)) {
+            my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+            if (defined($ENV{'XDG_CACHE_HOME'})) {
+                $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
+            }
+
+            print STDERR "Unable to find $chroot in $xdg_cache_home\n";
+            return 0;
+        }
     }
 
-    print STDOUT "Unpacking $tarball to $rootdir...\n";
-    @cmd = (
-        "/usr/libexec/sbuild-usernsexec", (map { join ":", @{$_} } @idmap),
-        "--",                      'tar',
-        '--exclude=./dev/urandom', '--exclude=./dev/random',
-        '--exclude=./dev/full',    '--exclude=./dev/null',
-        '--exclude=./dev/console', '--exclude=./dev/zero',
-        '--exclude=./dev/tty',     '--exclude=./dev/ptmx',
-        '--directory',             $rootdir,
-        '--extract'
-    );
-    push @cmd, get_tar_compress_options($tarball);
+    if (-d $tarball) {
+        # it's not a tarball but an existing chroot directory, so there is
+        # nothing to unpack
+    } elsif (!-e $tarball) {
+        print STDERR
+          "$tarball does not exist, check \$unshare_tarball config option\n";
+        return 0;
+    } else {
+        # The tarball might be in a location where it cannot be accessed by the
+        # user from within the unshared namespace
+        if (!-r $tarball) {
+            print STDERR "$tarball is not readable\n";
+            return 0;
+        }
 
-    if ($self->get_conf('DEBUG')) {
-	printf STDERR "running @cmd\n";
-    }
-    my $pid = open(my $out, '|-', @cmd);
-    if (!defined($pid)) {
-	print STDERR "Can't fork: $!\n";
-	return 0;
-    }
-    if (copy($tarball, $out) != 1) {
-	print STDERR "copy() failed: $!\n";
-	return 0;
-    }
-    close($out);
-    $exit = $? >> 8;
-    if ($exit) {
-	print STDERR "bad exit status ($exit): @cmd\n";
-	return 0;
+        print STDERR "I: Unpacking $tarball to $rootdir...\n";
+        @cmd = (
+            "/usr/libexec/sbuild-usernsexec",
+            (map { join ":", @{$_} } @idmap),
+            '--',
+            'tar',
+            '--exclude=./dev/urandom',
+            '--exclude=./dev/random',
+            '--exclude=./dev/full',
+            '--exclude=./dev/null',
+            '--exclude=./dev/console',
+            '--exclude=./dev/zero',
+            '--exclude=./dev/tty',
+            '--exclude=./dev/ptmx',
+            '--directory',
+            $rootdir,
+            '--extract'
+        );
+        push @cmd, get_tar_compress_options($tarball);
+
+        if ($self->get_conf('DEBUG')) {
+            printf STDERR "running @cmd\n";
+        }
+        my $pid = open(my $out, '|-', @cmd);
+        if (!defined($pid)) {
+            print STDERR "Can't fork: $!\n";
+            return 0;
+        }
+        if (copy($tarball, $out) != 1) {
+            print STDERR "copy() failed: $!\n";
+            return 0;
+        }
+        close($out);
+        $exit = $? >> 8;
+        if ($exit) {
+            print STDERR "bad exit status ($exit): @cmd\n";
+            return 0;
+        }
     }
 
     $self->set('Session ID', $rootdir);
@@ -201,7 +464,7 @@ sub begin_session {
     # if a source type chroot was requested, then we need to memorize the
     # tarball location for when the session is ended
     if (defined($namespace) && $namespace eq "source") {
-	$self->set('Tarball', $tarball);
+        $self->set('Tarball', $tarball);
     }
 
     return 0 if !$self->_setup_options();

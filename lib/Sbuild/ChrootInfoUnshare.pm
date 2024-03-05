@@ -60,6 +60,7 @@ sub get_info_all {
 	while (defined(my $file = readdir $dh)) {
 	    next if $file eq '.' || $file eq '..';
 	    next if $file !~ /^[^-]+-[^-]+(-[^-]+)?(-sbuild)?\.t.+$/;
+	    next if ! -d "$xdg_cache_home/$file" && -z "$xdg_cache_home/$file";
 	    my $isdir = -d "$xdg_cache_home/$file";
 	    $file =~ s/\.t.+$//; # chop off extension
 	    if (! $isdir) {
@@ -79,14 +80,12 @@ sub get_info_all {
 }
 
 sub _create {
-    my $self = shift;
+    my $self      = shift;
     my $chroot_id = shift;
 
     my $chroot = undef;
 
-    if (defined($chroot_id)) {
-	$chroot = Sbuild::ChrootUnshare->new($self->get('Config'), $chroot_id);
-    }
+    $chroot = Sbuild::ChrootUnshare->new($self->get('Config'), $chroot_id);
 
     return $chroot;
 }

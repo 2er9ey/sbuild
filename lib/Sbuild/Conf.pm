@@ -275,7 +275,7 @@ sub setup ($) {
 	'UNSHARE_TMPDIR_TEMPLATE'			=> {
 	    TYPE => 'STRING',
 	    VARNAME => 'unshare_tmpdir_template',
-	    GROUP => 'Programs',
+	    GROUP => 'Chroot options (unshare)',
 	    DEFAULT => '/tmp/tmp.sbuild.XXXXXXXXXX',
 	    HELP => 'Template used to create the temporary unpack directory for the unshare chroot mode.'
 	    # CLI_OPTIONS => ['--unshare-tmpdir-template']
@@ -283,7 +283,7 @@ sub setup ($) {
 	'UNSHARE_BIND_MOUNTS'			=> {
 	    TYPE => 'ARRAY',
 	    VARNAME => 'unshare_bind_mounts',
-	    GROUP => 'Programs',
+	    GROUP => 'Chroot options (unshare)',
 	    CHECK =>  sub {
 		my $conf = shift;
 		my $entry = shift;
@@ -296,6 +296,69 @@ sub setup ($) {
 	    DEFAULT => [],
 	    HELP => 'Bind mount directories from the outside to a mountpoint inside the chroot in unshare mode.',
 	    EXAMPLE => '$unshare_bind_mounts = [ { directory => "/home/path/outside", mountpoint => "/path/inside" } ];'
+	},
+	'UNSHARE_MMDEBSTRAP_AUTO_CREATE' => {
+	    TYPE    => 'BOOL',
+	    DEFAULT => 1,
+	    VARNAME => 'unshare_mmdebstrap_auto_create',
+	    GROUP   => 'Chroot options (unshare)',
+	    HELP    => 'This is an experimental feature. In unshare mode, if the desired chroot tarball does not exist or if it is too old (see UNSHARE_MMDEBSTRAP_MAX_AGE), run mmdebstrap to create a new chroot that will be used for the build. Refer to UNSHARE_MMDEBSTRAP_EXTRA_ARGS to learn how to customize the mmdebstrap invocation for your chroots.'
+	  },
+	'MMDEBSTRAP' => {
+	    TYPE    => 'STRING',
+	    VARNAME => 'mmdebstrap',
+	    GROUP   => 'Chroot options (unshare)',
+	    CHECK   => sub {
+	        my $conf  = shift;
+	        my $entry = shift;
+	        my $key   = $entry->{'NAME'};
+	        # Only validate if needed.
+	        if ($conf->get('CHROOT_MODE') eq 'unshare' && $conf->get('UNSHARE_MMDEBSTRAP_AUTO_CREATE')) {
+	            $validate_program->($conf, $entry);
+	        }
+	    },
+	    DEFAULT     => 'mmdebstrap',
+	    HELP        => 'Path to mmdebstrap binary',
+	  },
+	'UNSHARE_MMDEBSTRAP_KEEP_TARBALL' => {
+	    TYPE => 'BOOL',
+	    DEFAULT => 0,
+	    VARNAME => 'unshare_mmdebstrap_keep_tarball',
+	    GROUP => 'Chroot options (unshare)',
+	    HELP => 'This is an experimental feature. In unshare mode and only if UNSHARE_MMDEBSTRAP_AUTO_CREATE is true, write the created tarball back to its appropriate location in ~/.cache/sbuild/${release}-${arch}.tar. If a chroot tarball was given explicitly by passing a path with the --chroot option, that chroot will never be updated by sbuild. But if the chroot tarball was outdated (see UNSHARE_MMDEBSTRAP_MAX_AGE), it will still get re-created and used but not saved back to the given path.'
+	},
+	'UNSHARE_MMDEBSTRAP_EXTRA_ARGS' => {
+	    TYPE => 'HASH:STRING',
+	    DEFAULT => {
+		"stable-backports" => [ '--setup-hook=echo "deb http://deb.debian.org/debian stable-backports main" > "$1"/etc/apt/sources.list.d/stable-backports.list' ],
+		"experimental" => [ '--setup-hook=echo "deb http://deb.debian.org/debian experimental main" > "$1"/etc/apt/sources.list.d/experimental.list' ]
+	    },
+	    VARNAME => 'unshare_mmdebstrap_extra_args',
+	    GROUP => 'Chroot options (unshare)',
+	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is run because of UNSHARE_MMDEBSTRAP_AUTO_CREATE was set to true, pass these extra arguments to the mmdebstrap invocation. The option allows specifying extra arguments specific to a specific distribution name or build architecture. A key containing a single asterisk serves as a catch-all wildcard which applies the extra options to all invocations. A key named after a distribution name will replace it for sbuild runs for that distribution. Even more specific, a key containing the architecture appended to the distribution name separated by a minus allows for build architecture specific options. Lastly, a key named exactly like the chroot will overwrite all the former entries.',
+	    EXAMPLE => '
+$unshare_mmdebstrap_extra_args = {
+   "*" => [ "--include=debhelper" ], # if no more specific glob matches, include debhelper
+   "noble" => [ "--components=main,universe,multiverse" ], # add universe and multiverse for ubuntu
+   # custom options for explicit chroot path (but sbuild will not update that
+   # tarball even with UNSHARE_MMDEBSTRAP_KEEP_TARBALL=1)
+   "/srv/custom-chroot.tar" => [ "--variant=apt", --arch="i386,ppc64el" ]
+};'
+	},
+	'UNSHARE_MMDEBSTRAP_ENV_CMND'			=> {
+	    TYPE => 'ARRAY',
+	    VARNAME => 'unshare_mmdebstrap_env_cmnd',
+	    GROUP => 'Chroot options (unshare)',
+	    DEFAULT => [],
+	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is used to create the chroot environment, prefix that command with this option array.',
+	    EXAMPLE => '$unshare_mmdebstrap_env_cmnd = [ "env", "TMPDIR=/dev/shm/" ];'
+	},
+	'UNSHARE_MMDEBSTRAP_MAX_AGE' => {
+	    TYPE => 'NUMERIC',
+	    DEFAULT => 604800, # one week like the buildds use
+	    VARNAME => 'unshare_mmdebstrap_max_age',
+	    GROUP => 'Chroot options (unshare)',
+	    HELP => 'This is an experimental feature. In unshare mode, with UNSHARE_MMDEBSTRAP_AUTO_CREATE=1, consider tarballs as outdated if they are older than the number of seconds given by this option. A negative value completely disables this check.'
 	},
 	'ENABLE_NETWORK'				=> {
 	    TYPE => 'STRING',

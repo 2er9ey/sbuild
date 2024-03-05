@@ -1,3 +1,23 @@
+sbuild (0.87.0~exp1) experimental; urgency=medium
+
+    This release introduces an experimental new feature for the unshare
+    backend which is supposed to make sbuild more easy to use because
+    sbuild will manage the chroot tarballs itself.
+    With unshare-mode, sbuild will now automatically create a chroot tarball
+    upon startup using mmdebstrap if it cannot find one in ~/.cache/sbuild.
+    This feature can be disabled by setting $unshare_mmdebstrap_auto_create=0;
+    in your ~/.sbuildrc. If you like the feature and you would like to keep
+    the tarballs sbuild creates so that they can be re-used in subsequent
+    invocations of sbuild, you can set $unshare_mmdebstrap_keep_tarball=1; in
+    your ~/.sbuildrc. This will also make sbuild update an existing tarball (by
+    re-creating it) if it has become too old. The maximum age of a chroot
+    tarball can be specified by setting $unshare_mmdebstrap_max_age to a
+    maximum age value in seconds (default is 604800, which is one week).
+    To customize the chroot tarball creation, refer to the setting
+    UNSHARE_MMDEBSTRAP_EXTRA_ARGS in your sbuild.conf(5).
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Thu, 24 Oct 2024 16:39:50 +0200
+
 sbuild (0.75.0-1) unstable; urgency=medium
 
     sbuild now builds arch:all packages by default.
