@@ -358,7 +358,7 @@ sub get_command_internal {
     }
 
     my $disable_network = 0;
-    if (defined($options->{'DISABLE_NETWORK'}) && $options->{'DISABLE_NETWORK'}) {
+    if (defined($options->{'ENABLE_NETWORK'}) && $options->{'ENABLE_NETWORK'} == 0) {
 	$disable_network = 1;
     }
 

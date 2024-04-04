@@ -2593,7 +2593,7 @@ sub build {
 	PRIORITY => 0,
 	DIR => $dscdir,
 	STREAMERR => \*STDOUT,
-	DISABLE_NETWORK => 1,
+	ENABLE_NETWORK => $self->get_conf('ENABLE_NETWORK'),
     };
 
     my $pipe = $session->pipe_command($command);

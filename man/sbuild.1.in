@@ -54,6 +54,8 @@ sbuild \- build debian packages from source
 .RB [ \-\-source\-only\-changes ]
 .RB [ \-\-no\-source\-only\-changes ]
 .RB [ \-j \[or] \-\-jobs=\fIn\fP ]
+.RB [ \-\-enable\-network ]
+.RB [ \-\-no\-enable\-network ]
 .RB [ \-\-debbuildopt=\fIoption\fP ]
 .RB [ \-\-debbuildopts=\fIoptions\fP ]
 .RB [ \-\-dpkg\-source\-opt=\fIoptions\fP ]
@@ -384,6 +386,18 @@ for more information.
 .BR \-j ", " "\-\-jobs=\fIn\fP"
 Number of jobs to run simultaneously.  Passed through to dpkg\-buildpackage.
 This command line option appends the appropriate \fB\-j\fP option to the \fBDPKG_BUILDPACKAGE_USER_OPTIONS\fP configuration variable. See
+.BR sbuild.conf (5)
+for more information.
+.TP
+.BR \-\-enable\-network
+Enable network access during build.  This command line option sets the
+\fBENABLE_NETWORK\fP configuration variable. See
+.BR sbuild.conf (5)
+for more information.
+.TP
+.BR \-\-no\-enable\-network
+Don't enable network access during build (only implemented for the unshare mode) (default).  This
+command line option sets the \fBENABLE_NETWORK\fP configuration variable. See
 .BR sbuild.conf (5)
 for more information.
 .TP

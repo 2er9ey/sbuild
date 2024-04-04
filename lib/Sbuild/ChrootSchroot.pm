@@ -132,7 +132,7 @@ sub get_command_internal {
 
     return if $self->get('Session ID') eq "";
 
-    if (defined($options->{'DISABLE_NETWORK'}) && $options->{'DISABLE_NETWORK'}) {
+    if (defined($options->{'ENABLE_NETWORK'}) && $options->{'ENABLE_NETWORK'} == 0) {
 	print STDERR "Disabling the network for this command was requested but the schroot backend doesn't support this feature yet: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=802849\n" if $self->get_conf('DEBUG');
     }
 

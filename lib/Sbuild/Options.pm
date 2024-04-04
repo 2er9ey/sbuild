@@ -51,6 +51,7 @@ sub set_options {
     my ($opt_run_lintian, $opt_no_run_lintian);
     my ($opt_run_piuparts, $opt_no_run_piuparts);
     my ($opt_run_autopkgtest, $opt_no_run_autopkgtest);
+    my ($opt_enable_network, $opt_no_enable_network);
     my ($opt_make_binnmu, $opt_binnmu, $opt_binnmu_timestamp, $opt_binnmu_changelog, $opt_append_to_version);
 
     $self->add_options("arch=s" => sub {
@@ -504,6 +505,20 @@ sub set_options {
 			    }
 			    $self->set_conf('RUN_AUTOPKGTEST', 0);
 			    $opt_no_run_autopkgtest = 1;
+		       },
+		       "enable-network" => sub {
+			    if ($opt_no_enable_network) {
+				die "--enable-network cannot be used together with --no-enable-network";
+			    }
+			    $self->set_conf('ENABLE_NETWORK', 1);
+			    $opt_enable_network = 1;
+		       },
+		       "no-enable-network" => sub {
+			    if ($opt_enable_network) {
+				die "--no-enable-network cannot be used together with --enable-network";
+			    }
+			    $self->set_conf('ENABLE_NETWORK', 0);
+			    $opt_no_enable_network = 1;
 		       },
 		       "autopkgtest-opts=s" => sub {
 			   push(@{$self->get_conf('AUTOPKGTEST_OPTIONS')},

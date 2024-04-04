@@ -295,6 +295,14 @@ sub setup ($) {
 	    HELP => 'Bind mount directories from the outside to a mountpoint inside the chroot in unshare mode.',
 	    EXAMPLE => '$unshare_bind_mounts = [ { directory => "/home/path/outside", mountpoint => "/path/inside" } ];'
 	},
+	'ENABLE_NETWORK'				=> {
+	    TYPE => 'STRING',
+	    VARNAME => 'enable_network',
+	    GROUP => 'Build options',
+	    DEFAULT => 0,
+	    HELP => 'By default network access is blocked during build (only implemented for the unshare mode). This lifts the restriction.',
+	    CLI_OPTIONS => ['--enable-network']
+	},
 	'AUTOPKGTEST_VIRT_SERVER'			=> {
 	    TYPE => 'STRING',
 	    VARNAME => 'autopkgtest_virt_server',
