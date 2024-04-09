@@ -271,15 +271,21 @@ sub _get_exec_argv {
     my $dir = shift;
     my $user = shift;
     my $disable_network = shift // 0;
+    my $build_inside_init = shift // 0;
 
     # On systems with libnss-resolve installed there is no need for a
     # /etc/resolv.conf. This works around this by adding 127.0.0.53 (default
     # for systemd-resolved) in that case.
     my $network_setup = '[ -f /etc/resolv.conf ] && cat /etc/resolv.conf > "$rootdir/etc/resolv.conf" || echo "nameserver 127.0.0.53" > "$rootdir/etc/resolv.conf";';
     my $unshare = CLONE_NEWNS | CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWIPC;
+    my $init = "";
     if ($disable_network) {
 	$unshare |= CLONE_NEWNET;
 	$network_setup = 'ip link set lo up;> "$rootdir/etc/resolv.conf";';
+    }
+
+    if ($build_inside_init) {
+	$init = "/usr/bin/dumb-init";
     }
 
     my @bind_mounts = ();
@@ -321,7 +327,7 @@ sub _get_exec_argv {
 	mount -o rbind /sys \"\$rootdir/sys\";
 	mkdir -p \"\$rootdir/proc\";
 	mount -t proc proc \"\$rootdir/proc\";
-	exec /usr/sbin/chroot \"\$rootdir\" /sbin/runuser -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
+	exec /usr/sbin/chroot \"\$rootdir\" $init /sbin/runuser -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
 	", '--', $self->get('Session ID'), $user, $dir, @bind_mounts, '--'
     );
 }
@@ -362,7 +368,12 @@ sub get_command_internal {
 	$disable_network = 1;
     }
 
-    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network);
+    my $build_inside_init = 0;
+    if (defined($options->{'BUILD_INSIDE_INIT'}) && $options->{'BUILD_INSIDE_INIT'}) {
+	$build_inside_init = 1;
+    }
+
+    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network, $build_inside_init);
     if (ref $command) {
 	push @cmdline, @$command;
     } else {
