@@ -1159,21 +1159,18 @@ sub fetch_source_files {
                 return 0;
             }
         }
-        my $found_sources_entry  = 0;
-        my $num_packages_entries = 0;
-        my $entry_uri            = undef;
-        my $entry_codename       = undef;
-        my $entry_component      = undef;
-        foreach my $key ( $indextargets->get_keys() ) {
+        my $found_sources_entry = 0;
+        my %unique_sources      = ();
+        foreach my $key ($indextargets->get_keys()) {
             my $cdata      = $indextargets->get_by_key($key);
             my $createdby  = $cdata->{"Created-By"} // "";
             my $targetof   = $cdata->{"Target-Of"}  // "";
             my $identifier = $cdata->{"Identifier"} // "";
             if (    $createdby eq "Sources"
                 and $identifier eq "Sources"
-                and $targetof eq "deb-src" )
-            {
+                and $targetof eq "deb-src") {
                 $found_sources_entry = 1;
+                last;
             }
             if (    $createdby eq 'Packages'
                 and $identifier eq 'Packages'
@@ -1187,8 +1184,7 @@ sub fetch_source_files {
                 and $cdata->{"Codename"} eq 'invalid-sbuild-codename'
                 and $cdata->{'Label'} eq 'sbuild-build-depends-archive'
                 and $cdata->{'Origin'} eq 'sbuild-build-depends-archive'
-                and $cdata->{'Suite'} eq 'invalid-sbuild-suite' )
-            {
+                and $cdata->{'Suite'} eq 'invalid-sbuild-suite') {
                 # do not count the sbuild dummy repository created by any
                 # --extra-package options
                 next;
@@ -1198,26 +1194,25 @@ sub fetch_source_files {
                 and $targetof eq 'deb'
                 and length $cdata->{"Repo-URI"} > 0
                 and length $cdata->{"Codename"} > 0
-                and length $cdata->{"Component"} > 0 )
-            {
-                $num_packages_entries += 1;
-                $entry_uri       = $cdata->{"Repo-URI"};
-                $entry_codename  = $cdata->{"Codename"};
-                $entry_component = $cdata->{"Component"};
+                and length $cdata->{"Component"} > 0) {
+                $unique_sources{
+                    join "\n",            $cdata->{"Repo-URI"},
+                    $cdata->{"Codename"}, $cdata->{"Component"} } = 1;
             }
         }
-        if ( !$found_sources_entry ) {
+        if (!$found_sources_entry) {
             $self->log("There are no deb-src lines in your sources.list\n");
-            if ( $num_packages_entries == 0 ) {
-                $self->log("Cannot generate deb-src entry without deb entry\n");
-            }
-            elsif ( $num_packages_entries > 1 ) {
-                $self->log( "Cannot generate deb-src entry "
-                      . "with more than one deb entry\n" );
-            }
-            else {
-                my $entry =
-                  "deb-src $entry_uri $entry_codename $entry_component";
+            if (scalar(keys %unique_sources) == 0) {
+                $self->log(
+                    "Cannot generate deb-src entry without deb entry\n");
+            } elsif (scalar(keys %unique_sources) > 1) {
+                $self->log("Cannot generate deb-src entry "
+                      . "with more than one deb entry\n");
+            } else {
+                my ($entry_uri, $entry_codename, $entry_component)
+                  = split /\n/, ((keys %unique_sources)[0]), 3;
+                my $entry
+                  = "deb-src $entry_uri $entry_codename $entry_component";
                 $self->log(
                     "Automatically adding to EXTRA_REPOSITORIES: $entry\n");
                 push @{ $self->get_conf('EXTRA_REPOSITORIES') }, $entry;
