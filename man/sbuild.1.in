@@ -101,7 +101,7 @@ sbuild \- build debian packages from source
 .RB [ \-\-setup\-hook=\fIhook-script\fP ]
 .RB [ \-\-build\-dep\-resolver=\fIresolver\fP ]
 .RB [ \-\-resolve\-alternatives \[or] \-\-no\-resolve\-alternatives ]
-.RB [ \-\-extra\-package=\fIpackage.deb\fP ]
+.RB [ \-\-extra\-package=\fIpackage.deb|directory\fP ]
 .RB [ \-\-extra\-repository=\fIspec\fP ]
 .RB [ \-\-extra\-repository\-key=\fIfile.asc\fP ]
 .RB [ \-\-build\-path=\fIstring\fP ]
