@@ -1,3 +1,22 @@
+sbuild (0.85.7) unstable; urgency=medium
+
+  [ Santiago Ruano Rincón ]
+  * Remove deprecation note about the sudo chroot mode
+
+  [ Christian Kastner ]
+  * sbuild-qemu: Use 4M OVMF images if available
+
+  [ Jochen Sprickerhof ]
+  * Add --{no-,}enable-network and ENABLE_NETWORK options
+  * Unshare: use dumb-init for build
+  * Run post-build-failed-commands before cleanup
+  * Add myself to uploaders
+
+  [ Boyuan Yang ]
+  * "directory" is available for "--extra-package" (Closes: #1040978)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Fri, 12 Apr 2024 18:50:09 +0200
+
 sbuild (0.85.6) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
