@@ -1224,12 +1224,23 @@ $crossbuild_core_depends = {
 	    TYPE => 'ARRAY:STRING',
 	    VARNAME => 'piuparts_opts',
 	    GROUP => 'Build validation',
-	    DEFAULT => [],
+            DEFAULT => undef,
 	    GET => sub {
 		my $conf = shift;
 		my $entry = shift;
 
 		my $retval = $conf->_get($entry->{'NAME'});
+
+                if (!defined($retval)) {
+                    if ($conf->get('CHROOT_MODE') eq 'unshare') {
+                        $retval = [
+                            "--basetgz=$HOME/.cache/sbuild/%r-%a.tar",
+                            '--fake-essential-packages=systemd-sysv'
+                        ];
+                    } else {
+                        $retval = [];
+                    }
+                }
 
 		my $dist = $conf->get('DISTRIBUTION');
 		my $hostarch = $conf->get('HOST_ARCH');
@@ -1258,7 +1269,28 @@ $crossbuild_core_depends = {
 	    TYPE => 'ARRAY:STRING',
 	    VARNAME => 'piuparts_root_args',
 	    GROUP => 'Build validation',
-	    DEFAULT => [],
+            DEFAULT => undef,
+            GET     => sub {
+                my $conf  = shift;
+                my $entry = shift;
+
+                my $retval = $conf->_get($entry->{'NAME'});
+
+                if (!defined($retval)) {
+                    if ($conf->get('CHROOT_MODE') eq 'unshare') {
+                        $retval = [
+                            'PATH=/sbin:/bin', 'unshare',
+                            '--pid',           '--fork',
+                            '--mount-proc',    '--map-root-user',
+                            '--map-auto'
+                        ];
+                    } else {
+                        $retval = [];
+                    }
+                }
+
+                return $retval;
+              },
 	    HELP => 'Preceding arguments to launch piuparts as root. With the default value (the empty array) "sudo --" will be used as a prefix. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
 	    EXAMPLE =>
 '# prefix with "sudo --":
@@ -1315,12 +1347,25 @@ $piuparts_root_args = [\'\', \'whatever\'];
 	    TYPE => 'ARRAY:STRING',
 	    VARNAME => 'autopkgtest_opts',
 	    GROUP => 'Build validation',
-	    DEFAULT => [],
+	    DEFAULT => undef,
 	    GET => sub {
 		my $conf = shift;
 		my $entry = shift;
 
 		my $retval = $conf->_get($entry->{'NAME'});
+
+                if (!defined($retval)) {
+                    if ($conf->get('CHROOT_MODE') eq 'unshare') {
+                        $retval = [
+                            '--apt-upgrade', '--',
+                            'unshare',       '--release',
+                            '%r',            '--arch',
+                            '%a'
+                        ];
+                    } else {
+                        $retval = [];
+                    }
+                }
 
 		my $dist = $conf->get('DISTRIBUTION');
 		my $hostarch = $conf->get('HOST_ARCH');
