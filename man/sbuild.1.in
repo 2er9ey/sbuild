@@ -1094,9 +1094,9 @@ This command line option appends to the \fBEXTRA_REPOSITORY_KEYS\fP configuratio
 for more information.
 .TP
 .BR \-\-build\-path=\fIstring\fP
-By default the package is built in a path of the following format
-/build/packagename\-XXXXXX/packagename\-version/ where XXXXXX is a random ascii
-string. This option allows one to specify a custom path where the package is
+By default the package is built under the path
+/build/reproducible-path/packagename\-version/.
+This option allows one to specify a custom path where the package is
 built inside the chroot. The sbuild user in the chroot must have permissions to
 create the path. Common writable locations are subdirectories of /tmp or
 /build. Using /tmp might be dangerous, because (depending on the chroot
@@ -1111,6 +1111,9 @@ these shared locations as the build path or otherwise concurrent runs of sbuild
 will likely fail. With the default schroot chroot mode, the directory /build
 is shared between multiple schroot sessions. You can change this behaviour in
 /etc/schroot/sbuild/fstab. The behaviour of other chroot modes will vary.
+To let sbuild choose a random build location of the format
+/build/packagename\-XXXXXX/packagename-version/ where XXXXXX is a random ascii
+string, pass the empty string to this option.
 This command line option sets the \fBBUILD_PATH\fP configuration variable. See
 .BR sbuild.conf (5)
 for more information.
