@@ -332,7 +332,7 @@ the unshare backend:
 .br
     --make-sbuild-tarball ~/.cache/sbuild/unstable-amd64.tar.gz \\
 .br
-    unstable `mktemp -d` http://deb.debian.org/debian/ \\
+    unstable `mktemp -d` http://deb.debian.org/debian\fP\[CR]
 .PP
 .SH HISTORY
 sbuild\-createchroot was previously known as \fBbuildd.chroot\fP.
