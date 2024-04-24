@@ -288,6 +288,18 @@ sub _get_exec_argv {
 	$init = "/usr/bin/dumb-init";
     }
 
+    # Detect whether linux32 personality might be needed
+    my %personalities = (
+	'armel:arm64'     => 1,
+	'armhf:arm64'     => 1,
+	'i386:amd64'      => 1,
+	'mipsel:mips64el' => 1,
+	'powerpc:ppc64'   => 1,
+	's390:s390x'      => 1,
+	'sparc:sparc64'   => 1,
+    );
+    my $linux32 = exists $personalities{($self->get_conf('BUILD_ARCH') . ':' . $self->get_conf('ARCH'))};
+
     my @bind_mounts = ();
     for my $entry (@{$self->get_conf('UNSHARE_BIND_MOUNTS')}) {
 	push @bind_mounts, $entry->{directory}, $entry->{mountpoint};
@@ -295,7 +307,7 @@ sub _get_exec_argv {
 
     return (
 	'env', 'PATH=' . $self->get_conf('PATH'),
-	get_unshare_cmd({UNSHARE_FLAGS => $unshare, FORK => 1, IDMAP => $self->get('Uid Gid Map')}), 'sh', '-c', "
+	get_unshare_cmd({UNSHARE_FLAGS => $unshare, FORK => 1, IDMAP => $self->get('Uid Gid Map'), LINUX32 => $linux32}), 'sh', '-c', "
 	rootdir=\"\$1\"; shift;
 	user=\"\$1\"; shift;
 	dir=\"\$1\"; shift;

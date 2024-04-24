@@ -56,7 +56,7 @@ BEGIN {
 
     @EXPORT = qw(setup cleanup shutdown check_url download get_unshare_cmd
     read_subuid_subgid CLONE_NEWNS CLONE_NEWUTS CLONE_NEWIPC CLONE_NEWUSER
-    CLONE_NEWPID CLONE_NEWNET test_unshare get_tar_compress_options);
+    CLONE_NEWPID CLONE_NEWNET PER_LINUX32 test_unshare get_tar_compress_options);
 
     $SIG{'INT'} = \&shutdown;
     $SIG{'TERM'} = \&shutdown;
@@ -379,6 +379,11 @@ use constant {
     CLONE_NEWNET  => 0x40000000,
 };
 
+# from personality.h
+use constant {
+    PER_LINUX32 => 0x0008,
+};
+
 sub get_unshare_cmd($) {
     my $options = shift;
 
@@ -513,6 +518,11 @@ if (\$cpid != 0) {
     exit (\$? >> 8);
 }
 EOF
+    }
+
+    if ($options->{'LINUX32'}) {
+        my $personality = PER_LINUX32;
+        $command .= "syscall &SYS_personality, $personality;";
     }
 
     $command .= 'exec { $ARGV[0] } @ARGV or die "exec() failed: $!";';
