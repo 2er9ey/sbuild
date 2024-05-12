@@ -318,7 +318,7 @@ sub _get_exec_argv {
 	    shift; shift;
 	done;
 	hostname sbuild;
-	echo \"127.0.0.1 localhost\\n127.0.1.1 sbuild\" > \"\$rootdir/etc/hosts\";
+	echo \"127.0.0.1 localhost\\n127.0.1.1 sbuild\\n::1 localhost ip6-localhost ip6-loopback\" > \"\$rootdir/etc/hosts\";
 	$network_setup
 	mkdir -p \"\$rootdir/dev\";
 	for f in null zero full random urandom tty console; do
