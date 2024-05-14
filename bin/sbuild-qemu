@@ -148,7 +148,7 @@ def main():
     else:
         guessed_name = f'{peeked_args.dist}-autopkgtest-{build_arch}.img'
         if os.path.exists(os.path.abspath(guessed_name)):
-            images = os.path.abspath(guessed_name)
+            image = os.path.abspath(guessed_name)
         else:
             image = os.path.join(
                 IMAGEDIR,
