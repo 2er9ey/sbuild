@@ -40,6 +40,7 @@ IMAGEDIR = os.environ.get(
     os.path.join(os.path.expanduser('~'), '.cache', 'sbuild'),
 )
 
+DEFAULT_DIST = 'unstable'
 DEFAULT_ARCH = subprocess.check_output(
     ['dpkg', '--print-architecture'],
     text=True,
@@ -118,7 +119,6 @@ def main():
     peeker.add_argument(
         '--dist',
         action='store',
-        default='unstable',
     )
     peeker.add_argument(
         '--arch',
@@ -146,14 +146,11 @@ def main():
         else:
             image = os.path.join(IMAGEDIR, parsed_args.image)
     else:
-        guessed_name = f'{peeked_args.dist}-autopkgtest-{build_arch}.img'
+        guessed_name = f'{peeked_args.dist or DEFAULT_DIST}-autopkgtest-{build_arch}.img'
         if os.path.exists(os.path.abspath(guessed_name)):
             image = os.path.abspath(guessed_name)
         else:
-            image = os.path.join(
-                IMAGEDIR,
-                f'{peeked_args.dist}-autopkgtest-{build_arch}.img',
-            )
+            image = os.path.join(IMAGEDIR, guessed_name)
 
     if not os.path.exists(image):
         print(f"File {image} does not exist.", file=sys.stderr)
@@ -161,7 +158,6 @@ def main():
 
     args = [
             'sbuild',
-            '--dist',                           peeked_args.dist,
             '--purge-build=never',
             '--purge-deps=never',
             '--chroot-mode=autopkgtest',
