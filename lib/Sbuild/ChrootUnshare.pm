@@ -306,7 +306,7 @@ sub _get_exec_argv {
     }
 
     return (
-	'env', 'PATH=' . $self->get_conf('PATH'),
+	'env', 'PATH=' . $self->get_conf('PATH'), "USER=$user",
 	get_unshare_cmd({UNSHARE_FLAGS => $unshare, FORK => 1, IDMAP => $self->get('Uid Gid Map'), LINUX32 => $linux32}), 'sh', '-c', "
 	rootdir=\"\$1\"; shift;
 	user=\"\$1\"; shift;
@@ -339,7 +339,7 @@ sub _get_exec_argv {
 	mount -o rbind /sys \"\$rootdir/sys\";
 	mkdir -p \"\$rootdir/proc\";
 	mount -t proc proc \"\$rootdir/proc\";
-	exec /usr/sbin/chroot \"\$rootdir\" $init /sbin/runuser -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
+	exec /usr/sbin/chroot \"\$rootdir\" $init /sbin/runuser -p -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
 	", '--', $self->get('Session ID'), $user, $dir, @bind_mounts, '--'
     );
 }
