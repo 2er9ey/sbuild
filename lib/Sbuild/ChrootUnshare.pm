@@ -337,6 +337,7 @@ sub _get_exec_argv {
 	mount -t tmpfs tmpfs \"\$rootdir/dev/shm\";
 	mkdir -p \"\$rootdir/sys\";
 	mount -o rbind /sys \"\$rootdir/sys\";
+	mount -t tmpfs tmpfs \"\$rootdir/sys/kernel\" -o mode=0000,size=4k,ro;
 	mkdir -p \"\$rootdir/proc\";
 	mount -t proc proc \"\$rootdir/proc\";
 	exec /usr/sbin/chroot \"\$rootdir\" $init /sbin/runuser -p -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
