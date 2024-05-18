@@ -420,6 +420,10 @@ sub get_unshare_cmd($) {
     my $command = <<"EOF";
 require 'syscall.ph';
 
+# Workaround for #1070007 (Permission denied if STDOUT points to a pipe)
+use Fcntl qw(:mode);
+chmod(0666, *STDOUT) if ((stat(*STDOUT))[2] & S_IFMT) == S_IFIFO;
+
 # Create a pipe for the parent process to signal the child process that it is
 # done with calling unshare() so that the child can go ahead setting up
 # uid_map and gid_map.
