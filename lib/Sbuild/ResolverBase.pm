@@ -168,6 +168,13 @@ sub setup {
 	print $F "Dir \"$chroot_dir\";\n";
     }
 
+# The cross build profile indicates that we cannot run host architecture binaries.
+# In that case, forbid installing host architecture binaries.
+    if (grep { $_ eq 'cross' } (split /\s+/, $self->get_conf('BUILD_PROFILES'))) {
+	my $host_arch = $self->get_conf('HOST_ARCH');
+	print $F qq(APT::BarbarianArchitectures {"$host_arch"};\n);
+    }
+
     close $F;
 
     if (!$session->rename($tmpaptconf, $aptconf)) {
