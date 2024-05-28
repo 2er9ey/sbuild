@@ -306,7 +306,7 @@ sub _get_exec_argv {
     }
 
     return (
-	'env', 'PATH=' . $self->get_conf('PATH'), "USER=$user",
+	'env', 'PATH=' . $self->get_conf('PATH'), "USER=$user", "LOGNAME=$user",
 	get_unshare_cmd({UNSHARE_FLAGS => $unshare, FORK => 1, IDMAP => $self->get('Uid Gid Map'), LINUX32 => $linux32}), 'sh', '-c', "
 	rootdir=\"\$1\"; shift;
 	user=\"\$1\"; shift;
