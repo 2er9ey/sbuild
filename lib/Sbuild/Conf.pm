@@ -249,16 +249,18 @@ sub setup ($) {
 	},
 	'SCHROOT'				=> {
 	    TYPE => 'STRING',
-	    GROUP => '__INTERNAL',
+	    VARNAME => 'schroot',
+	    GROUP => 'Programs',
 	    CHECK => sub {
 		my $conf = shift;
 		my $entry = shift;
 		my $key = $entry->{'NAME'};
 
 		# Only validate if needed.
-		if ($conf->get('CHROOT_MODE') eq 'schroot') {
-		    $validate_program->($conf, $entry);
-		}
+                if (defined $conf->_get('CHROOT_MODE')
+                    && $conf->_get('CHROOT_MODE') eq 'schroot') {
+                    $validate_program->($conf, $entry);
+                }
 	    },
 	    DEFAULT => 'schroot',
 	    HELP => 'Path to schroot binary'
@@ -734,7 +736,13 @@ sub setup ($) {
 		    if !isin($conf->get('CHROOT_MODE'),
 			     qw(schroot sudo autopkgtest unshare));
 	    },
-	    DEFAULT => 'schroot',
+            DEFAULT => undef,
+            GET     => sub {
+                my $conf  = shift;
+                my $entry = shift;
+
+                return ($conf->_get($entry->{'NAME'}) // 'schroot');
+            },
 	    HELP => 'Mechanism to use for chroot virtualisation.  Possible value are "schroot" (default), "sudo", "autopkgtest" and "unshare".',
 	    CLI_OPTIONS => ['--chroot-mode']
 	},
