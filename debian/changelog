@@ -1,3 +1,27 @@
+sbuild (0.85.9) unstable; urgency=medium
+
+  [ Aurelien Jarno ]
+  * Unshare: add IPv6 loopback address to /etc/hosts
+  * Unshare: preserve HOME environment variable
+  * Unshare: define the LOGNAME environment variable
+
+  [ Christian Kastner ]
+  * sbuild-qemu: Fix typo breaking one guess for image path
+  * sbuild-qemu: Don't add --dist (Closes: #1071000)
+
+  [ Helmut Grohne ]
+  * lib/Sbuild/ChrootUnshare.pm: Do not expose /sys/kernel in the unshare backend.
+    (Closes: #1071234)
+
+  [ Timo Röhling ]
+  * Relax permissions on pipes connected to STDOUT (Closes: #1070007)
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * lib/Sbuild/Conf.pm: make the schroot binary configurable via ~/.sbuildrc
+  * bin/sbuild: only check group membership if 'schroot' is configured as the schroot binary
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Wed, 29 May 2024 10:46:22 +0200
+
 sbuild (0.85.8) unstable; urgency=medium
 
   [ Aurelien Jarno ]
