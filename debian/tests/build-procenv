@@ -112,6 +112,10 @@ if [ -z "$http_proxy" ]; then
 fi
 
 echo "INFO: Creating sbuild chroot '$chroot' for release '$release' in directory '$dir' from url '$url'"
+
+# Test if there is actually a release for that architecture
+wget --quiet --spider "$url/dists/$release/main/binary-$arch/Release" || exit 77
+
 [ -n "$components" ] && components="--components=$components"
 # avoid "debconf: delaying package configuration, since apt-utils is not installed"
 runuser -u "$AUTOPKGTEST_NORMAL_USER" -- sudo sbuild-createchroot $components "$release" "$dir" "$url"
