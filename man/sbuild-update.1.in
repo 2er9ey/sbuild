@@ -109,10 +109,10 @@ To clean the \fIunstable\fP chroot:
 .PP
 \f[CR]% \f[CB]sbuild\-update \-\-clean unstable\fP\fP
 .PP
-To perform an update, dist-upgrade, clean, autoclean, and autoremove for
-the \fIunstable\fP chroot:
+To perform an update, dist-upgrade, autoclean, and autoremove for the
+\fIunstable\fP chroot:
 .PP
-\f[CR]% \f[CB]sbuild\-update \-udcar unstable\fP\fP
+\f[CR]% \f[CB]sbuild\-update \-udar unstable\fP\fP
 .SH AUTHORS
 .nf
 Roger Leigh.
