@@ -34,7 +34,6 @@ EXTRA_DIST =				\
 	lisp				\
 	scripts/git-tag-release		\
 	HACKING				\
-	Makefile-buildd			\
 	README.buildd-admin		\
 	README.chroot-building
 
