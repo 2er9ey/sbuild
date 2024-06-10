@@ -86,7 +86,6 @@ install-data-hook:
 	ln -sf sbuild-update.1 $(DESTDIR)$(man1dir)/sbuild-upgrade.1
 	ln -sf sbuild-update.1 $(DESTDIR)$(man1dir)/sbuild-distupgrade.1
 	ln -sf sbuild-update.1 $(DESTDIR)$(man1dir)/sbuild-clean.1
-	ln -sf buildd-mail.1 $(DESTDIR)$(man1dir)/buildd-mail-wrapper.1
 	ln -sf sbuild-abort.1 $(DESTDIR)$(man1dir)/buildd-abort.1
 	ln -sf sbuild-update.1 $(DESTDIR)$(man1dir)/buildd-update-chroots.1
 	ln -sf sbuild-createchroot.8 $(DESTDIR)$(man8dir)/buildd-make-chroot.8
@@ -96,7 +95,6 @@ uninstall-hook:
 	$(RM) $(DESTDIR)$(man1dir)/sbuild-upgrade.1
 	$(RM) $(DESTDIR)$(man1dir)/sbuild-distupgrade.1
 	$(RM) $(DESTDIR)$(man1dir)/sbuild-clean.1
-	$(RM) $(DESTDIR)$(man1dir)/buildd-mail-wrapper.1
 	$(RM) $(DESTDIR)$(man1dir)/buildd-abort.1
 	$(RM) $(DESTDIR)$(man1dir)/buildd-update-chroots.1
 	$(RM) $(DESTDIR)$(man8dir)/buildd-make-chroot.8

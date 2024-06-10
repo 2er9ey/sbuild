@@ -94,6 +94,5 @@ install-exec-hook:
 	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/lib/sbuild/apt-keys"
 
 # Links for compatibility.
-	ln -sf "$(bindir)/buildd-mail" "$(DESTDIR)$(bindir)/buildd-mail-wrapper"
 	ln -sf "$(bindir)/sbuild-abort" "$(DESTDIR)$(bindir)/buildd-abort"
 
