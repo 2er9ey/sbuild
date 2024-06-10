@@ -36,7 +36,6 @@ EXTRA_DIST =				\
 	ChangeLog-buildd		\
 	HACKING				\
 	Makefile-buildd			\
-	NEWS-buildd			\
 	README.buildd-admin		\
 	README.chroot-building
 
