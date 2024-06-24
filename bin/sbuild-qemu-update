@@ -257,7 +257,7 @@ def main():
             '-m',      '1024',
             '-smp',    '1',
             '-nographic',
-            image,
+            '-drive',  f'file={image},discard=unmap,if=virtio',
     ])
     if parsed_args.extra_args:
         args.extend(parsed_args.extra_args)

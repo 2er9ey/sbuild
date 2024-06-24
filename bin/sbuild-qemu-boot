@@ -274,7 +274,7 @@ def main():
             '-fw_cfg', f'name=opt/sbuild-qemu/tty-cols,string={termsize.columns}',
             ])
 
-    args.append(image)
+    args.extend(['-drive', f'file={image},discard=unmap,if=virtio'])
 
     print(' '.join(str(a) for a in args))
     if parsed_args.noexec:
