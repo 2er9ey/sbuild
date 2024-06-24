@@ -180,6 +180,12 @@ def update_interaction(child, quiet):
     child.expect('root@host:~# ')
     child.sendline('sync')
     child.expect('root@host:~# ')
+    child.sendline('mount -o remount,discard /')
+    child.expect('root@host:~# ')
+    child.sendline('fstrim /')
+    child.expect('root@host:~# ')
+    child.sendline('sync')
+    child.expect('root@host:~# ')
     # Don't recall what issue this solves, but it solves it
     child.sendline('sleep 1')
     child.expect('root@host:~# ')
@@ -278,6 +284,14 @@ def main():
     except pexpect.TIMEOUT:
         print("Update timed out. Consider using --timeout.", file=sys.stderr)
         child.terminate()
+    child.wait()
+
+    try:
+       subprocess.check_call(["qemu-img", "convert", "-O", "qcow2", image, f"{image}.tmp"])
+    except subprocess.CalledProcessError as err:
+        print(f"Error converting image: {err}", file=sys.stderr)
+        return
+    os.replace(f"{image}.tmp", image)
 
 
 if __name__ == '__main__':
