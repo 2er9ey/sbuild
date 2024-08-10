@@ -407,7 +407,7 @@ sub useradd {
     my $rootdir = $self->get('Session ID');
     my @idmap = read_subuid_subgid;
     my @unshare_cmd = get_unshare_cmd({IDMAP => \@idmap});
-    return system(@unshare_cmd, "/usr/sbin/useradd", "--root", $rootdir, @args);
+    return system(@unshare_cmd, "/usr/sbin/useradd", "--no-log-init", "--prefix", $rootdir, @args);
 }
 
 sub groupadd {
@@ -416,7 +416,7 @@ sub groupadd {
     my $rootdir = $self->get('Session ID');
     my @idmap = read_subuid_subgid;
     my @unshare_cmd = get_unshare_cmd({IDMAP => \@idmap});
-    return system(@unshare_cmd, "/usr/sbin/groupadd", "--root", $rootdir, @args);
+    return system(@unshare_cmd, "/usr/sbin/groupadd", "--prefix", $rootdir, @args);
 }
 
 1;
