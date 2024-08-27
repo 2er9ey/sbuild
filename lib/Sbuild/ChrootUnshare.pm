@@ -127,21 +127,17 @@ sub begin_session {
 	return 0;
     }
 
-    my @unshare_cmd = get_unshare_cmd({IDMAP => \@idmap});
-
     my $rootdir = mkdtemp($self->get_conf('UNSHARE_TMPDIR_TEMPLATE'));
 
-    # $REAL_GROUP_ID is a space separated list of all groups the current user
-    # is in with the first group being the result of getgid(). We reduce the
-    # list to the first group by forcing it to be numeric
-    my $outer_gid = $REAL_GROUP_ID+0;
-    @cmd = (get_unshare_cmd({
-		IDMAP => [['u', '0', $REAL_USER_ID, '1'],
-		    ['g', '0', $outer_gid, '1'],
-		    ['u', '1', $idmap[0][2], '1'],
-		    ['g', '1', $idmap[1][2], '1'],
-		]
-	    }), 'chown', '1:1', $rootdir);
+    @cmd = (
+        'unshare',
+        # comment to guide perltidy line wrapping
+        '--map-user',   '0',
+        '--map-group',  '0',
+        '--map-users',  "$idmap[0][2],1,1",
+        '--map-groups', "$idmap[1][2],1,1",
+        'chown',        '1:1', $rootdir
+    );
     if ($self->get_conf('DEBUG')) {
 	printf STDERR "running @cmd\n";
     }
@@ -165,17 +161,15 @@ sub begin_session {
     }
 
     print STDOUT "Unpacking $tarball to $rootdir...\n";
-    @cmd = (@unshare_cmd, 'tar',
-	'--exclude=./dev/urandom',
-	'--exclude=./dev/random',
-	'--exclude=./dev/full',
-	'--exclude=./dev/null',
-	'--exclude=./dev/console',
-	'--exclude=./dev/zero',
-	'--exclude=./dev/tty',
-	'--exclude=./dev/ptmx',
-	'--directory', $rootdir,
-	'--extract'
+    @cmd = (
+        "/usr/libexec/sbuild-usernsexec", (map { join ":", @{$_} } @idmap),
+        "--",                      'tar',
+        '--exclude=./dev/urandom', '--exclude=./dev/random',
+        '--exclude=./dev/full',    '--exclude=./dev/null',
+        '--exclude=./dev/console', '--exclude=./dev/zero',
+        '--exclude=./dev/tty',     '--exclude=./dev/ptmx',
+        '--directory',             $rootdir,
+        '--extract'
     );
     push @cmd, get_tar_compress_options($tarball);
 
@@ -220,6 +214,8 @@ sub end_session {
 
     return if $self->get('Session ID') eq "";
 
+    my @idmap = read_subuid_subgid;
+
     if (defined($self->get('Tarball'))) {
 	my ($tmpfh, $tmpfile) = tempfile("XXXXXX");
 	my @program_list = ("/bin/tar", "-c", "-C", $self->get('Session ID'));
@@ -227,9 +223,12 @@ sub end_session {
 	push @program_list, './';
 
 	print "I: Creating tarball...\n";
-	open(my $in, '-|', get_unshare_cmd(
-		{IDMAP => $self->get('Uid Gid Map')}), @program_list
-	) // die "could not exec tar";
+        open(
+            my $in, '-|',
+            "/usr/libexec/sbuild-usernsexec",
+            (map { join ":", @{$_} } @idmap),
+            "--", @program_list
+        ) // die "could not exec tar";
 	if (copy($in, $tmpfile) != 1 ) {
 	    die "unable to copy: $!\n";
 	}
@@ -247,7 +246,10 @@ sub end_session {
     # this looks like a recipe for disaster, but since we execute "rm -rf" with
     # lxc-usernsexec, we only have permission to delete the files that were
     # created with the fake root user
-    my @cmd = (get_unshare_cmd({IDMAP => $self->get('Uid Gid Map')}), 'rm', '-rf', $self->get('Session ID'));
+    my @cmd = (
+        "/usr/libexec/sbuild-usernsexec",
+        (map { join ":", @{$_} } @idmap),
+        '--', 'rm', '-rf', $self->get('Session ID'));
     if ($self->get_conf('DEBUG')) {
 	printf STDERR "running @cmd\n";
     }
@@ -271,22 +273,6 @@ sub _get_exec_argv {
     my $dir = shift;
     my $user = shift;
     my $disable_network = shift // 0;
-    my $build_inside_init = shift // 0;
-
-    # On systems with libnss-resolve installed there is no need for a
-    # /etc/resolv.conf. This works around this by adding 127.0.0.53 (default
-    # for systemd-resolved) in that case.
-    my $network_setup = '[ -f /etc/resolv.conf ] && cat /etc/resolv.conf > "$rootdir/etc/resolv.conf" || echo "nameserver 127.0.0.53" > "$rootdir/etc/resolv.conf";';
-    my $unshare = CLONE_NEWNS | CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWIPC;
-    my $init = "";
-    if ($disable_network) {
-	$unshare |= CLONE_NEWNET;
-	$network_setup = 'ip link set lo up;> "$rootdir/etc/resolv.conf";';
-    }
-
-    if ($build_inside_init) {
-	$init = "/usr/bin/dumb-init";
-    }
 
     # Detect whether linux32 personality might be needed
     my %personalities = (
@@ -306,42 +292,20 @@ sub _get_exec_argv {
     }
 
     return (
-	'env', 'PATH=' . $self->get_conf('PATH'), "USER=$user", "LOGNAME=$user",
-	get_unshare_cmd({UNSHARE_FLAGS => $unshare, FORK => 1, IDMAP => $self->get('Uid Gid Map'), LINUX32 => $linux32}), 'sh', '-c', "
-	rootdir=\"\$1\"; shift;
-	user=\"\$1\"; shift;
-	dir=\"\$1\"; shift;
-	while [ \$# -gt 0 ]; do
-	    if [ \"\$1\" = \"--\" ]; then shift; break; fi;
-	    mkdir -p \"\$rootdir\$2\";
-	    mount -o rbind \"\$1\" \"\$rootdir\$2\";
-	    shift; shift;
-	done;
-	hostname sbuild;
-	echo \"127.0.0.1 localhost\\n127.0.1.1 sbuild\\n::1 localhost ip6-localhost ip6-loopback\" > \"\$rootdir/etc/hosts\";
-	$network_setup
-	mkdir -p \"\$rootdir/dev\";
-	for f in null zero full random urandom tty console; do
-	    touch \"\$rootdir/dev/\$f\";
-	    chmod -rwx \"\$rootdir/dev/\$f\";
-	    mount -o bind \"/dev/\$f\" \"\$rootdir/dev/\$f\";
-	done;
-	ln -sfT /proc/self/fd \"\$rootdir/dev/fd\";
-	ln -sfT /proc/self/fd/0 \"\$rootdir/dev/stdin\";
-	ln -sfT /proc/self/fd/1 \"\$rootdir/dev/stdout\";
-	ln -sfT /proc/self/fd/2 \"\$rootdir/dev/stderr\";
-	mkdir -p \"\$rootdir/dev/pts\";
-	mount -o noexec,nosuid,gid=5,mode=620,ptmxmode=666 -t devpts none \"\$rootdir/dev/pts\";
-	ln -sfT /dev/pts/ptmx \"\$rootdir/dev/ptmx\";
-	mkdir -p \"\$rootdir/dev/shm\";
-	mount -t tmpfs tmpfs \"\$rootdir/dev/shm\";
-	mkdir -p \"\$rootdir/sys\";
-	mount -o rbind /sys \"\$rootdir/sys\";
-	mount -t tmpfs tmpfs \"\$rootdir/sys/kernel\" -o mode=0000,size=4k,ro;
-	mkdir -p \"\$rootdir/proc\";
-	mount -t proc proc \"\$rootdir/proc\";
-	exec /usr/sbin/chroot \"\$rootdir\" $init /sbin/runuser -p -u \"\$user\" -- sh -c \"cd \\\"\\\$1\\\" && shift && \\\"\\\$@\\\"\" -- \"\$dir\" \"\$@\";
-	", '--', $self->get('Session ID'), $user, $dir, @bind_mounts, '--'
+        'env',
+        'PATH=' . $self->get_conf('PATH'),
+        "USER=$user",
+        "LOGNAME=$user",
+        "/usr/libexec/sbuild-usernsexec",
+        '--pivotroot',
+        $linux32         ? ('--32bit') : (),
+        $disable_network ? ('--nonet') : (),
+        (map { join ":", @{$_} } read_subuid_subgid),
+        $self->get('Session ID'),
+        $user,
+        $dir,
+        @bind_mounts,
+        '--'
     );
 }
 
@@ -381,12 +345,7 @@ sub get_command_internal {
 	$disable_network = 1;
     }
 
-    my $build_inside_init = 0;
-    if (defined($options->{'BUILD_INSIDE_INIT'}) && $options->{'BUILD_INSIDE_INIT'}) {
-	$build_inside_init = 1;
-    }
-
-    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network, $build_inside_init);
+    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network);
     if (ref $command) {
 	push @cmdline, @$command;
     } else {
@@ -405,18 +364,27 @@ sub useradd {
     my $self = shift;
     my @args = @_;
     my $rootdir = $self->get('Session ID');
-    my @idmap = read_subuid_subgid;
-    my @unshare_cmd = get_unshare_cmd({IDMAP => \@idmap});
-    return system(@unshare_cmd, "/usr/sbin/useradd", "--no-log-init", "--prefix", $rootdir, @args);
+    return system(
+        "/usr/libexec/sbuild-usernsexec",
+        (map { join ":", @{$_} } read_subuid_subgid),
+        "--",
+        "/usr/sbin/useradd",
+        "--no-log-init",
+        "--prefix",
+        $rootdir,
+        @args
+    );
 }
 
 sub groupadd {
     my $self = shift;
     my @args = @_;
     my $rootdir = $self->get('Session ID');
-    my @idmap = read_subuid_subgid;
-    my @unshare_cmd = get_unshare_cmd({IDMAP => \@idmap});
-    return system(@unshare_cmd, "/usr/sbin/groupadd", "--prefix", $rootdir, @args);
+    return system(
+        "/usr/libexec/sbuild-usernsexec",
+        (map { join ":", @{$_} } read_subuid_subgid),
+        "--", "/usr/sbin/groupadd", "--prefix", $rootdir, @args
+    );
 }
 
 1;

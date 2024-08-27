@@ -826,9 +826,6 @@ sub run_fetch_install_packages {
 	$self->set('Install Start Time', time);
 	$self->set('Install End Time', $self->get('Install Start Time'));
 	my @coredeps = @{$self->get_conf('CORE_DEPENDS')};
-	if ($self->get_conf('CHROOT_MODE') eq 'unshare') {
-	    push(@coredeps, 'dumb-init:native');
-	}
 	if ($self->get('Host Arch') ne $self->get('Build Arch')) {
 	    my $crosscoredeps = $self->get_conf('CROSSBUILD_CORE_DEPENDS');
 	    if (defined($crosscoredeps->{$self->get('Host Arch')})) {
@@ -2597,7 +2594,6 @@ sub build {
 	DIR => $dscdir,
 	STREAMERR => \*STDOUT,
 	ENABLE_NETWORK => $self->get_conf('ENABLE_NETWORK'),
-	BUILD_INSIDE_INIT => 1,
     };
 
     my $pipe = $session->pipe_command($command);

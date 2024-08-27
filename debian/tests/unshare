@@ -263,3 +263,5 @@ rmdir "${AUTOPKGTEST_TMP}/test-pkg-1.0/debian/source" \
 	"${AUTOPKGTEST_TMP}/test-pkg-1.0/debian" \
 	"${AUTOPKGTEST_TMP}/test-pkg-1.0"
 rm "${AUTOPKGTEST_TMP}/chroot.tar"
+
+# FIXME: add cross-builds

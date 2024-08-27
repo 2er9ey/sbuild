@@ -397,39 +397,37 @@ if (!$conf->get('SETUP_ONLY')) {
 
 	makedir($target, 0755);
 
-	my $outer_gid = $REAL_GROUP_ID+0;
-	system(get_unshare_cmd({
-		    IDMAP => [['u', '0', $REAL_USER_ID, '1'],
-			['g', '0', $outer_gid, '1'],
-			['u', '1', $idmap[0][2], '1'],
-			['g', '1', $idmap[1][2], '1'],
-		    ]
-		}), 'chown', '1:1', $target);
-	my @cmd = ('env', 'PATH=/usr/sbin:/usr/bin:/sbin:/bin',
-	    get_unshare_cmd({UNSHARE_FLAGS => CLONE_NEWNS | CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWIPC, FORK => 1, IDMAP => \@idmap}), 'sh', '-c', "
-	    rootdir=\"\$1\"; shift;
-	    hostname sbuild;
-	    mkdir -p \"\$rootdir/dev\";
-	    for f in null zero full random urandom tty; do
-		touch \"\$rootdir/dev/\$f\";
-		chmod -rwx \"\$rootdir/dev/\$f\";
-		mount -o bind \"/dev/\$f\" \"\$rootdir/dev/\$f\";
-	    done;
-	    mkdir -p \"\$rootdir/sys\";
-	    mount -o rbind /sys \"\$rootdir/sys\";
-	    mkdir -p \"\$rootdir/proc\";
-	    mount -t proc proc \"\$rootdir/proc\";
-	    mkdir -p \"\$rootdir/fakebin\";
-	    ln -sf /bin/true \"\$rootdir/fakebin/mknod\";
-	    ln -sf /bin/true \"\$rootdir/fakebin/mount\";
-	    export PATH=\"\$rootdir/fakebin:/fakebin:\$PATH\"
-	    \"\$@\";
-	    exit_status=\$?;
-	    rm \"\$rootdir/fakebin/mknod\" \"\$rootdir/fakebin/mount\";
-	    rm -d \"\$rootdir/fakebin\";
-	    exit \$exit_status;
-	    ", '--', $target, $debootstrap, @args
-	);
+        0 == system(
+            'unshare',
+            # comment to guide perltidy line wrapping
+            '--map-user',   '0',
+            '--map-group',  '0',
+            '--map-users',  "$idmap[0][2],1,1",
+            '--map-groups', "$idmap[1][2],1,1",
+            'chown',        '1:1', $target
+        ) or die "E: Unable to chown $target";
+
+        my @cmd = (
+            'env', 'PATH=/usr/sbin:/usr/bin:/sbin:/bin',
+            '/usr/libexec/sbuild-usernsexec',
+            (map { join ":", @{$_} } @idmap),
+            $target,
+            'dummyuser',
+            'dummydir',
+            '--',
+            'sh', '-c', '
+                rootdir="$1"; shift;
+                mkdir -p "$rootdir/fakebin";
+                ln -sf /bin/true "$rootdir/fakebin/mknod";
+                ln -sf /bin/true "$rootdir/fakebin/mount";
+                export PATH="$rootdir/fakebin:/fakebin:$PATH"
+                "$@";
+                exit_status=$?;
+                rm "$rootdir/fakebin/mknod" "$rootdir/fakebin/mount";
+                rm -d "$rootdir/fakebin";
+                exit $exit_status;
+            ', '--', $target, $debootstrap, @args
+        );
 	!system(@cmd) or die "E: Error running @cmd";
     } else {
 	if ($REAL_USER_ID == 0) {
@@ -538,9 +536,18 @@ my \$group_sbuild = \$ARGV[2];
 my \$sources_list = \$ARGV[3];
 $setup_script
 EOF
-	!system(get_unshare_cmd(
-		{IDMAP => \@idmap}), 'perl', '-e', $setup_script, $target, $passwd_sbuild, $group_sbuild, $sources_list
-	) or die "E: failed running setup script";
+        0 == system(
+            "/usr/libexec/sbuild-usernsexec",
+            (map { join ":", @{$_} } @idmap),
+            '--',
+            'perl',
+            '-e',
+            $setup_script,
+            $target,
+            $passwd_sbuild,
+            $group_sbuild,
+            $sources_list
+        ) or die "E: failed running setup script";
     } else {
 	eval $setup_script;
 	if ($@) {
@@ -731,9 +738,12 @@ if ($conf->get('MAKE_SBUILD_TARBALL') && !$conf->get('SETUP_ONLY')) {
 
     print "I: Creating tarball...\n";
     if ($conf->get('CHROOT_MODE') eq 'unshare') {
-	open(my $in, '-|', get_unshare_cmd(
-		{IDMAP => \@idmap}), @program_list
-	) // die "could not exec tar";
+        open(
+            my $in, '-|',
+            "/usr/libexec/sbuild-usernsexec",
+            (map { join ":", @{$_} } @idmap),
+            '--', @program_list
+        ) // die "could not exec tar";
 	if (copy($in, $tmpfile) != 1 ) {
 	    die "unable to copy: $!\n";
 	}
@@ -753,7 +763,11 @@ if ($conf->get('MAKE_SBUILD_TARBALL') && !$conf->get('SETUP_ONLY')) {
 	    # this looks like a recipe for disaster, but since we execute "rm -rf" with
 	    # lxc-usernsexec, we only have permission to delete the files that were
 	    # created with the fake root user
-	    system(get_unshare_cmd({IDMAP => \@idmap}), 'rm', '-rf', $target);
+            system(
+                "/usr/libexec/sbuild-usernsexec",
+                (map { join ":", @{$_} } @idmap),
+                '--', 'rm', '-rf', $target
+            );
 	    die "Unable to remove $target" if -e $target;
 	} else {
 	    rmtree("$target");

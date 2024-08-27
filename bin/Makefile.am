@@ -63,12 +63,16 @@ doc_DATA = 		\
 aptsolver_SCRIPTS = 		\
 	sbuild-cross-resolver
 
+libexec_SCRIPTS = 		\
+	sbuild-usernsexec
+
 EXTRA_DIST =			\
 	$(bin_SCRIPTS)		\
 	$(sbin_SCRIPTS) 	\
 	$(sbuilddata_SCRIPTS)	\
 	$(doc_DATA)		\
 	$(aptsolver_SCRIPTS)	\
+	$(libexec_SCRIPTS)	\
 	buildd-make-chroot	\
 	check-old-builds	\
 	finish-build		\
