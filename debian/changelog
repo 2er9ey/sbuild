@@ -1,3 +1,17 @@
+sbuild (0.85.11) unstable; urgency=medium
+
+  [ Christian Kastner ]
+  * sbuild-qemu: Add discard=unmap to drive options
+  * sbuild-qemu-update: Reduce image size after update (Closes: #1073509)
+
+  [ Paride Legovini ]
+  * Unshare: run useradd/groupadd with --prefix instead of --root
+
+  [ Jochen Sprickerhof ]
+  * Mark dumb-init as :native (Closes: #1079731)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Wed, 28 Aug 2024 11:15:11 +0200
+
 sbuild (0.85.10) unstable; urgency=medium
 
   * autopkgtest: skip test for unreleased architecture
