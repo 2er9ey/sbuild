@@ -3272,6 +3272,10 @@ sub open_build_log {
     if ($self->get('Package_SVersion')) {
 	$filename .= $self->get('Package_SVersion');
     } else {
+	if (!defined $self->get('Package')) {
+	    warn "W: source package name is not defined";
+	    return 0;
+	}
 	$filename .= $self->get('Package');
     }
     $filename .= '_' . $self->get('Host Arch') . "-$date";
