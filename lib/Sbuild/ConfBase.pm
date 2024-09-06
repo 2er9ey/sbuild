@@ -48,7 +48,7 @@ sub init_allowed_keys {
 	    if !defined($program) || !$program;
 
 	# Emulate execvp behaviour by searching the binary in the PATH.
-	my @paths = split(/:/, $self->get('PATH'));
+	my @paths = split(/:/, ($ENV{'PATH'} // "/usr/sbin:/usr/bin:/sbin:/bin"));
 	# Also consider the empty path for absolute locations.
 	push (@paths, '');
 	my $found = 0;
