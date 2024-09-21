@@ -19,6 +19,12 @@ if [ -z "$release" ]; then
 	exit 1
 fi
 nativearch=$(dpkg --print-architecture)
+# only run the cross-tests on amd64 crossing for arm64 as per
+# https://lists.debian.org/msgid-search/173156754864.3649146.10791472176546387428@localhost
+foreignarch=
+if [ "$nativearch" = amd64 ]; then
+	foreignarch=arm64
+fi
 
 mkdir -p "${AUTOPKGTEST_TMP}/gpghome"
 chmod 700 "${AUTOPKGTEST_TMP}/gpghome"
@@ -113,6 +119,12 @@ verify_bin_changes() {
 	echo "verifying test-pkg_1.0_${nativearch}.changes" >&2
 	dscverify --keyring="${AUTOPKGTEST_TMP}/gpghome/pubring.kbx" \
 		"${AUTOPKGTEST_TMP}/test-pkg_1.0_${nativearch}.changes"
+}
+
+verify_foreign_bin_changes() {
+	echo "verifying test-pkg_1.0_${foreignarch}.changes" >&2
+	dscverify --keyring="${AUTOPKGTEST_TMP}/gpghome/pubring.kbx" \
+		"${AUTOPKGTEST_TMP}/test-pkg_1.0_${foreignarch}.changes"
 }
 
 verify_src_changes() {
@@ -219,6 +231,7 @@ cat << END > "${AUTOPKGTEST_TMP}/test-pkg-1.0/debian/source/format"
 END
 
 mmdebstrap --mode=unshare --variant=apt \
+	--architecture="$nativearch,$foreignarch" \
 	--debug \
 	--hook-dir=/usr/share/mmdebstrap/hooks/copy-host-apt-sources-and-preferences \
 	--hook-dir=/usr/share/mmdebstrap/hooks/file-mirror-automount \
@@ -248,6 +261,11 @@ verify orig deb dsc bin_changes commands_log
 
 run_sbuild test-pkg-1.0
 verify orig deb bin_changes commands_log
+
+if [ "$nativearch" = amd64 ]; then
+  run_sbuild test-pkg-1.0 --build="$nativearch" --host="$foreignarch" --arch-all
+  verify orig deb foreign_bin_changes
+fi
 
 # Test running sbuild on the dsc
 env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-source --build .

@@ -14,3 +14,18 @@ Depends: build-essential,
          sqop,
          uidmap
 Restrictions: allow-stderr
+
+# trigger the 'unshare' test on those packages which are likely to break
+# cross-compilation but only on amd64 as per:
+# https://lists.debian.org/msgid-search/173156754864.3649146.10791472176546387428@localhost
+Features: test-name=hint-testsuite-triggers
+Test-Command: false
+Architecture: amd64
+Depends: binutils,
+         gcc-for-host,
+         libc6-dev,
+         libcrypt-dev,
+         libgcc-s1,
+         linux-libc-dev,
+         make
+Restrictions: hint-testsuite-triggers
