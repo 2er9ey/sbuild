@@ -430,9 +430,33 @@ chroot "." or die "failed to chroot() to .: $!";
 # chdir while we are still root
 chdir $dir or die "unable to chdir $dir: $!";
 
-# switch to the desired user and main group
-(undef, undef, my $uid, my $gid) = getpwnam($user);
-0 == syscall &SYS_setgid, $gid or die "setgid failed: $!";
-0 == syscall &SYS_setuid, $uid or die "setuid failed: $!";
+# Look up the uid and gid for $user without getpwnam as that could call into
+# nss modules and the version and architecture of the running perl interpreter
+# may mismatch the chroot.
+{
+    open my $fh, '<', '/etc/passwd'
+        or die "opening /etc/passwd failed: $!";
+    my $uid;
+    my $gid;
+    while (my $line = <$fh>) {
+        my @fields = split /:/, $line;
+        next unless $#fields >= 4 and $fields[0] eq $user;
+        unless ($fields[2] =~ /\d+/ and $fields[3] =~ /\d+/) {
+            die "invalid /etc/passwed line: $line";
+        }
+        $uid = int $fields[2];
+        $gid = int $fields[3];
+        last;
+    }
+    close $fh;
+
+    unless (defined $uid and defined $gid) {
+        die "user $user not found in /etc/passed";
+    }
+
+    0 == syscall &SYS_setgid, $gid or die "setgid failed: $!";
+    0 == syscall &SYS_setuid, $uid or die "setuid failed: $!";
+
+}
 
 exec @ARGV;
