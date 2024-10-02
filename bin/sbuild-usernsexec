@@ -301,13 +301,7 @@ while (scalar @ARGV > 0) {
         last;
     }
     if (!-d "$rootdir/$ARGV[1]") {
-        my $num_created = make_path "$rootdir/$ARGV[1]", { error => \my $err };
-        if ($err && @$err) {
-            die (join "; ",
-              (map { "cannot create " . (join ": ", %{$_}) } @$err));
-        } elsif ($num_created == 0) {
-            die  "cannot create $ARGV[1]";
-        }
+        make_path "$rootdir/$ARGV[1]";
     }
     0 == system('mount', '-o', 'rbind', $ARGV[0], "$rootdir/$ARGV[1]")
       or die "mount failed: $!";
