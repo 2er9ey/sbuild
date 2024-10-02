@@ -1,3 +1,40 @@
+sbuild (0.86.0) unstable; urgency=medium
+
+  [ Chris Hofstaedtler ]
+  * Remove buildd-mail-wrapper compat symlink
+  * Remove NEWS-buildd, ending in 2004
+  * Remove reference to deleted ChangeLog-buildd
+  * Remove Makefile-buildd
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * lib/Sbuild/Build.pm: warn if source package name is not defined
+  * lib/Sbuild/ConfBase.pm: fall back to sane PATH if unset
+  * debian/salsa-ci.yml: SALSA_CI_REPROTEST_ENABLE_DIFFOSCOPE: 1
+  * remove ./debian/buildd.init
+  * d/rules: set LC_ALL=C.UTF-8 for reproduciblity (Closes: #1082358)
+  * refactor the unshare backend as /usr/libexec/sbuild-usernsexec
+
+  [ Helmut Grohne ]
+  * sbuild-usernsexec: avoid getpwnam inside the chroot
+
+  [ Grzegorz Szymaszek ]
+  * man/sbuild-update.1: delete clean from an example
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * add .perltidyrc
+  * lib/Sbuild/Build.pm: when auto-adding deb-src to EXTRA_REPOSITORIES,
+    consider sources.list entries unique by Repo-URI, Codename and Component
+
+  [ Jochen Sprickerhof ]
+  * Remove unused use
+  * unshare: mkdir before bind mounting
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * bin/sbuild-usernsexec: let make_path croak() by itself on error.
+    Thanks to Guillem Jover
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Wed, 02 Oct 2024 14:59:15 +0200
+
 sbuild (0.85.11) unstable; urgency=medium
 
   [ Christian Kastner ]
