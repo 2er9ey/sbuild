@@ -31,7 +31,6 @@ use Errno qw(:POSIX);
 use Fcntl;
 use File::Temp qw(mkdtemp);
 use File::Basename qw(basename dirname);
-use File::Path qw(make_path);
 use FileHandle;
 use File::Copy qw(); # copy is already exported from Sbuild, so don't export
 		     # anything.
