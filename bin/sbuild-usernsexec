@@ -56,6 +56,7 @@ our (
 my $disable_network = 0;
 my $perlinux32      = 0;
 my $pivotroot       = 0;
+my $setsid          = 1;
 while ($ARGV[0] !~ /^[ugb]:/) {
     if ($ARGV[0] eq '--nonet') {
         $disable_network = 1;
@@ -65,6 +66,9 @@ while ($ARGV[0] !~ /^[ugb]:/) {
         shift;
     } elsif ($ARGV[0] eq '--pivotroot') {
         $pivotroot = 1;
+        shift;
+    } elsif ($ARGV[0] eq '--nosetsid') {
+        $setsid = 0;
         shift;
     } else {
         print STDERR "invalid option $ARGV[0]\n";
@@ -284,7 +288,10 @@ if (defined ioctl(STDIN, $TIOCNOTTY, 0)) {
 
 # child
 
-if (POSIX::setsid() == -1) {
+# setsid is needed so procps does not FTBFS.
+# On the other hand it breaks the /dev/tty for interactive shells so we need to
+# disable it there.
+if ($setsid == 1 && POSIX::setsid() == -1) {
     exit 1;
 }
 

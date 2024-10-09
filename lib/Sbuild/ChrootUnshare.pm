@@ -273,6 +273,7 @@ sub _get_exec_argv {
     my $dir = shift;
     my $user = shift;
     my $disable_network = shift // 0;
+    my $disable_setsid = shift // 0;
 
     # Detect whether linux32 personality might be needed
     my %personalities = (
@@ -300,6 +301,7 @@ sub _get_exec_argv {
         '--pivotroot',
         $linux32         ? ('--32bit') : (),
         $disable_network ? ('--nonet') : (),
+        $disable_setsid  ? ('--nosetsid') : (),
         (map { join ":", @{$_} } read_subuid_subgid),
         $self->get('Session ID'),
         $user,
@@ -344,8 +346,12 @@ sub get_command_internal {
     if (defined($options->{'ENABLE_NETWORK'}) && $options->{'ENABLE_NETWORK'} == 0) {
 	$disable_network = 1;
     }
+    my $disable_setsid = 1;
+    if (defined($options->{'SETSID'}) && $options->{'SETSID'} == 1) {
+	$disable_setsid = 0;
+    }
 
-    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network);
+    my @cmdline = $self->_get_exec_argv($dir, $user, $disable_network, $disable_setsid);
     if (ref $command) {
 	push @cmdline, @$command;
     } else {
