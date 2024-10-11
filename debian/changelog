@@ -1,3 +1,11 @@
+sbuild (0.86.1) unstable; urgency=medium
+
+  * unshare: Don't setsid() for hooks (Closes: #1084174)
+  * Add warning for schroot users
+  * Fix lintian warning superfluous-file-pattern
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Fri, 11 Oct 2024 09:33:39 +0200
+
 sbuild (0.86.0) unstable; urgency=medium
 
   [ Chris Hofstaedtler ]
