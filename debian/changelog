@@ -1,3 +1,9 @@
+sbuild (0.86.2) unstable; urgency=medium
+
+  * unshare: disable pivot_root (Closes: #1084956)
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sat, 12 Oct 2024 21:57:54 +0200
+
 sbuild (0.86.1) unstable; urgency=medium
 
   * unshare: Don't setsid() for hooks (Closes: #1084174)
