@@ -419,27 +419,32 @@ if (!$pivotroot) {
     exec @ARGV;
 }
 
-# pivot root
-my $target  = "/mnt";
-my $put_old = "tmp";
-0 == syscall &SYS_mount, $rootdir, $target, 0, $MS_REC | $MS_BIND, 0
-  or die "mount failed: $!";
-chdir "/mnt" or die "failed chdir() to /mnt: $!";
-0 == syscall &SYS_pivot_root, my $new_root = ".", $put_old
-  or die "pivot_root failed: $!";
+if (defined $ENV{'SBUILD_ENABLE_PIVOT_ROOT'}) {
+    # pivot root
+    my $target  = "/mnt";
+    my $put_old = "tmp";
+    0 == syscall &SYS_mount, $rootdir, $target, 0, $MS_REC | $MS_BIND, 0
+      or die "mount failed: $!";
+    chdir "/mnt" or die "failed chdir() to /mnt: $!";
+    0 == syscall &SYS_pivot_root, my $new_root = ".", $put_old
+      or die "pivot_root failed: $!";
 
-# FIXME: is the 'chroot "."' even needed? It is done here because that's
-# what is done in pivot_root(8) but why is it done?
-chroot "." or die "failed to chroot() to .: $!";
-0 == syscall &SYS_umount2, $put_old, $MNT_DETACH
-  or die "umount2 failed: $!";
+    # FIXME: is the 'chroot "."' even needed? It is done here because that's
+    # what is done in pivot_root(8) but why is it done?
+    chroot "." or die "failed to chroot() to .: $!";
+    0 == syscall &SYS_umount2, $put_old, $MNT_DETACH
+      or die "umount2 failed: $!";
 
-# FIXME: why is /sys unmounted here?
-0 == syscall &SYS_umount2, my $sys = "sys", $MNT_DETACH
-  or die "umount2 failed: $!";
+    # FIXME: why is /sys unmounted here?
+    0 == syscall &SYS_umount2, my $sys = "sys", $MNT_DETACH
+      or die "umount2 failed: $!";
 
-# chdir while we are still root
-chdir $dir or die "unable to chdir $dir: $!";
+    # chdir while we are still root
+    chdir $dir or die "unable to chdir $dir: $!";
+} else {
+    chroot $rootdir or die "failed to chroot() to .: $!";
+    chdir $dir      or die "unable to chdir /: $!";
+}
 
 # Look up the uid and gid for $user without getpwnam as that could call into
 # nss modules and the version and architecture of the running perl interpreter
