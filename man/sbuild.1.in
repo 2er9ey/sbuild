@@ -1284,6 +1284,10 @@ building. The default tarball location is in ~/.cache/sbuild/. The expected
 names are resolved in the same order as for the schroot chroot mode and can be
 overridden using the \-c or \-\-chroot options.
 
+Note that the unshare backend does not support the session concept so you can't
+use  \f[CB]\-\-purge\-session\fP with it. Use the options listed below
+\fBEXTERNAL COMMANDS\fR instead.
+
 On buster and earlier Debian releases, unprivileged userns clones
 (/proc/sys/kernel/unprivileged_userns_clone) were disabled by default by means
 of a Debian-specific kernel patch. On these systems, root is required for

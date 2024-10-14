@@ -649,7 +649,9 @@ END
 	    if ($end_session) {
 		    $session->end_session();
 	    } else {
-		    $self->log("Keeping session: " . $session->get('Session ID') . "\n");
+		    if ($self->get_conf('CHROOT_MODE') ne 'unshare') {
+			$self->log("Keeping session: " . $session->get('Session ID') . "\n");
+		    }
 	    }
 	    $session = undef;
     }
