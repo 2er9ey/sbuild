@@ -76,7 +76,6 @@ EXTRA_DIST =			\
 	buildd-make-chroot	\
 	check-old-builds	\
 	finish-build		\
-	sbuild-debuild		\
 	setup_system		\
 	wb-ssh-wrapper
 

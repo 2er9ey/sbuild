@@ -78,8 +78,7 @@ CLEANFILES = 				\
 
 EXTRA_DIST =				\
 	defs.man.in			\
-	$(addsuffix .in, $(man_MANS))	\
-	sbuild-debuild.1.in
+	$(addsuffix .in, $(man_MANS))
 
 install-data-hook:
 	ln -sf sbuild-hold.1 $(DESTDIR)$(man1dir)/sbuild-unhold.1
