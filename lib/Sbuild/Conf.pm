@@ -1291,7 +1291,7 @@ $crossbuild_core_depends = {
 
                 return $retval;
               },
-	    HELP => 'Preceding arguments to launch piuparts as root. With the default value (the empty array) "sudo --" will be used as a prefix. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
+	    HELP => 'Preceding arguments to launch piuparts as root. With the default value (the empty array) "sudo --" will be used as a prefix unless sbuild is run in unshare mode. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
 	    EXAMPLE =>
 '# prefix with "sudo --":
 $piuparts_root_args = [];
@@ -1395,7 +1395,7 @@ $piuparts_root_args = [\'\', \'whatever\'];
 	    VARNAME => 'autopkgtest_root_args',
 	    GROUP => 'Build validation',
 	    DEFAULT => [],
-	    HELP => 'Preceding arguments to launch autopkgtest as root. With the default value (the empty array) "sudo --" will be used as a prefix. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
+	    HELP => 'Preceding arguments to launch autopkgtest as root. With the default value (the empty array) "sudo --" will be used as a prefix unless sbuild is run in unshare mode. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
 	    EXAMPLE =>
 '# prefix with "sudo --":
 $autopkgtest_root_args = [];
