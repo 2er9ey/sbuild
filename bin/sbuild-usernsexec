@@ -403,8 +403,19 @@ for my $link (
     if (-e "$rootdir/$link") {
         unlink "$rootdir/$link" or die "cannot unlink $link";
     }
-    symlink $target, "$rootdir/$link"
-      or die "failed to create symlink $link";
+    if (0 == symlink $target, "$rootdir/$link") {
+        warn "failed to create symlink $link: $!";
+        if (-l "$rootdir/$link") {
+            my $target = readlink "$rootdir/$link";
+            warn "$rootdir/$link is a symlink to $target";
+        } elsif (-f "$rootdir/$link") {
+            warn "$rootdir/$link is a plain file";
+        } elsif (-d "$rootdir/$link") {
+            warn "$rootdir/$link is a directory";
+        } elsif (-e "$rootdir/$link") {
+            warn "$rootdir/$link exists and is not a symlink";
+        }
+    }
 }
 
 if (!-d "$rootdir/dev/pts") {
