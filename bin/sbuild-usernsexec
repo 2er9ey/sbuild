@@ -10,6 +10,28 @@
 #
 # Or like this without:
 # bin/sbuild-usernsexec b:0:100000:65536 -- sh -c "exit 1"
+#
+# Here is an "interesting" set of packages which FTBFS with 'unshare' mode in
+# April 2024: buildbot debugpy dumb-init foolscap globus-gram-job-manager
+# heimdal idzebra kf5-messagelib kpat libapp-daemon-perl
+# libdaemon-control-perl libdaemon-generic-perl libfile-flock-perl
+# libfirefox-marionette-perl libmoosex-daemonize-perl libproc-daemon-perl
+# libproc-pid-file-perl libsoup2.4 libtest-postgresql-perl
+# libtest2-harness-perl libvirt manila-ui mosh munge mypy nautilus nbdkit
+# neovim ngircd node-async ocaml-extunix openvswitch ovn pgbouncer procps
+# public-inbox pyranges python-psutil ros-actionlib ruby-childprocess
+# ruby-process-daemon swtpm thin tracker-miners unicorn
+#
+# These seem to not like pivot_root in October 2024: daemontools elogind
+# flatpak gnome-shell golang-github-containers-toolbox
+# golang-github-shirou-gopsutil golang-github-tklauser-go-sysconf
+# golang-github-tklauser-numcpus golang-github-ungerik-go-sysfs ipsvd
+# ironic-python-agent macs netplan.io network-manager pyopencl python-mne
+# ruby-macaddr sasmodels silx tuned ucspi-tcp umockdev util-linux gpyfft
+# policykit-1 rust-lfs-core rust-udev
+#
+# When making changes to the unshare backend, consider testing against
+# above list of packages.
 
 use strict;
 use warnings;
