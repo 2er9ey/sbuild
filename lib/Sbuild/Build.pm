@@ -2053,10 +2053,16 @@ sub explain_bd_uninstallable {
 	return 0;
     } elsif ($self->get_conf('BD_UNINSTALLABLE_EXPLAINER') eq 'apt') {
 	my (@instd, @rmvd);
-	my @apt_args = ('--simulate', \@instd, \@rmvd, 'install', $dummy_pkg_name,
-	    '-oDebug::pkgProblemResolver=true', '-oDebug::pkgDepCache::Marker=1',
-	    '-oDebug::pkgDepCache::AutoInstall=1', '-oDebug::BuildDeps=1'
-	);
+        my @apt_args = (
+            '--simulate',
+            \@instd,
+            \@rmvd,
+            'install',
+            $dummy_pkg_name,
+            '-oDebug::pkgProblemResolver=true',
+            '-oDebug::pkgDepCache::Marker=1',
+            '-oDebug::pkgDepCache::AutoInstall=1'
+        );
 	$resolver->run_apt(@apt_args);
     } elsif ($self->get_conf('BD_UNINSTALLABLE_EXPLAINER') eq 'dose3') {
 	# To retrieve all Packages files apt knows about we use "apt-get
