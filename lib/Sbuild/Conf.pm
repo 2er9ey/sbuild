@@ -739,7 +739,7 @@ sub setup ($) {
 		    print STDERR "The Debian buildd's switched to the \"unshare\" backend and sbuild may adjust its default chroot backend accordingly in the future. To make sure that your configuration does not break once this happens, add the following to your `~/.sbuildrc` to keep the current default:\n";
 		    print STDERR "\t\$chroot_mode = \"schroot\";\n";
 		    print STDERR "\t\$schroot = \"schroot\";\n";
-		    print STDERR "If you want to use the \"unshare\" backend see https://wiki.debian.org/sbuild#Option_1:_Using_unshare_with_mmdebstrap_.28no_root_needed.29\n";
+		    print STDERR "If you want to use the \"unshare\" backend see https://wiki.debian.org/sbuild\n";
 		}
 	    },
             DEFAULT => undef,
