@@ -1,3 +1,32 @@
+sbuild (0.86.3) unstable; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * bin/sbuild-usernsexec: add interesting package sets for the unshare backend
+  * bin/sbuild-usernsexec: do not die if symlink creation fails but warn with
+    the possible reason for failure
+    (Closes: #1085219)
+
+  [ Chris Hofstaedtler ]
+  * Drop sbuild-debuild code
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * If run in unshare mode and if unset in ~/.sbuildrc, run piuparts and
+    autopkgtest in unshare mode as well, re-using the sbuild tarball
+  * unify ROOT_ARGS handling of autopkgtest and piuparts
+  * lib/Sbuild/Build.pm: remove use of apt's Debug::BuildDeps=1 which was last
+    used in jessie and no longer exists in apt since stretch
+
+  [ Benjamin Drung ]
+  * debian/tests/unshare-qemuwrapper: Test absolute paths in %SBUILD_DSC
+  * debian/tests/unshare: Test fix building symlinks not ending on .dsc
+    (Closes: #1012856)
+
+  [ Jochen Sprickerhof ]
+  * Don't show "Keeping session:" in unshare mode (Closes: #1073295)
+  * Update sbuild wiki link
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Sun, 27 Oct 2024 08:12:10 +0100
+
 sbuild (0.86.2) unstable; urgency=medium
 
   * unshare: disable pivot_root (Closes: #1084956)
