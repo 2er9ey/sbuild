@@ -1235,6 +1235,7 @@ $crossbuild_core_depends = {
                     if ($conf->get('CHROOT_MODE') eq 'unshare') {
                         $retval = [
                             "--basetgz=$HOME/.cache/sbuild/%r-%a.tar",
+			    '--distribution=%r',
                             '--fake-essential-packages=systemd-sysv'
                         ];
                     } else {
