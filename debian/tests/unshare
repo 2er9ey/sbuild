@@ -223,7 +223,7 @@ mmdebstrap --mode=unshare --variant=apt \
 	--hook-dir=/usr/share/mmdebstrap/hooks/copy-host-apt-sources-and-preferences \
 	--hook-dir=/usr/share/mmdebstrap/hooks/file-mirror-automount \
 	--skip=cleanup/apt/lists \
-	"$release" \
+	"" \
 	"${AUTOPKGTEST_TMP}/chroot.tar"
 
 env --chdir="${AUTOPKGTEST_TMP}/test-pkg-1.0/" dpkg-buildpackage --sign-keyfile="${AUTOPKGTEST_TMP}/key.asc" --build=full
