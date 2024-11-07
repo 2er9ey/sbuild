@@ -333,13 +333,52 @@ sub setup ($) {
 		"stable-backports" => [ '--setup-hook=echo "deb http://deb.debian.org/debian stable-backports main" > "$1"/etc/apt/sources.list.d/stable-backports.list' ],
 		"experimental" => [ '--setup-hook=echo "deb http://deb.debian.org/debian experimental main" > "$1"/etc/apt/sources.list.d/experimental.list' ]
 	    },
+	    GET => sub {
+	        my $conf  = shift;
+	        my $entry = shift;
+	
+	        my $retval = $conf->_get($entry->{'NAME'});
+	
+	        my $dist     = $conf->get('DISTRIBUTION');
+	        my $hostarch = $conf->get('HOST_ARCH');
+	        my %percent  = (
+	            '%'                   => '%',
+	            'a'                   => $hostarch,
+	            'SBUILD_HOST_ARCH'    => $hostarch,
+	            'r'                   => $dist,
+	            'SBUILD_DISTRIBUTION' => $dist,
+	        );
+	
+	        my $keyword_pat = join("|",
+	            sort { length $b <=> length $a || $a cmp $b }
+	              keys %percent);
+	        foreach my $key (keys %{$retval}) {
+	            (my $newkey = $key) =~ s{
+	                # Match a percent followed by a valid keyword
+	                \%($keyword_pat)
+	            }{
+	                # Substitute with the appropriate value only if it's defined
+	                $percent{$1} || $&
+	            }msxge;
+	            if ($newkey eq $key) {
+	                # key is unchanged, do nothing
+	                next;
+	            }
+	            # rename hash key after percent escape replacement
+	            $retval->{$newkey} = $retval->{$key};
+	            delete %{$retval}{$key};
+	        }
+	        return $retval;
+	      },
 	    VARNAME => 'unshare_mmdebstrap_extra_args',
+
 	    GROUP => 'Chroot options (unshare)',
-	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is run because of UNSHARE_MMDEBSTRAP_AUTO_CREATE was set to true, pass these extra arguments to the mmdebstrap invocation. The option allows specifying extra arguments specific to a specific distribution name or build architecture. A key containing a single asterisk serves as a catch-all wildcard which applies the extra options to all invocations. A key named after a distribution name will replace it for sbuild runs for that distribution. Even more specific, a key containing the architecture appended to the distribution name separated by a minus allows for build architecture specific options. Lastly, a key named exactly like the chroot will overwrite all the former entries.',
+	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is run because of UNSHARE_MMDEBSTRAP_AUTO_CREATE was set to true, pass these extra arguments to the mmdebstrap invocation. The option allows specifying extra arguments specific to a specific distribution name or build architecture. A key containing a single asterisk serves as a catch-all wildcard which applies the extra options to all invocations. A key named after a distribution name will replace it for sbuild runs for that distribution. Even more specific, a key containing the architecture appended to the distribution name separated by a minus allows for build architecture specific options. Lastly, a key named exactly like the chroot will overwrite all the former entries. Percentage escapes %a and %r will be replaced by host architecture and distribution of the current build, respectively.',
 	    EXAMPLE => '
 $unshare_mmdebstrap_extra_args = {
    "*" => [ "--include=debhelper" ], # if no more specific glob matches, include debhelper
    "noble" => [ "--components=main,universe,multiverse" ], # add universe and multiverse for ubuntu
+   "debcargo-unstable-%a-sbuild" => ["--include=dh-cargo,cargo"], # %a will be replaced by the host architecture
    # custom options for explicit chroot path (but sbuild will not update that
    # tarball even with UNSHARE_MMDEBSTRAP_KEEP_TARBALL=1)
    "/srv/custom-chroot.tar" => [ "--variant=apt", --arch="i386,ppc64el" ]
