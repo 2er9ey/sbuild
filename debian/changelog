@@ -1,9 +1,9 @@
-sbuild (0.87.0~exp2) UNRELEASED; urgency=medium
+sbuild (0.87.0~exp2) experimental; urgency=medium
 
   * lib/Sbuild/Conf.pm: interpret percent escapes in
     UNSHARE_MMDEBSTRAP_EXTRA_ARGS
 
- -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Thu, 07 Nov 2024 09:58:32 +0100
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Thu, 07 Nov 2024 10:38:03 +0100
 
 sbuild (0.87.0~exp1) experimental; urgency=medium
 
