@@ -2523,7 +2523,6 @@ sub build {
 			  [$self->get_conf('BUILD_ARCH_ALL')]
 			  [$self->get_conf('BUILD_ARCH_ANY')];
     push (@{$buildcmd}, $binopt) if $binopt;
-    push (@{$buildcmd}, "-r" . $self->get_conf('FAKEROOT'));
 
     if ($self->get_conf('DPKG_FILE_SUFFIX')) {
 	my $dpkg_version_ok = Dpkg::Version->new("1.18.11");
