@@ -89,7 +89,7 @@ sub chroot_tarball_if_too_old {
         if (!-e $tarball) {
             print STDERR "I: Chroot Tarball $tarball does not exist yet\n";
             if ($max_age < 0) {
-                print STDERR,
+                print STDERR
                   "I: Not updating it due to negative maximum age\n";
                 return undef;
             }
