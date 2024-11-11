@@ -86,6 +86,15 @@ sub chroot_tarball_if_too_old {
     }
     my $tarball = $self->find_tarball($chroot);
     if (defined($tarball)) {
+        if (!-e $tarball) {
+            print STDERR "I: Chroot Tarball $tarball does not exist yet\n";
+            if ($max_age < 0) {
+                print STDERR,
+                  "I: Not updating it due to negative maximum age\n";
+                return undef;
+            }
+            return $tarball;
+        }
         # negative max-age indicates to never update
         # if an existing tarball is too young, don't update
         my $age     = time - (stat($tarball))[9];
