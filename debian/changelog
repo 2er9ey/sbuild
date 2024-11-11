@@ -1,4 +1,4 @@
-sbuild (0.87.0) UNRELEASED; urgency=medium
+sbuild (0.87.0) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
   * If a tarball can't be found, create a chroot on-demand using mmdebstrap.
@@ -21,7 +21,7 @@ sbuild (0.87.0) UNRELEASED; urgency=medium
   [ Jochen Sprickerhof ]
   * Use empty release in unshare autopkgtest (Closes: #1085450)
 
- -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Wed, 06 Nov 2024 12:42:07 +0100
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Tue, 12 Nov 2024 00:09:38 +0100
 
 sbuild (0.86.3) unstable; urgency=medium
 
