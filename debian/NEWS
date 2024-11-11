@@ -1,4 +1,4 @@
-sbuild (0.87.0~exp1) experimental; urgency=medium
+sbuild (0.87.0) experimental; urgency=medium
 
     This release introduces an experimental new feature for the unshare
     backend which is supposed to make sbuild more easy to use because
