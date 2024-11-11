@@ -86,6 +86,7 @@ sub chroot_tarball_if_too_old {
     }
     my $tarball = $self->find_tarball($chroot);
     if (defined($tarball)) {
+        my $max_age = $self->get_conf('UNSHARE_MMDEBSTRAP_MAX_AGE');
         if (!-e $tarball) {
             print STDERR "I: Chroot Tarball $tarball does not exist yet\n";
             if ($max_age < 0) {
@@ -98,7 +99,6 @@ sub chroot_tarball_if_too_old {
         # negative max-age indicates to never update
         # if an existing tarball is too young, don't update
         my $age     = time - (stat($tarball))[9];
-        my $max_age = $self->get_conf('UNSHARE_MMDEBSTRAP_MAX_AGE');
         if ($max_age >= 0 && $age >= $max_age) {
             print STDERR "I: Existing chroot tarball is too old ("
               . (
