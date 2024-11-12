@@ -127,22 +127,22 @@ sub set_options {
 			   $self->set_conf('BUILD_PROFILES', $_[1]);
 		       },
 		       "add-depends=s" => sub {
-			   push(@{$self->get_conf('MANUAL_DEPENDS')}, $_[1]);
+			   $self->push_conf('MANUAL_DEPENDS', $_[1]);
 		       },
 		       "add-conflicts=s" => sub {
-			   push(@{$self->get_conf('MANUAL_CONFLICTS')}, $_[1]);
+			   $self->push_conf('MANUAL_CONFLICTS', $_[1]);
 		       },
 		       "add-depends-arch=s" => sub {
-			   push(@{$self->get_conf('MANUAL_DEPENDS_ARCH')}, $_[1]);
+			   $self->push_conf('MANUAL_DEPENDS_ARCH', $_[1]);
 		       },
 		       "add-conflicts-arch=s" => sub {
-			   push(@{$self->get_conf('MANUAL_CONFLICTS_ARCH')}, $_[1]);
+			   $self->push_conf('MANUAL_CONFLICTS_ARCH', $_[1]);
 		       },
 		       "add-depends-indep=s" => sub {
-			   push(@{$self->get_conf('MANUAL_DEPENDS_INDEP')}, $_[1]);
+			   $self->push_conf('MANUAL_DEPENDS_INDEP', $_[1]);
 		       },
 		       "add-conflicts-indep=s" => sub {
-			   push(@{$self->get_conf('MANUAL_CONFLICTS_INDEP')}, $_[1]);
+			   $self->push_conf('MANUAL_CONFLICTS_INDEP', $_[1]);
 		       },
 		       "b|batch" => sub {
 			   $self->set_conf('BATCH_MODE', 1);
@@ -208,11 +208,10 @@ sub set_options {
 			   $self->set_conf('AUTOPKGTEST_VIRT_SERVER', $_[1]);
 		       },
 		       "autopkgtest-virt-server-opts=s" => sub {
-			   push(@{$self->get_conf('AUTOPKGTEST_VIRT_SERVER_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('AUTOPKGTEST_VIRT_SERVER_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "autopkgtest-virt-server-opt=s" => sub {
-			   push(@{$self->get_conf('AUTOPKGTEST_VIRT_SERVER_OPTIONS')}, $_[1]);
+			   $self->push_conf('AUTOPKGTEST_VIRT_SERVER_OPTIONS', $_[1]);
 		       },
 		       "apt-clean" => sub {
 			   if ($opt_no_apt_clean) {
@@ -303,27 +302,22 @@ sub set_options {
 			   $self->set_conf('UPLOADER_NAME', $_[1]);
 		       },
 		       "debbuildopts=s" => sub {
-			   push(@{$self->get_conf('DPKG_BUILDPACKAGE_USER_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('DPKG_BUILDPACKAGE_USER_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "debbuildopt=s" => sub {
-			   push(@{$self->get_conf('DPKG_BUILDPACKAGE_USER_OPTIONS')},
-				$_[1]);
+			   $self->push_conf('DPKG_BUILDPACKAGE_USER_OPTIONS', $_[1]);
 		       },
 		       "dpkg-file-suffix=s" => sub {
 			   $self->set_conf('DPKG_FILE_SUFFIX', $_[1]);
 		       },
 		       "j|jobs=i" => sub {
-			   push(@{$self->get_conf('DPKG_BUILDPACKAGE_USER_OPTIONS')},
-				'-j'.$_[1])
+			   $self->push_conf('DPKG_BUILDPACKAGE_USER_OPTIONS', '-j'.$_[1])
 		       },
 		       "dpkg-source-opts=s" => sub {
-			   push(@{$self->get_conf('DPKG_SOURCE_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('DPKG_SOURCE_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "dpkg-source-opt=s" => sub {
-			   push(@{$self->get_conf('DPKG_SOURCE_OPTIONS')},
-				$_[1]);
+			   $self->push_conf('DPKG_SOURCE_OPTIONS', $_[1]);
 		       },
 		       "mail-log-to=s" => sub {
 			   $self->set_conf('MAILTO', $_[1]);
@@ -455,12 +449,10 @@ sub set_options {
 			    $opt_no_run_lintian = 1;
 		       },
 		       "lintian-opts=s" => sub {
-			   push(@{$self->get_conf('LINTIAN_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('LINTIAN_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "lintian-opt=s" => sub {
-			   push(@{$self->get_conf('LINTIAN_OPTIONS')},
-				$_[1]);
+			   $self->push_conf('LINTIAN_OPTIONS', $_[1]);
 		       },
 		       "run-piuparts" => sub {
 			    if ($opt_no_run_piuparts) {
@@ -477,20 +469,16 @@ sub set_options {
 			    $opt_no_run_piuparts = 1;
 		       },
 		       "piuparts-opts=s" => sub {
-			   push(@{$self->get_conf('PIUPARTS_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('PIUPARTS_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "piuparts-opt=s" => sub {
-			   push(@{$self->get_conf('PIUPARTS_OPTIONS')},
-				$_[1]);
+			   $self->push_conf('PIUPARTS_OPTIONS', $_[1]);
 		       },
 		       "piuparts-root-args=s" => sub {
-			   push(@{$self->get_conf('PIUPARTS_ROOT_ARGS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('PIUPARTS_ROOT_ARGS', split(/\s+/, $_[1]));
 		       },
 		       "piuparts-root-arg=s" => sub {
-			   push(@{$self->get_conf('PIUPARTS_ROOT_ARGS')},
-				$_[1]);
+			   $self->push_conf('PIUPARTS_ROOT_ARGS', $_[1]);
 		       },
 		       "run-autopkgtest" => sub {
 			    if ($opt_no_run_autopkgtest) {
@@ -521,12 +509,10 @@ sub set_options {
 			    $opt_no_enable_network = 1;
 		       },
 		       "autopkgtest-opts=s" => sub {
-			   push(@{$self->get_conf('AUTOPKGTEST_OPTIONS')},
-				split(/\s+/, $_[1]));
+			   $self->push_conf('AUTOPKGTEST_OPTIONS', split(/\s+/, $_[1]));
 		       },
 		       "autopkgtest-opt=s" => sub {
-			   push(@{$self->get_conf('AUTOPKGTEST_OPTIONS')},
-				$_[1]);
+			   $self->push_conf('AUTOPKGTEST_OPTIONS', $_[1]);
 		       },
 		       "autopkgtest-root-args=s" => sub {
 			   # special handling of the case when the string
@@ -535,16 +521,13 @@ sub set_options {
 			   # would just return an empty list when splitting
 			   # the empty string
 			   if ($_[1] eq '') {
-			       push(@{$self->get_conf('AUTOPKGTEST_ROOT_ARGS')},
-				   '');
+			       $self->push_conf('AUTOPKGTEST_ROOT_ARGS', '');
 			   } else {
-			       push(@{$self->get_conf('AUTOPKGTEST_ROOT_ARGS')},
-				   split(/\s+/, $_[1]));
+			       $self->push_conf('AUTOPKGTEST_ROOT_ARGS', split(/\s+/, $_[1]));
 			   }
 		       },
 		       "autopkgtest-root-arg=s" => sub {
-			   push(@{$self->get_conf('AUTOPKGTEST_ROOT_ARGS')},
-				$_[1]);
+			   $self->push_conf('AUTOPKGTEST_ROOT_ARGS', $_[1]);
 		       },
 			"pre-build-commands=s" => sub {
 			   push(@{${$self->get_conf('EXTERNAL_COMMANDS')}{"pre-build-commands"}},
@@ -605,13 +588,13 @@ sub set_options {
 			    $self->set_conf('LOG_EXTERNAL_COMMAND_ERROR', 1);
 		       },
 			"extra-package=s" => sub {
-			   push(@{$self->get_conf('EXTRA_PACKAGES')}, $_[1]);
+			   $self->push_conf('EXTRA_PACKAGES', $_[1]);
 		       },
 			"extra-repository=s" => sub {
-			   push(@{$self->get_conf('EXTRA_REPOSITORIES')}, $_[1]);
+			   $self->push_conf('EXTRA_REPOSITORIES', $_[1]);
 		       },
 			"extra-repository-key=s" => sub {
-			   push(@{$self->get_conf('EXTRA_REPOSITORY_KEYS')}, $_[1]);
+			   $self->push_conf('EXTRA_REPOSITORY_KEYS', $_[1]);
 		       },
 			"build-path=s" => sub {
 			   $self->set_conf('BUILD_PATH', $_[1]);
