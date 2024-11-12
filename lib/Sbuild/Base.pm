@@ -82,6 +82,22 @@ sub set_conf {
     return $self->get('Config')->set($key,$value);
 }
 
+# Add values to an array configuration option
+sub push_conf {
+    my $self = shift;
+    my $key = shift;
+
+    # Get an array reference
+    my $value = $self->get('Config')->get($key);
+
+    # Pass all remaining arguments to push function
+    push(@{$value}, @_);
+
+    # Ensure the array is really saved, we might have modified a temporary array
+    # returned by a 'GET' function in Conf.pm.
+    return $self->get('Config')->set($key,$value);
+}
+
 sub log {
     my $self = shift;
 
