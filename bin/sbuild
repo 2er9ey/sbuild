@@ -259,7 +259,7 @@ sub create_source_package ($) {
 	    failstage => "pack-source");
     }
     if ($conf->get('CLEAN_SOURCE')) {
-	system($conf->get('FAKEROOT'), 'debian/rules', 'clean');
+	system('dpkg-buildpackage', '--target', 'clean');
 	if ($?) {
 	    Sbuild::Exception::Build->throw(
 		error => "Failed to clean source directory $dir ($dsc)",
