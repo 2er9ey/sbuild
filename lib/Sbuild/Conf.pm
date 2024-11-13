@@ -841,7 +841,7 @@ $unshare_mmdebstrap_extra_args = {
 		    print STDERR "The Debian buildd's switched to the \"unshare\" backend and sbuild may adjust its default chroot backend accordingly in the future.\n";
 		    print STDERR "To also also use \"unshare\" add this to your `~/.sbuildrc`:\n";
 		    print STDERR "\t\$chroot_mode = \"unshare\";\n";
-		    print STDERR "To use the old \"schroot\" mode and to make sure that your configuration does not break once this happens, add the following to your `~/.sbuildrc` to keep the current default:\n";
+		    print STDERR "If you want to use the old \"schroot\" mode (the current default) and to make sure that your setup\ndoes not break once the default chroot backend changes, add the following to your `~/.sbuildrc`:\n";
 		    print STDERR "\t\$chroot_mode = \"schroot\";\n";
 		    print STDERR "\t\$schroot = \"schroot\";\n";
 		}
