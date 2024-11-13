@@ -467,15 +467,6 @@ $unshare_mmdebstrap_extra_args = {
 	    HELP => 'Additional command-line options for autopkgtest-virt-*',
 	    CLI_OPTIONS => ['--autopkgtest-virt-server-opt', '--autopkgtest-virt-server-opts']
 	},
-	# Do not check for the existance of fakeroot because it's needed
-	# inside the chroot and not on the host
-	'FAKEROOT'				=> {
-	    TYPE => 'STRING',
-	    VARNAME => 'fakeroot',
-	    GROUP => 'Programs',
-	    DEFAULT => 'fakeroot',
-	    HELP => 'Path to fakeroot binary'
-	},
 	'APT_GET'				=> {
 	    TYPE => 'STRING',
 	    VARNAME => 'apt_get',
