@@ -838,10 +838,12 @@ $unshare_mmdebstrap_extra_args = {
 		    if !isin($conf->get('CHROOT_MODE'),
 			     qw(schroot sudo autopkgtest unshare));
 		if (!defined($conf->_get($entry->{'NAME'}))) {
-		    print STDERR "The Debian buildd's switched to the \"unshare\" backend and sbuild may adjust its default chroot backend accordingly in the future. To make sure that your configuration does not break once this happens, add the following to your `~/.sbuildrc` to keep the current default:\n";
+		    print STDERR "The Debian buildd's switched to the \"unshare\" backend and sbuild may adjust its default chroot backend accordingly in the future.\n";
+		    print STDERR "To also also use \"unshare\" add this to your `~/.sbuildrc`:\n";
+		    print STDERR "\t\$chroot_mode = \"unshare\";\n";
+		    print STDERR "To use the old \"schroot\" mode and to make sure that your configuration does not break once this happens, add the following to your `~/.sbuildrc` to keep the current default:\n";
 		    print STDERR "\t\$chroot_mode = \"schroot\";\n";
 		    print STDERR "\t\$schroot = \"schroot\";\n";
-		    print STDERR "If you want to use the \"unshare\" backend see https://wiki.debian.org/sbuild\n";
 		}
 	    },
             DEFAULT => undef,
