@@ -1329,9 +1329,8 @@ $crossbuild_core_depends = {
                 if (!defined($retval)) {
                     if ($conf->get('CHROOT_MODE') eq 'unshare') {
                         $retval = [
-                            "--basetgz=$HOME/.cache/sbuild/%r-%a.tar",
-			    '--distribution=%r',
-                            '--fake-essential-packages=systemd-sysv'
+                            '--distribution=%SBUILD_DISTRIBUTION',
+                            "--bootstrapcmd=mmdebstrap --skip=check/empty --variant=minbase",
                         ];
                     } else {
                         $retval = [];
@@ -1365,28 +1364,7 @@ $crossbuild_core_depends = {
 	    TYPE => 'ARRAY:STRING',
 	    VARNAME => 'piuparts_root_args',
 	    GROUP => 'Build validation',
-            DEFAULT => undef,
-            GET     => sub {
-                my $conf  = shift;
-                my $entry = shift;
-
-                my $retval = $conf->_get($entry->{'NAME'});
-
-                if (!defined($retval)) {
-                    if ($conf->get('CHROOT_MODE') eq 'unshare') {
-                        $retval = [
-                            'PATH=/sbin:/bin', 'unshare',
-                            '--pid',           '--fork',
-                            '--mount-proc',    '--map-root-user',
-                            '--map-auto'
-                        ];
-                    } else {
-                        $retval = [];
-                    }
-                }
-
-                return $retval;
-              },
+	    DEFAULT => [],
 	    HELP => 'Preceding arguments to launch piuparts as root. With the default value (the empty array) "sudo --" will be used as a prefix unless sbuild is run in unshare mode. If the first element in the array is the empty string, no prefixing will be done. If the value is a scalar, it will be prefixed by that string. If the scalar is an empty string, no prefixing will be done.',
 	    EXAMPLE =>
 '# prefix with "sudo --":
