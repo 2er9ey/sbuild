@@ -23,6 +23,7 @@ include $(top_srcdir)/scripts/global.mk
 
 TESTS =				\
 	perl-syntax		\
+	sbuild-options-parsing.t	\
 	$(chroot_checks)
 
 if SBUILD_CHROOT_CHECKS
