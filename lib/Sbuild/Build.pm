@@ -2297,7 +2297,14 @@ sub build {
 	}
 	if ($free < 2*$current_usage && $self->get_conf('CHECK_SPACE')) {
 	    Sbuild::Exception::Build->throw(error => "Disk space is probably not sufficient for building.",
-		info => "Source needs $current_usage KiB, while $free KiB is free.)",
+                info => (
+                    "Unpacked source needs $current_usage KiB (according to "
+                      . "du -k) and you have $free KiB free (according to df -k).\n"
+                      . "I: Please make enough room for twice the unpacked source "
+                      . "size or disable this check by  setting \$check_space "
+                      . "to 0 in your ~/.sbuildrc.\n"
+                      . "I: For more information see CHECK_SPACE in sbuild.conf(5)."
+                  ),
 		failstage => "check-space");
 	} else {
 	    $self->log("Sufficient free space for build\n");
