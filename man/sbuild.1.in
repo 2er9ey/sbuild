@@ -138,8 +138,9 @@ It is also possible to run external commands with sbuild. See the section
 \fBEXTERNAL COMMANDS\fR for more on this.
 .PP
 \fBsbuild\fR mails the build logs to a user.  It is configured by the
-configuration files \fI/etc/sbuild/sbuild.conf\fP and \fI~/.sbuildrc\fP.  An
-example sbuildrc is available in
+configuration files \fI/etc/sbuild/sbuild.conf\fP and \fI$XDG_CONFIG_HOME/sbuild/config.pl\fP
+(preferred over \fI~/.sbuildrc\fP). If \fI$XDG_CONFIG_HOME\fP is either not set
+or empty, \fI~/.config/sbuild/config.pl\fP will be used. An example sbuildrc is available in
 \fI/usr/share/doc/sbuild/examples/example.sbuildrc\fP.
 A custom path to a configuration file can also be specified through setting the
 \fBSBUILD_CONFIG\fP environment variable to the path of an additional
@@ -1646,8 +1647,12 @@ override the defaults.
 Directory containing symbolic links to chroots.  This is only used for sudo
 chroot access; schroot access uses the schroot chroot configuration.
 .TP
-.I ~/.sbuildrc
-User-specific configuration. A custom path to a configuration file can also be
+.I $XDG_CONFIG_HOME/sbuild/config.pl or ~/.config/sbuild/config.pl (alternatively: ~/.sbuildrc)
+User-specific configuration. If \fI$XDG_CONFIG_HOME\fP is either not set or
+empty, \fI~/.config/sbuild/config.pl\fP will be used. If no \fIconfig.pl\fP was
+found, \fI~/.sbuildrc\fP is used but that path is deprecated and users should
+switch to a location under \fI$XDG_CONFIG_HOME\fP or \fI~/.config\fP.
+A custom path to a configuration file can also be
 specified through setting the \fBSBUILD_CONFIG\fP environment variable to the
 path of an additional configuration file.
 .TP

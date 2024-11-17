@@ -840,10 +840,18 @@ $unshare_mmdebstrap_extra_args = {
 		    if !isin($conf->get('CHROOT_MODE'),
 			     qw(schroot sudo autopkgtest unshare));
 		if (!defined($conf->_get($entry->{'NAME'}))) {
+                    my $config_path = '~/.config/sbuild/config.pl';
+                    if (length($ENV{'XDG_CONFIG_HOME'})) {
+                        $config_path
+                          = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
+                    }
 		    print STDERR "The Debian buildds switched to the \"unshare\" backend and sbuild will default to it in the future.\n";
-		    print STDERR "To start using \"unshare\" add this to your `~/.sbuildrc`:\n";
+                    print STDERR ("To start using \"unshare\" add this to "
+                          . "your `$config_path`:\n");
 		    print STDERR "\t\$chroot_mode = \"unshare\";\n";
-		    print STDERR "If you want to keep the old \"schroot\" mode even in the future, add the following to your `~/.sbuildrc`:\n";
+                    print STDERR ("If you want to keep the old \"schroot\" "
+                          . "mode even in the future, add the following to your `$config_path`:\n"
+                    );
 		    print STDERR "\t\$chroot_mode = \"schroot\";\n";
 		    print STDERR "\t\$schroot = \"schroot\";\n";
 		}
@@ -1685,8 +1693,20 @@ sub read ($) {
 
     my $HOME = $conf->get('HOME');
 
-    my $files = ["$Sbuild::Sysconfig::paths{'SBUILD_CONF'}",
-		 "$HOME/.sbuildrc"];
+    my $files           = ["$Sbuild::Sysconfig::paths{'SBUILD_CONF'}"];
+
+    # prefer ~/.config/sbuild/config.pl over ~/.sbuildrc
+    my $sbuild_config_home = $conf->get('HOME') . "/.config/sbuild";
+    if (defined($ENV{'XDG_CONFIG_HOME'})) {
+        $sbuild_config_home = $ENV{'XDG_CONFIG_HOME'} . '/sbuild';
+    }
+    if (-r "$sbuild_config_home/config.pl") {
+        push @{$files}, "$sbuild_config_home/config.pl";
+    } elsif (-r "$HOME/.sbuildrc") {
+        print STDOUT ("I: consider moving your ~/.sbuildrc "
+              . "to $sbuild_config_home/config.pl\n");
+        push @{$files}, "$HOME/.sbuildrc";
+    }
 
     push @{$files}, $ENV{'SBUILD_CONFIG'} if defined $ENV{'SBUILD_CONFIG'};
 

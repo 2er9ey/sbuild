@@ -112,6 +112,10 @@ sub chroot_tarball_if_too_old {
     # if an existing tarball is too young, don't update
     my $age = time - (stat($tarball))[9];
     if ($max_age >= 0 && $age >= $max_age) {
+        my $config_path = '~/.config/sbuild/config.pl';
+        if (defined($ENV{'XDG_CONFIG_HOME'})) {
+            $config_path = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
+        }
         print STDERR "I: Existing chroot tarball is too old ("
           . (
             sprintf '%.2f >= %.2f',
@@ -119,8 +123,8 @@ sub chroot_tarball_if_too_old {
             ($max_age / 60 / 60 / 24)) . " days):\n";
         print STDERR ("I: Change the maximum age by setting "
               . "\$unshare_mmdebstrap_max_age (in seconds)\n"
-              . "I: in your ~/.sbuildrc or disable it by setting it to a "
-              . "negative value.\n");
+              . "I: in your $config_path or disable it by "
+              . "setting it to a negative value.\n");
         return $tarball;
     }
     return undef;
@@ -315,12 +319,17 @@ sub chroot_auto_create {
           )
           . "\n"
     );
+    my $config_path = '~/.config/sbuild/config.pl';
+    if (defined($ENV{'XDG_CONFIG_HOME'})) {
+        $config_path = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
+    }
     print STDERR ("I:  - or let sbuild take care of this via the setting "
           . "UNSHARE_MMDEBSTRAP_KEEP_TARBALL by adding "
-          . "'\$unshare_mmdebstrap_keep_tarball = 1;' to your ~/.sbuildrc.\n");
+          . "'\$unshare_mmdebstrap_keep_tarball = 1;' to your $config_path.\n"
+    );
     print STDERR ("I:  - or completely disable this behaviour via the setting "
           . "UNSHARE_MMDEBSTRAP_AUTO_CREATE by adding "
-          . "'\$unshare_mmdebstrap_auto_create = 0;' to your ~/.sbuildrc.\n");
+          . "'\$unshare_mmdebstrap_auto_create = 0;' to your $config_path.\n");
     print STDERR (
             "I: Refer to UNSHARE_MMDEBSTRAP_KEEP_TARBALL in sbuild.conf(5) "
           . "for more information\n");
