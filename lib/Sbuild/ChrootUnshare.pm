@@ -85,45 +85,42 @@ sub chroot_tarball_if_too_old {
         return undef;
     }
     my $tarball = $self->find_tarball($chroot);
-    if (defined($tarball)) {
-        my $max_age = $self->get_conf('UNSHARE_MMDEBSTRAP_MAX_AGE');
-        if (!-e $tarball) {
-            print STDERR "I: Chroot Tarball $tarball does not exist yet\n";
-            if ($max_age < 0) {
-                print STDERR
-                  "I: Not updating it due to negative maximum age\n";
-                return undef;
-            }
-            return $tarball;
+    if (!defined($tarball)) {
+        # We end up here if the user added the --chroot option but there
+        # was no associated tarball found. Create a new tarball using the
+        # chroot name.
+        my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+        if (defined($ENV{'XDG_CACHE_HOME'})) {
+            $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
         }
-        # negative max-age indicates to never update
-        # if an existing tarball is too young, don't update
-        my $age     = time - (stat($tarball))[9];
-        if ($max_age >= 0 && $age >= $max_age) {
-            print STDERR "I: Existing chroot tarball is too old ("
-              . (
-                sprintf '%.2f >= %.2f',
-                ($age / 60 / 60 / 24),
-                ($max_age / 60 / 60 / 24)) . " days):\n";
-            print STDERR ("I: Change the maximum age by setting "
-                  . "\$unshare_mmdebstrap_max_age (in seconds) in your "
-                  . "~/.sbuildrc or disable it by setting it to a "
-                  . "negative value.\n");
-            return $tarball;
+        $tarball = "$xdg_cache_home/$chroot.tar";
+    }
+
+    my $max_age = $self->get_conf('UNSHARE_MMDEBSTRAP_MAX_AGE');
+    if (!-e $tarball) {
+        print STDERR "I: Chroot Tarball $tarball does not exist yet\n";
+        if ($max_age < 0) {
+            print STDERR "I: Not updating it due to negative maximum age\n";
+            return undef;
         }
-        return undef;
+        return $tarball;
     }
-    # this should never happen because $chroot was computed by
-    # ChrootInfo.pm and should thus be an already existing path
-    print STDERR ("W: Existing chroot tarball was not "
-          . "found even though it should've been.\n");
-    print STDERR ("W: THIS SHOULD NEVER HAPPEN."
-          . "Please file a bug if you are seeing this.\n");
-    my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-    if (defined($ENV{'XDG_CACHE_HOME'})) {
-        $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
+    # negative max-age indicates to never update
+    # if an existing tarball is too young, don't update
+    my $age = time - (stat($tarball))[9];
+    if ($max_age >= 0 && $age >= $max_age) {
+        print STDERR "I: Existing chroot tarball is too old ("
+          . (
+            sprintf '%.2f >= %.2f',
+            ($age / 60 / 60 / 24),
+            ($max_age / 60 / 60 / 24)) . " days):\n";
+        print STDERR ("I: Change the maximum age by setting "
+              . "\$unshare_mmdebstrap_max_age (in seconds)\n"
+              . "I: in your ~/.sbuildrc or disable it by setting it to a "
+              . "negative value.\n");
+        return $tarball;
     }
-    return "$xdg_cache_home/$chroot.tar";
+    return undef;
 }
 
 sub chroot_auto_create {
