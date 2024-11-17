@@ -66,7 +66,10 @@ sub find_tarball {
         while (defined(my $file = readdir $dh)) {
             next if $file eq '.' || $file eq '..';
             my $path = "$xdg_cache_home/$file";
-            next if -z $path;
+            if (-z $path) {
+                print STDERR "I: ignoring $path (zero size)\n";
+                next;
+            }
             if ($file =~ /^$chroot\.t.+$/) {
                 $tarball = $path;
                 last;
