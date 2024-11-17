@@ -1,8 +1,6 @@
 #!/usr/bin/perl
-#
-# This script is in the public domain
-#
-# Author: Johannes Schauer Marin Rodrigues <josch@mister-muffin.de>
+# SPDX-License-Identifier: MIT
+# Copyright 2022 Johannes Schauer Marin Rodrigues <josch@mister-muffin.de>
 #
 # Thin layer around /usr/lib/apt/solvers/apt which removes M-A:foreign and
 # Essential:yes packages that are not arch:all and not arch:native from the
