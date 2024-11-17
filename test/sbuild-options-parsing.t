@@ -29,10 +29,11 @@ use FindBin;
 
 # Reset environment to a controlled one
 %ENV = (
-    'TERM', 'linux',
-    'PWD',  '/non-existant-pwd',
-    'PATH', '/sbin:/usr/sbin:/bin:/usr/bin',
-    'HOME', '/non-existant-home',
+    'TERM',          'linux',
+    'PWD',           '/non-existant-pwd',
+    'PATH',          '/sbin:/usr/sbin:/bin:/usr/bin',
+    'HOME',          '/non-existant-home',
+    'SBUILD_CONFIG', 'test/sbuildrc'
 );
 
 # Use lib path instead of system path when importing
