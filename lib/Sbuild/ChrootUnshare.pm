@@ -193,10 +193,10 @@ sub chroot_auto_create {
             $tarball = "$xdg_cache_home/$dist-$arch.tar";
             $chroot  = "$xdg_cache_home/$dist-$arch.tar";
             $self->set('Chroot ID', $chroot);
-            print STDERR ("I: Creating new chroot tarball:\n"
-                  . join(" ", (@commonargs, $tarball, @{$extraargs}))
-                  . "\n");
         }
+        print STDERR ("I: Creating new chroot tarball:\n"
+              . join(" ", (@commonargs, $tarball, @{$extraargs}))
+              . "\n");
 
         my $exit_code = system @commonargs, $tarball, @{$extraargs};
         if ($exit_code != 0) {
