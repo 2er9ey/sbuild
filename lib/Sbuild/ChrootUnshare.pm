@@ -201,6 +201,7 @@ sub chroot_auto_create {
         my $exit_code = system @commonargs, $tarball, @{$extraargs};
         if ($exit_code != 0) {
             print STDERR "mmdebstrap failed\n";
+            unlink $tarball;
             return undef;
         }
 
