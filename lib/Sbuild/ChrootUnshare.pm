@@ -126,6 +126,13 @@ sub chroot_tarball_if_too_old {
     return undef;
 }
 
+# from List/MoreUtils/PP.pm
+sub natatime ($@) {
+    my $n    = shift;
+    my @list = @_;
+    return sub { return splice @list, 0, $n; }
+}
+
 sub chroot_auto_create {
     my $self    = shift;
     my $chroot  = shift;
@@ -149,12 +156,24 @@ sub chroot_auto_create {
     # also pass an empty dist string but then mmdebstrap cannot anymore
     # choose the stable mirrors for us.
     my $basedist = $dist;
-    if ($dist eq "experimental" or $dist eq "rc-buggy") {
-        print STDERR "I: choosing unstable as base distribution for $dist\n";
-        $basedist = "unstable";
-    } elsif ($dist =~ m/^(.*)-backports$/) {
-        print STDERR "I: choosing $1 as base distribution for $dist\n";
-        $basedist = $1;
+    if (scalar(@{ $self->get_conf('UNSHARE_MMDEBSTRAP_DISTRO_MANGLE') })) {
+        if (
+            scalar(@{ $self->get_conf('UNSHARE_MMDEBSTRAP_DISTRO_MANGLE') })
+            % 2 != 0) {
+            print STDERR
+              "W: length of UNSHARE_MMDEBSTRAP_DISTRO_MANGLE is uneven\n";
+        }
+        my $it = natatime 2,
+          @{ $self->get_conf('UNSHARE_MMDEBSTRAP_DISTRO_MANGLE') };
+        while (my ($k, $v) = $it->()) {
+            if ($dist !~ m/$k/) {
+                next;
+            }
+            ($basedist = $dist) =~ s/$k/$v/;
+            print STDERR ("I: Applied base distribution name mangle rule "
+                  . "s/$k/$v/ turning \"$dist\" into \"$basedist\"\n");
+            last;
+        }
     }
 
     my @commonargs = (
