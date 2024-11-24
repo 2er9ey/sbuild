@@ -146,7 +146,7 @@ sub chroot_auto_create {
     }
 
     if ($dist eq "UNRELEASED") {
-        print STDERR "W: translating UNRELEASED to unstable";
+        print STDERR "W: translating UNRELEASED to unstable\n";
         $dist = "unstable";
     }
 
