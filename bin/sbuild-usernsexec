@@ -389,7 +389,7 @@ foreach my $f ("null", "zero", "full", "random", "urandom", "tty", "console") {
     }
     chmod 0, "$rootdir/dev/$f" or die "chmod failed: $!";
     0 == system("mount", "-o", "bind", "/dev/$f", "$rootdir/dev/$f")
-      or die "mount failed: $!";
+      or die "bind mounting /dev/$f failed: $!";
 }
 
 for my $link (
