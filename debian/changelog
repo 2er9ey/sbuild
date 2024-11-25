@@ -1,3 +1,44 @@
+sbuild (0.87.1) UNRELEASED; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * prefer ~/.config/sbuild/config.pl over ~/.sbuildrc (Closes: #1087378)
+  * default build path is /build/reproducible-path and switch off log filtering
+  * bin/sbuild: run dpkg-buildpackage --target clean instead of running
+    debian/rules clean under fakeroot
+  * lib/Sbuild/Conf.pm:
+     - throw out FAKEROOT
+     - add UNSHARE_MMDEBSTRAP_DISTRO_MANGLE
+  * lib/Sbuild/ChrootUnshare.pm:
+     - create new tarball for a chroot given via --chroot if it was missing
+     - always print mmdebstrap invokation when creating new chroot tarballs
+     - if mmdebstrap failed unlink (probably empty) tarball
+     - print out the files that were ignored because they are empty
+     - also translate UNRELEASED->unstable via unshare_mmdebstrap_distro_mangle
+  * bin/sbuild-usernsexec:
+     - do not attempt bind-mounting something that does not exist on the
+       outside
+     - be more verbose about what failed to mount
+  * bin/sbuild-cross-resolver: switch license to mit/expat
+  * Be more elaborate with explanation for insufficient disk space
+    (Closes: #1087656)
+  * debian/tests/unshare: test cross compilation
+  * debian/copyright: modernize
+
+  [ Alexis Murzeau ]
+  * lib/Sbuild/Base.pm: add function to add items to array conf options
+  * lib/Sbuild/Options.pm: replace uses of push by push_conf
+  * test/sbuild-options-parsing.pl: test that options correctly set conf
+    variables
+
+  [ Jochen Sprickerhof ]
+  * Improve wording about future schroot deprecation
+  * Use mmdebstrap to create piuparts chroot
+
+  [ Chris Hofstaedtler ]
+  * Reword schroot/unshare compat warning
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 25 Nov 2024 10:44:49 +0100
+
 sbuild (0.87.0) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
