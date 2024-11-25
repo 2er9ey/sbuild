@@ -378,6 +378,10 @@ if ($disable_network) {
 }
 
 foreach my $f ("null", "zero", "full", "random", "urandom", "tty", "console") {
+    if (!-e "/dev/$f") {
+        warn
+          "cannot bind-mount /dev/$f as it does not exist outside the chroot";
+    }
     if (!-e "$rootdir/dev/$f") {
         open my $fh, '>', "$rootdir/dev/$f"
           or die "failed opening $rootdir/dev/$f: $!";
