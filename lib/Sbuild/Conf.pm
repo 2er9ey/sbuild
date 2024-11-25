@@ -404,7 +404,7 @@ $unshare_mmdebstrap_extra_args = {
 	    VARNAME => 'unshare_mmdebstrap_distro_mangle',
 	    GROUP => 'Chroot options (unshare)',
 	    DEFAULT => [
-	        qr/^(experimental|rc-buggy)$/ => 'unstable',
+	        qr/^(experimental|rc-buggy|UNRELEASED)$/ => 'unstable',
 	        qr/^(.*)-backports$/ => '$1',
 	    ],
 	    HELP => 'The distribution you want to build for might be an "overlay" for another distribution. For example if you build for stable-backports, you want to create a chroot for stable and then add backports or to build for experimental you want to build for unstable and then add experimental on top. This option allows one to perform this name mangling from distribution name to desired base distribution. The option array is given as substitution pairs. The first regex which matches is applied and the remaining regexes are skipped.',

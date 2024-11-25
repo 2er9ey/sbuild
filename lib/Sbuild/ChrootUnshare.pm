@@ -145,11 +145,6 @@ sub chroot_auto_create {
         $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
     }
 
-    if ($dist eq "UNRELEASED") {
-        print STDERR "W: translating UNRELEASED to unstable\n";
-        $dist = "unstable";
-    }
-
     # mmdebstrap chooses Essential:yes packages from the given
     # distribution, so for experimental or backports, we have to
     # pass a different dist (unstable and stable, respectively). We could
