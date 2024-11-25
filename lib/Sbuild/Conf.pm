@@ -1697,7 +1697,7 @@ sub read ($) {
 
     # prefer ~/.config/sbuild/config.pl over ~/.sbuildrc
     my $sbuild_config_home = $conf->get('HOME') . "/.config/sbuild";
-    if (defined($ENV{'XDG_CONFIG_HOME'})) {
+    if (length($ENV{'XDG_CONFIG_HOME'})) {
         $sbuild_config_home = $ENV{'XDG_CONFIG_HOME'} . '/sbuild';
     }
     if (-r "$sbuild_config_home/config.pl") {

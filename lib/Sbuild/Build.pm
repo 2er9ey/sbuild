@@ -2297,7 +2297,7 @@ sub build {
 	}
 	if ($free < 2*$current_usage && $self->get_conf('CHECK_SPACE')) {
 	    my $config_path = '~/.config/sbuild/config.pl';
-	    if (defined($ENV{'XDG_CONFIG_HOME'})) {
+	    if (length($ENV{'XDG_CONFIG_HOME'})) {
 	        $config_path = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
 	    }
 	    Sbuild::Exception::Build->throw(error => "Disk space is probably not sufficient for building.",

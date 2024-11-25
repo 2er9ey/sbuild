@@ -59,7 +59,7 @@ sub find_tarball {
     my ($chroot)       = @_;
     my $tarball        = undef;
     my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-    if (defined($ENV{'XDG_CACHE_HOME'})) {
+    if (length($ENV{'XDG_CACHE_HOME'})) {
         $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
     }
     if (opendir my $dh, $xdg_cache_home) {
@@ -93,7 +93,7 @@ sub chroot_tarball_if_too_old {
         # was no associated tarball found. Create a new tarball using the
         # chroot name.
         my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-        if (defined($ENV{'XDG_CACHE_HOME'})) {
+        if (length($ENV{'XDG_CACHE_HOME'})) {
             $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
         }
         $tarball = "$xdg_cache_home/$chroot.tar";
@@ -113,7 +113,7 @@ sub chroot_tarball_if_too_old {
     my $age = time - (stat($tarball))[9];
     if ($max_age >= 0 && $age >= $max_age) {
         my $config_path = '~/.config/sbuild/config.pl';
-        if (defined($ENV{'XDG_CONFIG_HOME'})) {
+        if (length($ENV{'XDG_CONFIG_HOME'})) {
             $config_path = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
         }
         print STDERR "I: Existing chroot tarball is too old ("
@@ -145,7 +145,7 @@ sub chroot_auto_create {
     my $arch    = $self->get_conf('BUILD_ARCH');
 
     my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-    if (defined($ENV{'XDG_CACHE_HOME'})) {
+    if (length($ENV{'XDG_CACHE_HOME'})) {
         $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
     }
 
@@ -320,7 +320,7 @@ sub chroot_auto_create {
           . "\n"
     );
     my $config_path = '~/.config/sbuild/config.pl';
-    if (defined($ENV{'XDG_CONFIG_HOME'})) {
+    if (length($ENV{'XDG_CONFIG_HOME'})) {
         $config_path = $ENV{'XDG_CONFIG_HOME'} . '/sbuild/config.pl';
     }
     print STDERR ("I:  - or let sbuild take care of this via the setting "
@@ -424,7 +424,7 @@ sub begin_session {
         $tarball = $self->find_tarball($chroot);
         if (!defined($tarball)) {
             my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
-            if (defined($ENV{'XDG_CACHE_HOME'})) {
+            if (length($ENV{'XDG_CACHE_HOME'})) {
                 $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
             }
 
