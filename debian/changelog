@@ -1,4 +1,4 @@
-sbuild (0.87.1) UNRELEASED; urgency=medium
+sbuild (0.87.1) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
   * prefer ~/.config/sbuild/config.pl over ~/.sbuildrc (Closes: #1087378)
@@ -37,7 +37,7 @@ sbuild (0.87.1) UNRELEASED; urgency=medium
   [ Chris Hofstaedtler ]
   * Reword schroot/unshare compat warning
 
- -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 25 Nov 2024 10:44:49 +0100
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 25 Nov 2024 11:17:42 +0100
 
 sbuild (0.87.0) unstable; urgency=medium
 
