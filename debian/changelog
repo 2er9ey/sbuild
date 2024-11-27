@@ -10,7 +10,7 @@ sbuild (0.87.1) unstable; urgency=medium
      - add UNSHARE_MMDEBSTRAP_DISTRO_MANGLE
   * lib/Sbuild/ChrootUnshare.pm:
      - create new tarball for a chroot given via --chroot if it was missing
-     - always print mmdebstrap invokation when creating new chroot tarballs
+     - always print mmdebstrap invocation when creating new chroot tarballs
      - if mmdebstrap failed unlink (probably empty) tarball
      - print out the files that were ignored because they are empty
      - also translate UNRELEASED->unstable via unshare_mmdebstrap_distro_mangle
