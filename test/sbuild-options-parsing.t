@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/usr/bin/perl
 #
 # sbuild-options-parsing.pl: Check option parsing in Sbuild
 # Copyright © 2024 Alexis Murzeau <amubtdx@gmail.com>
