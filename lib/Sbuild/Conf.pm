@@ -353,6 +353,14 @@ sub setup ($) {
 	            sort { length $b <=> length $a || $a cmp $b }
 	              keys %percent);
 	        foreach my $key (keys %{$retval}) {
+		    # first mangle the values
+		    my $newval = [];
+		    foreach my $val (@{$retval->{$key}}) {
+			$val =~ s{\%($keyword_pat)}{$percent{$1} || $&}msxge;
+			push @{$newval}, $val;
+		    }
+		    $retval->{$key} = $newval;
+		    # then mangle the key
 	            (my $newkey = $key) =~ s{
 	                # Match a percent followed by a valid keyword
 	                \%($keyword_pat)
