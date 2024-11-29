@@ -809,7 +809,7 @@ sub dump_build_environment {
 
     my $arch = $self->get('Arch');
     my ($sysname, $nodename, $release, $version, $machine) = POSIX::uname();
-    $self->log_subsection("Build environment");
+    $self->log_subsection_t("Build environment", time);
     $self->log("Kernel: $sysname $release $version $arch ($machine)\n");
 
     $self->log("Toolchain package versions:");

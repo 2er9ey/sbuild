@@ -720,7 +720,7 @@ sub run_chroot_update {
     eval {
 	if ($self->get_conf('APT_CLEAN') || $self->get_conf('APT_UPDATE') ||
 	    $self->get_conf('APT_DISTUPGRADE') || $self->get_conf('APT_UPGRADE')) {
-	    $self->log_subsection('Update chroot');
+	    $self->log_subsection_t('Update chroot', time);
 	}
 
 	# Clean APT cache.
@@ -857,7 +857,7 @@ sub run_fetch_install_packages {
 	    join(", ", $self->get('Build Conflicts Indep') // (),
 		       @{$self->get_conf('MANUAL_CONFLICTS_INDEP')}));
 
-	$self->log_subsection("Install package build dependencies");
+	$self->log_subsection_t("Install package build dependencies", time);
 
 	$self->check_abort();
 	if (!$resolver->install_deps('main', 'MAIN')) {
@@ -918,7 +918,7 @@ sub run_fetch_install_packages {
 	# because they might need files that are not available on the host,
 	# for example the .dsc which might have been downloaded
 	if ($self->get('Pkg Status') eq "successful") {
-	    $self->log_subsection("Post Build");
+	    $self->log_subsection_t("Post Build", time);
 
 	    # Run piuparts.
 	    $self->check_abort();
@@ -1012,7 +1012,7 @@ sub run_fetch_install_packages {
 	}
     }
 
-    $self->log_subsection("Cleanup");
+    $self->log_subsection_t("Cleanup", time);
     my $session = $self->get('Session');
     my $resolver = $self->get('Dependency Resolver');
 
@@ -1095,7 +1095,7 @@ sub fetch_source_files {
     my $build_conflicts_indep = "";
     local( *F );
 
-    $self->log_subsection("Fetch source files");
+    $self->log_subsection_t("Fetch source files", time);
 
     $self->check_abort();
     if ($self->get('DSC Base') =~ m/\.dsc$/) {
@@ -1395,7 +1395,7 @@ sub check_architectures {
     my $host_arch = $self->get('Host Arch');
     my $session = $self->get('Session');
 
-    $self->log_subsection("Check architectures");
+    $self->log_subsection_t("Check architectures", time);
     # Check for cross-arch dependencies
     # parse $build_depends* for explicit :arch and add the foreign arches, as needed
     #
@@ -1657,32 +1657,32 @@ sub run_external_commands {
     # run inside the chroot or not, and as root or not.
     my $chroot = 0;
     if ($stage eq "pre-build-commands") {
-	$self->log_subsection("Pre Build Commands");
+	$self->log_subsection_t("Pre Build Commands", time);
     } elsif ($stage eq "chroot-setup-commands") {
-	$self->log_subsection("Chroot Setup Commands");
+	$self->log_subsection_t("Chroot Setup Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "chroot-update-failed-commands") {
-	$self->log_subsection("Chroot-update Install Failed Commands");
+	$self->log_subsection_t("Chroot-update Install Failed Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "build-deps-failed-commands") {
-	$self->log_subsection("Build-Deps Install Failed Commands");
+	$self->log_subsection_t("Build-Deps Install Failed Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "build-failed-commands") {
-	$self->log_subsection("Generic Build Failed Commands");
+	$self->log_subsection_t("Generic Build Failed Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "starting-build-commands") {
-	$self->log_subsection("Starting Timed Build Commands");
+	$self->log_subsection_t("Starting Timed Build Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "finished-build-commands") {
-	$self->log_subsection("Finished Timed Build Commands");
+	$self->log_subsection_t("Finished Timed Build Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "chroot-cleanup-commands") {
-	$self->log_subsection("Chroot Cleanup Commands");
+	$self->log_subsection_t("Chroot Cleanup Commands", time);
 	$chroot = 1;
     } elsif ($stage eq "post-build-commands") {
-	$self->log_subsection("Post Build Commands");
+	$self->log_subsection_t("Post Build Commands", time);
     } elsif ($stage eq "post-build-failed-commands") {
-	$self->log_subsection("Post Build Failed Commands");
+	$self->log_subsection_t("Post Build Failed Commands", time);
     }
 
     # Run each command, substituting the various percent escapes (like
@@ -2211,7 +2211,7 @@ sub build {
     my( $rv, $changes );
     local( *PIPE, *F, *F2 );
 
-    $self->log_subsection("Build");
+    $self->log_subsection_t("Build", time);
     $self->set('This Space', 0);
 
     my $tmpunpackdir = $dscdir;
@@ -2765,7 +2765,7 @@ sub build {
 	    return 0;
 	}
 
-	$self->log_subsection("Changes");
+	$self->log_subsection_t("Changes", time);
 
 	# we use an anonymous subroutine so that the referenced variables are
 	# automatically rebound to their current values
@@ -2880,7 +2880,7 @@ sub build {
 	    my $pchanges = &$copy_changes($so_changes);
 	}
 
-	$self->log_subsection("Buildinfo");
+	$self->log_subsection_t("Buildinfo", time);
 
 	foreach (@cfiles) {
 	    my $deb = "$build_dir/$_";
@@ -2894,7 +2894,7 @@ sub build {
 	    }
 	}
 
-	$self->log_subsection("Package contents");
+	$self->log_subsection_t("Package contents", time);
 
 	my @debcfiles = @cfiles;
 	foreach (@debcfiles) {
@@ -3425,23 +3425,12 @@ sub open_build_log {
     $self->log("sbuild (Debian sbuild) $version ($release_date) on $hostname\n");
 
     my $arch_string = $self->get('Host Arch');
-    my $head1 = $self->get('Package');
+    my $head = $self->get('Package');
     if ($self->get('Version')) {
-	$head1 .= ' ' . $self->get('Version');
+	$head .= ' ' . $self->get('Version');
     }
-    $head1 .= ' (' . $arch_string . ') ';
-    my $head2 = strftime_c "%a, %d %b %Y %H:%M:%S +0000",
-			 gmtime($self->get('Pkg Start Time'));
-    my $head = $head1;
-    # If necessary, insert spaces so that $head1 is left aligned and $head2 is
-    # right aligned. If the sum of the length of both is greater than the
-    # available space of 76 characters, then no additional padding is
-    # inserted.
-    if (length($head1) + length($head2) <= 76) {
-	$head .= ' ' x (76 - length($head1) - length($head2));
-    }
-    $head .= $head2;
-    $self->log_section($head);
+    $head .= ' (' . $arch_string . ') ';
+    $self->log_section_t($head, $self->get('Pkg Start Time'));
 
     $self->log("Package: " . $self->get('Package') . "\n");
     if (defined $self->get('Version')) {
@@ -3483,7 +3472,7 @@ sub close_build_log {
 	$self->set_status('failed');
     }
 
-    $self->log_subsection('Summary');
+    $self->log_subsection_t('Summary', time);
     $self->generate_stats();
     $self->log_stats();
 

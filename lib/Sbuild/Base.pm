@@ -23,7 +23,7 @@ package Sbuild::Base;
 use strict;
 use warnings;
 
-use Sbuild qw(debug);
+use Sbuild qw(debug strftime_c);
 
 BEGIN {
     use Exporter ();
@@ -147,6 +147,24 @@ sub log_section {
     }
 }
 
+sub log_section_t {
+    my $self = shift;
+    my $section = shift;
+    my $tstamp = shift;
+    my $head = $section;
+    my $head2 = strftime_c "%a, %d %b %Y %H:%M:%S +0000", gmtime($tstamp);
+
+    # If necessary, insert spaces so that $head1 is left aligned and $head2 is
+    # right aligned. If the sum of the length of both is greater than the
+    # available space of 76 characters, then no additional padding is
+    # inserted.
+    if (length($section) + length($head2) <= 76) {
+        $head .= ' ' x (76 - length($section) - length($head2));
+    }
+    $head .= $head2;
+    $self->log_section($head);
+}
+
 sub log_subsection {
     my $self = shift;
     my $section = shift;
@@ -161,6 +179,24 @@ sub log_subsection {
 	$self->log('|', " $section ", '|', "\n");
 	$self->log('+', '-' x (length($section) + 2), '+', "\n\n");
     }
+}
+
+sub log_subsection_t {
+    my $self = shift;
+    my $section = shift;
+    my $tstamp = shift;
+    my $head = $section;
+    my $head2 = strftime_c "%a, %d %b %Y %H:%M:%S +0000", gmtime($tstamp);
+
+    # If necessary, insert spaces so that $head1 is left aligned and $head2 is
+    # right aligned. If the sum of the length of both is greater than the
+    # available space of 76 characters, then no additional padding is
+    # inserted.
+    if (length($section) + length($head2) <= 76) {
+        $head .= ' ' x (76 - length($section) - length($head2));
+    }
+    $head .= $head2;
+    $self->log_subsection($head);
 }
 
 sub log_subsubsection {
