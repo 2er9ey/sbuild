@@ -266,7 +266,7 @@ sub chroot_auto_create {
             print STDERR ("I: Creating chroot on-demand by running:\n"
                   . join(" ", @cmdline)
                   . "\n");
-            exec @commonargs;
+            exec @cmdline;
         }
         my $tarpid = fork();
         if ($tarpid == 0) {
