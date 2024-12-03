@@ -1358,6 +1358,7 @@ $crossbuild_core_depends = {
                     if ($conf->get('CHROOT_MODE') eq 'unshare') {
                         $retval = [
                             '--distribution=%SBUILD_DISTRIBUTION',
+			    '--arch=%SBUILD_HOST_ARCH',
                             "--bootstrapcmd=mmdebstrap --skip=check/empty --variant=minbase",
                         ];
                     } else {
