@@ -528,10 +528,8 @@ END
 			failstage => "create-session");
 		}
 	    }
-	    foreach my $solver ('apt', 'sbuild-cross-resolver') {
-		if ($session->test_regular_file_readable("/usr/lib/apt/solvers/$solver")) {
-		    next;
-		}
+	    my $solver = 'sbuild-cross-resolver';
+	    if (!$session->test_regular_file_readable("/usr/lib/apt/solvers/$solver")) {
 		if (! -e "/usr/lib/apt/solvers/$solver") {
 		    Sbuild::Exception::Build->throw(
 			error => "/usr/lib/apt/solvers/$solver is missing",
@@ -833,6 +831,9 @@ sub run_fetch_install_packages {
 	        push(@coredeps, @{$crosscoredeps->{$self->get('Host Arch')}});
 	    } else {
 		push(@coredeps, 'crossbuild-essential-' . $self->get('Host Arch') . ':native');
+		# for /usr/lib/apt/solvers/apt which is used by the
+		# sbuild-cross-resolver
+		push(@coredeps, 'apt-utils:native');
 		# Also add the following to work around bug #815172
 		push(@coredeps, 'libc-dev:' . $self->get('Host Arch'),
 		    'libstdc++-dev:' . $self->get('Host Arch'));
