@@ -131,19 +131,13 @@ sub chroot_tarball_if_too_old {
     return undef;
 }
 
-# from List/MoreUtils/PP.pm
-sub natatime ($@) {
-    my $n    = shift;
-    my @list = @_;
-    return sub { return splice @list, 0, $n; }
-}
-
 sub chroot_auto_create {
-    my $self    = shift;
-    my $chroot  = shift;
-    my $rootdir = shift;
-    my $dist    = $self->get_conf('DISTRIBUTION');
-    my $arch    = $self->get_conf('BUILD_ARCH');
+    my $self      = shift;
+    my $chroot    = shift;
+    my $rootdir   = shift;
+    my $dist      = $self->get_conf('DISTRIBUTION');
+    my $arch      = $self->get_conf('BUILD_ARCH');
+    my $host_arch = $self->get_conf('HOST_ARCH');
 
     my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
     if (length($ENV{'XDG_CACHE_HOME'})) {
@@ -184,15 +178,44 @@ sub chroot_auto_create {
         "--format=tar", $basedist,
     );
     my $extraargs = [];
-    {
-        my $ea_conf = $self->get_conf('UNSHARE_MMDEBSTRAP_EXTRA_ARGS');
-        next if !defined $ea_conf;
-        # more specific entries overwrite less specific entries
-        foreach my $arg ("*", $dist, "$dist-$arch", $chroot) {
-            next if !defined $arg;
-            next if !exists ${$ea_conf}{$arg};
-            next if ref(${$ea_conf}{$arg}) ne "ARRAY";
-            $extraargs = ${$ea_conf}{$arg};
+    if (scalar(@{ $self->get_conf('UNSHARE_MMDEBSTRAP_EXTRA_ARGS') })) {
+        if (
+            scalar(@{ $self->get_conf('UNSHARE_MMDEBSTRAP_EXTRA_ARGS') }) % 2
+            != 0) {
+            print STDERR
+              "W: length of UNSHARE_MMDEBSTRAP_EXTRA_ARGS is uneven\n";
+        }
+        my $it = natatime 2,
+          @{ $self->get_conf('UNSHARE_MMDEBSTRAP_EXTRA_ARGS') };
+        while (my ($k, $v) = $it->()) {
+            if (ref($v) ne "ARRAY") {
+                print STDERR (
+                    "W: entry $k in UNSHARE_MMDEBSTRAP_EXTRA_ARGS should be "
+                      . "an ARRAY but is a "
+                      . ref($v)
+                      . "\n");
+                next;
+            }
+            foreach
+              my $arg ($dist, "$dist-$arch", "$dist-$arch-$host_arch", $chroot)
+            {
+                next if !defined $arg;
+                if ($self->get_conf('DEBUG')) {
+                    print STDERR "D: extra_args checking $arg\n";
+                }
+                if (ref($k) eq "Regexp") {
+                    if ($arg !~ $k) {
+                        next;
+                    }
+                } elsif ($k ne $arg) {
+                    next;
+                }
+                if ($self->get_conf('DEBUG')) {
+                    print STDERR "D: extra_args $k matched\n";
+                }
+                push @{$extraargs}, @{$v};
+                last;
+            }
         }
     }
 

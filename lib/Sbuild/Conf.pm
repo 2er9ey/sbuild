@@ -31,6 +31,7 @@ use Sbuild qw(isin);
 use Sbuild::ConfBase;
 use Sbuild::Sysconfig;
 use Dpkg::Build::Info;
+use Sbuild::Utility qw(glob_to_regex natatime);
 
 BEGIN {
     use Exporter ();
@@ -329,15 +330,22 @@ sub setup ($) {
 	},
 	'UNSHARE_MMDEBSTRAP_EXTRA_ARGS' => {
 	    TYPE => 'HASH:STRING',
-	    DEFAULT => {
-		"stable-backports" => [ '--setup-hook=echo "deb http://deb.debian.org/debian stable-backports main" > "$1"/etc/apt/sources.list.d/stable-backports.list' ],
-		"experimental" => [ '--setup-hook=echo "deb http://deb.debian.org/debian experimental main" > "$1"/etc/apt/sources.list.d/experimental.list' ]
-	    },
+	    DEFAULT => [
+	        "*-{backports,security}" => [ '--setup-hook=echo "deb http://deb.debian.org/debian %r main" > "$1"/etc/apt/sources.list.d/%r.list' ],
+	        qr/^(experimental|rc-buggy)$/ => [ '--setup-hook=echo "deb http://deb.debian.org/debian experimental main" > "$1"/etc/apt/sources.list.d/experimental.list' ],
+	    ],
 	    GET => sub {
 	        my $conf  = shift;
 	        my $entry = shift;
 	
 	        my $retval = $conf->_get($entry->{'NAME'});
+	        if (!defined $retval) {
+	            return [];
+	        }
+	        if (ref($retval) eq "HASH") {
+	            print STDERR "E: Since sbuild 0.87.2, \$unshare_mmdebstrap_extra_args is an ARRAY, not a HASH. Please convert {\"foo\"=>[],\"bar\"=>[]} into [\"foo\"=>[],\"bar\"=>[]]\n";
+	            die '$unshare_mmdebstrap_extra_args must be ARRAY, not HASH';
+	        }
 	
 	        my $dist     = $conf->get('DISTRIBUTION');
 	        my $hostarch = $conf->get('HOST_ARCH');
@@ -352,15 +360,20 @@ sub setup ($) {
 	        my $keyword_pat = join("|",
 	            sort { length $b <=> length $a || $a cmp $b }
 	              keys %percent);
-	        foreach my $key (keys %{$retval}) {
-		    # first mangle the values
-		    my $newval = [];
-		    foreach my $val (@{$retval->{$key}}) {
-			$val =~ s{\%($keyword_pat)}{$percent{$1} || $&}msxge;
-			push @{$newval}, $val;
-		    }
-		    $retval->{$key} = $newval;
-		    # then mangle the key
+	        my $newretval = [];
+	        my $it        = natatime 2, @{$retval};
+	        while (my ($key, $oldval) = $it->()) {
+	            # first mangle the values
+	            my $newval = [];
+	            foreach my $val (@{$oldval}) {
+	                $val =~ s{\%($keyword_pat)}{$percent{$1} || $&}msxge;
+	                push @{$newval}, $val;
+	            }
+	            # then mangle the key unless the key is a regex
+	            if (ref($key) eq "Regexp") {
+	                push @{$newretval}, $key, $newval;
+	                next;
+	            }
 	            (my $newkey = $key) =~ s{
 	                # Match a percent followed by a valid keyword
 	                \%($keyword_pat)
@@ -368,29 +381,27 @@ sub setup ($) {
 	                # Substitute with the appropriate value only if it's defined
 	                $percent{$1} || $&
 	            }msxge;
-	            if ($newkey eq $key) {
-	                # key is unchanged, do nothing
-	                next;
+	            # if key contains glob chars, turn it into a regex
+	            if ($newkey =~ m/[{}\[\]*?]/) {
+	                $newkey = glob_to_regex($newkey);
 	            }
-	            # rename hash key after percent escape replacement
-	            $retval->{$newkey} = $retval->{$key};
-	            delete %{$retval}{$key};
+	            push @{$newretval}, $newkey, $newval;
 	        }
-	        return $retval;
+	        return $newretval;
 	      },
 	    VARNAME => 'unshare_mmdebstrap_extra_args',
 
 	    GROUP => 'Chroot options (unshare)',
-	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is run because of UNSHARE_MMDEBSTRAP_AUTO_CREATE was set to true, pass these extra arguments to the mmdebstrap invocation. The option allows specifying extra arguments specific to a specific distribution name or build architecture. A key containing a single asterisk serves as a catch-all wildcard which applies the extra options to all invocations. A key named after a distribution name will replace it for sbuild runs for that distribution. Even more specific, a key containing the architecture appended to the distribution name separated by a minus allows for build architecture specific options. Lastly, a key named exactly like the chroot will overwrite all the former entries. Percentage escapes %a and %r will be replaced by host architecture and distribution of the current build, respectively.',
+	    HELP => 'This is an experimental feature. In unshare mode, when mmdebstrap is run because UNSHARE_MMDEBSTRAP_AUTO_CREATE was set to true, pass these extra arguments to the mmdebstrap invocation. The option array is given as key/value pairs. Each key will be matched against strings created from sbuild configuration variables, namely: DISTRIBUTION, DISTRIBUTION-BUILD_ARCH, DISTRIBUTION-BUILD_ARCH-HOST_ARCH as well as against the name of the chroot itself (defined if you use --chroot). If a key matches one of these strings, the value, containing extra mmdebstrap arguments is appended to the mmdebstrap argument list. A key can be a plain string, in which case glob-style expressions can be used. If the key is a plain string, it has to fully match. If the key is a plain string, percentage escapes %a and %r will be replaced by host architecture and distribution of the current build, respectively. A key can also be a precompiled qr// regular expression but match groups cannot be referenced in the extra arguments. The value is an array of extra arguments which are appended to the end of the mmdebstrap exec array.',
 	    EXAMPLE => '
-$unshare_mmdebstrap_extra_args = {
-   "*" => [ "--include=debhelper" ], # if no more specific glob matches, include debhelper
-   "noble" => [ "--components=main,universe,multiverse" ], # add universe and multiverse for ubuntu
-   "debcargo-unstable-%a-sbuild" => ["--include=dh-cargo,cargo"], # %a will be replaced by the host architecture
-   # custom options for explicit chroot path (but sbuild will not update that
-   # tarball even with UNSHARE_MMDEBSTRAP_KEEP_TARBALL=1)
-   "/srv/custom-chroot.tar" => [ "--variant=apt", --arch="i386,ppc64el" ]
-};'
+$unshare_mmdebstrap_extra_args = [
+   "*-%a-arm64" => [ ... ] # options for cross-builds with arm64 as the host architecture
+   "debcargo-unstable-%a" => ["--include=dh-cargo,cargo"], # %a will be replaced by the host architecture
+   "ubuntu-*" => [ "--components=main,universe,multiverse" ], # add universe and multiverse for ubuntu
+   "/srv/custom-chroot.tar" => [ "--variant=apt", --arch="i386,ppc64el" ],
+   qr/(jessie|stretch)-amd64/ => [ ... ] # do something special for jessie and stretch
+   "{jessie,stretch}-amd64"   => [ ... ] # the same as above but with a glob instead of a regex
+];'
 	},
 	'UNSHARE_MMDEBSTRAP_ENV_CMND'			=> {
 	    TYPE => 'ARRAY',

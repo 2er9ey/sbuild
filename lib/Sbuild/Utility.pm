@@ -44,6 +44,8 @@ sub setup ($$$);
 sub cleanup ($);
 sub shutdown ($);
 sub get_tar_compress_option($);
+sub glob_to_regex($);
+sub natatime ($@);
 
 my $current_session;
 
@@ -55,7 +57,8 @@ BEGIN {
 
     @EXPORT = qw(setup cleanup shutdown check_url download
     read_subuid_subgid CLONE_NEWNS CLONE_NEWUTS CLONE_NEWIPC CLONE_NEWUSER
-    CLONE_NEWPID CLONE_NEWNET PER_LINUX32 test_unshare get_tar_compress_options);
+    CLONE_NEWPID CLONE_NEWNET PER_LINUX32 test_unshare get_tar_compress_options
+    glob_to_regex natatime);
 
     $SIG{'INT'} = \&shutdown;
     $SIG{'TERM'} = \&shutdown;
@@ -483,6 +486,51 @@ sub get_tar_compress_options($) {
 	return ('--zstd');
     }
     return ();
+}
+
+# Copyright (C) 2002, 2003, 2006, 2007 Richard Clamp <richardc@unixbeard.net>
+# This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+sub glob_to_regex($) {
+    my $glob = shift;
+
+    my ($regex, $in_curlies, $escaping);
+    local $_;
+    for ($glob =~ m/(.)/gs) {
+        if ($_ eq '*') {
+            $regex .= $escaping ? "\\*" : ".*";
+        } elsif ($_ eq '?') {
+            $regex .= $escaping ? "\\?" : ".";
+        } elsif ($_ eq '{') {
+            $regex .= $escaping ? "\\{" : "(";
+            ++$in_curlies unless $escaping;
+        } elsif ($_ eq '}' && $in_curlies) {
+            $regex .= $escaping ? "}" : ")";
+            --$in_curlies unless $escaping;
+        } elsif ($_ eq ',' && $in_curlies) {
+            $regex .= $escaping ? "," : "|";
+        } elsif ($_ eq "\\") {
+            if ($escaping) {
+                $regex .= "\\\\";
+                $escaping = 0;
+            } else {
+                $escaping = 1;
+            }
+            next;
+        } else {
+            $regex .= quotemeta $_;
+            $escaping = 0;
+        }
+        $escaping = 0;
+    }
+
+    return qr/^$regex$/;
+}
+
+# from List/MoreUtils/PP.pm
+sub natatime ($@) {
+    my $n    = shift;
+    my @list = @_;
+    return sub { return splice @list, 0, $n; }
 }
 
 1;
