@@ -412,7 +412,7 @@ $unshare_mmdebstrap_extra_args = {
 	    VARNAME => 'unshare_mmdebstrap_distro_mangle',
 	    GROUP => 'Chroot options (unshare)',
 	    DEFAULT => [
-	        qr/^(experimental|rc-buggy|UNRELEASED)$/ => 'unstable',
+	        qr/^(experimental|rc-buggy|UNRELEASED|UNRELEASED.*)$/ => 'unstable',
 	        qr/^(.*)-backports$/ => '$1',
 	        qr/^(.*)-security$/ => '$1',
 	    ],
