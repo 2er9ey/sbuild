@@ -247,6 +247,7 @@ run_sbuild() {
 	workingdir=$1; shift
 	env --chdir="${AUTOPKGTEST_TMP}/$workingdir/" sbuild \
 		--no-source-only-changes --nolog \
+		--bd-uninstallable-explainer=apt \
 		--chroot="${AUTOPKGTEST_TMP}/chroot.tar" --chroot-mode=unshare \
 		--keyid="sbuild fake uploader <fake-uploader@debian.org>" \
 		--pre-build-commands="echo %SBUILD_DSC > ${AUTOPKGTEST_TMP}/pre-build-commands.log" \
