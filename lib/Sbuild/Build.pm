@@ -2054,16 +2054,23 @@ sub explain_bd_uninstallable {
 	return 0;
     } elsif ($self->get_conf('BD_UNINSTALLABLE_EXPLAINER') eq 'apt') {
 	my (@instd, @rmvd);
-        my @apt_args = (
-            '--simulate',
-            \@instd,
-            \@rmvd,
-            'install',
-            $dummy_pkg_name,
-            '-oDebug::pkgProblemResolver=true',
-            '-oDebug::pkgDepCache::Marker=1',
-            '-oDebug::pkgDepCache::AutoInstall=1'
-        );
+        my @apt_args
+          = ('--simulate', \@instd, \@rmvd, 'install', $dummy_pkg_name);
+        if ($self->get_conf('HOST_ARCH') eq $self->get_conf('BUILD_ARCH')) {
+            # when building natively, pass the debug options to apt directly
+            push @apt_args,
+              (
+                '-oDebug::pkgProblemResolver=true',
+                '-oDebug::pkgDepCache::Marker=1',
+                '-oDebug::pkgDepCache::AutoInstall=1'
+              );
+        } else {
+            # When cross-building, the sbuild-cross-resolver is used, which
+            # will ignore options passed to apt via --option. We use the
+            # Preferences field in the EDSP request to enable debug output.
+            push @apt_args,
+              '-oAPT::Solver::sbuild-cross-resolver::Preferences=debug';
+        }
 	$resolver->run_apt(@apt_args);
     } elsif ($self->get_conf('BD_UNINSTALLABLE_EXPLAINER') eq 'dose3') {
 	# To retrieve all Packages files apt knows about we use "apt-get
@@ -2079,6 +2086,12 @@ sub explain_bd_uninstallable {
 	# restrictions, we don't want to limit ourselves by it. In cases where
 	# apt cannot find a solution, this check is supposed to allow the user
 	# to know that choosing a different resolver might fix the problem.
+	#
+	# FIXME: dose3 will ignore apt pinning. One could write a parser for
+	# files in /etc/apt/preferences.d/ and filter the Packages files
+	# accordingly. Until then, if pinning values are relevant (for example
+	# in the sbuild autopkgtest where packages are pinned to unstable
+	# to test transitions to testing) use the apt explainer instead.
 	$resolver->add_dependencies('DOSE3', 'dose-distcheck:native', "", "", "", "", "");
 	if (!$resolver->install_deps('dose3', 'DOSE3')) {
 	    return 0;
