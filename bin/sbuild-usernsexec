@@ -495,7 +495,7 @@ if (defined $ENV{'SBUILD_ENABLE_PIVOT_ROOT'}) {
         my @fields = split /:/, $line;
         next unless $#fields >= 4 and $fields[0] eq $user;
         unless ($fields[2] =~ /\d+/ and $fields[3] =~ /\d+/) {
-            die "invalid /etc/passwed line: $line";
+            die "invalid /etc/passwd line: $line";
         }
         $uid = int $fields[2];
         $gid = int $fields[3];
@@ -504,7 +504,7 @@ if (defined $ENV{'SBUILD_ENABLE_PIVOT_ROOT'}) {
     close $fh;
 
     unless (defined $uid and defined $gid) {
-        die "user $user not found in /etc/passed";
+        die "user $user not found in /etc/passwd";
     }
 
     0 == syscall &SYS_setgid, $gid or die "setgid failed: $!";
