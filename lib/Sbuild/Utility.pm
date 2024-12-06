@@ -405,7 +405,7 @@ sub read_subuid_subgid() {
     close $fh;
 
     if ($n ne $username) {
-	printf STDERR "No entry for $username in /etc/subuid";
+	printf STDERR "No entry for $username in /etc/subuid\n";
 	return;
     }
 
@@ -419,7 +419,7 @@ sub read_subuid_subgid() {
     close $fh;
 
     if ($n ne $username) {
-	printf STDERR "No entry for $username in /etc/subgid";
+	printf STDERR "No entry for $username in /etc/subgid\n";
 	return;
     }
 
