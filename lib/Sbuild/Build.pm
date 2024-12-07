@@ -2418,7 +2418,8 @@ sub build {
 		    $date = $self->get_conf('BIN_NMU_TIMESTAMP');
 		}
 	    } else {
-		$date = strftime_c "%a, %d %b %Y %H:%M:%S +0000", gmtime();
+		$date = strftime_c "%a, %d %b %Y %H:%M:%S +0000",
+			 gmtime($self->get('Pkg Start Time'));
 	    }
 	    print $clogpipe " -- " . $self->get_conf('MAINTAINER_NAME') . "  $date\n\n";
 	}
