@@ -168,7 +168,9 @@ sub chroot_auto_create {
             if ($dist !~ m/$k/) {
                 next;
             }
-            ($basedist = $dist) =~ s($k){$v}ee;
+            # 'my worst Perl line ever' Stefano Zacchiroli 2008
+            # 'I'm sorry' Johannes Schauer Marin Rodrigues 2024
+            ($basedist = $dist) =~ s/$k/"qq{$v}"/ee;
             print STDERR ("I: Applied base distribution name mangle rule "
                   . "s/$k/$v/ turning \"$dist\" into \"$basedist\"\n");
             last;
