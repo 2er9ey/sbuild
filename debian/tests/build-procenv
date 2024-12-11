@@ -123,7 +123,11 @@ printf '$chroot_mode = "schroot";\n$schroot = "schroot";\n' > "$HOME/.sbuildrc"
 
 [ -n "$components" ] && components="--components=$components"
 # avoid "debconf: delaying package configuration, since apt-utils is not installed"
-runuser -u "$AUTOPKGTEST_NORMAL_USER" -- sudo sbuild-createchroot $components "$release" "$dir" "$url"
+if ! runuser -u "$AUTOPKGTEST_NORMAL_USER" -- sudo sbuild-createchroot $components "$release" "$dir" "$url" ; then
+    cat "$dir/debootstrap/debootstrap.log"
+    exit 1
+fi
+
 if [ -n "$http_proxy" ]; then
     echo "Acquire::http { Proxy \"$http_proxy\"; };" > "$dir/etc/apt/apt.conf.d/01proxy"
 fi
