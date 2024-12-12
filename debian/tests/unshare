@@ -262,9 +262,12 @@ verify orig deb dsc bin_changes commands_log
 run_sbuild test-pkg-1.0
 verify orig deb bin_changes commands_log
 
+# disable cross-builds until #1088971 is fixed in autopkgtest
+if false; then
 if [ "$nativearch" = amd64 ]; then
   run_sbuild test-pkg-1.0 --build="$nativearch" --host="$foreignarch" --arch-all
   verify orig deb foreign_bin_changes
+fi
 fi
 
 # Test running sbuild on the dsc
@@ -295,5 +298,3 @@ rmdir "${AUTOPKGTEST_TMP}/test-pkg-1.0/debian/source" \
 	"${AUTOPKGTEST_TMP}/test-pkg-1.0/debian" \
 	"${AUTOPKGTEST_TMP}/test-pkg-1.0"
 rm "${AUTOPKGTEST_TMP}/chroot.tar"
-
-# FIXME: add cross-builds
