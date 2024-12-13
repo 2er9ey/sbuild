@@ -2756,200 +2756,235 @@ sub build {
     my @space_files = ();
 
     $self->log_subsubsection("Finished");
-    if ($rv) {
-	Sbuild::Exception::Build->throw(error => "Build failure (dpkg-buildpackage died)",
-	    failstage => "build");
+
+    if ($rv != 0) {
+        Sbuild::Exception::Build->throw(
+            error     => "Build failure (dpkg-buildpackage died)",
+            failstage => "build"
+        );
+        $self->set('This Space', $self->check_space(@space_files));
+        return 0;
+    }
+
+    $self->log_info("Built successfully\n");
+
+    if ($session->test_regular_file_readable("$dscdir/debian/files")) {
+        my @files = $self->debian_files_list("$dscdir/debian/files");
+
+        foreach (@files) {
+            if (!$session->test_regular_file("$build_dir/$_")) {
+                $self->log_error("Package claims to have built "
+                      . basename($_)
+                      . ", but did not.  This is a bug in the packaging.\n");
+                next;
+            }
+            if (/_all.u?deb$/ and not $self->get_conf('BUILD_ARCH_ALL')) {
+                $self->log_error("Package builds "
+                      . basename($_)
+                      . " when binary-indep target is not called.  This is a bug in the packaging.\n"
+                );
+                $session->unlink("$build_dir/$_");
+                next;
+            }
+        }
+    }
+
+    # Restore write access to build tree now build is complete.
+    if (!$session->chmod($self->get('Build Dir'), 'g+w', { RECURSIVE => 1 })) {
+        $self->log_error(
+            "chmod g+w " . $self->get('Build Dir') . " failed.\n");
+        return 0;
+    }
+
+    $self->log_subsection_t("Changes", time);
+
+    # we use an anonymous subroutine so that the referenced variables are
+    # automatically rebound to their current values
+    my $copy_changes = sub {
+        my $changes = shift;
+
+        my $F = $session->get_read_file_handle("$build_dir/$changes");
+        if (!$F) {
+            $self->log_error(
+                "cannot get read file handle for $build_dir/$changes\n");
+            Sbuild::Exception::Build->throw(
+                error => "cannot get read file handle for $build_dir/$changes",
+                failstage => "parse-changes"
+            );
+        }
+        my $pchanges = Dpkg::Control->new(type => CTRL_FILE_CHANGES);
+        if (!$pchanges->parse($F, "$build_dir/$changes")) {
+            $self->log_error("cannot parse $build_dir/$changes\n");
+            Sbuild::Exception::Build->throw(
+                error     => "cannot parse $build_dir/$changes",
+                failstage => "parse-changes"
+            );
+        }
+        close($F);
+
+        if ($self->get_conf('OVERRIDE_DISTRIBUTION')) {
+            $pchanges->{Distribution} = $self->get_conf('DISTRIBUTION');
+        }
+
+        my $sys_build_dir = $self->get_conf('BUILD_DIR');
+        my $F2 = $session->get_write_file_handle("$build_dir/$changes.new");
+        if (!$F2) {
+            $self->log("Cannot create $build_dir/$changes.new\n");
+            $self->log("Distribution field may be wrong!!!\n");
+            if ($build_dir) {
+                if (!$session->copy_from_chroot("$build_dir/$changes", ".")) {
+                    $self->log_error(
+                        "Could not copy $build_dir/$changes to .\n");
+                }
+            }
+        } else {
+            $pchanges->output(\*STDOUT);
+            $pchanges->output(\*$F2);
+
+            close($F2);
+
+            $session->rename("$build_dir/$changes.new", "$build_dir/$changes");
+            if ($?) {
+                $self->log("$build_dir/$changes.new could not be "
+                      . "renamed to $build_dir/$changes: $?\n");
+                $self->log("Distribution field may be wrong!!!");
+            }
+            if ($build_dir) {
+                if (
+                    !$session->copy_from_chroot(
+                        "$build_dir/$changes", "$sys_build_dir"
+                    )
+                ) {
+                    $self->log(
+                        "Could not copy $build_dir/$changes to $sys_build_dir"
+                    );
+                }
+            }
+        }
+
+        return $pchanges;
+    };
+
+    $changes = $self->get_changes();
+    if (!defined($changes)) {
+        $self->log_error(".changes is undef. Cannot copy build results.\n");
+        return 0;
+    }
+    my @cfiles;
+    if ($session->test_regular_file_readable("$build_dir/$changes")) {
+        my (@do_dists, @saved_dists);
+        $self->log_subsubsection("$changes:");
+
+        my $pchanges = &$copy_changes($changes);
+        $self->set('Changes File', $self->get_conf('BUILD_DIR') . "/$changes");
+
+        my $checksums = Dpkg::Checksums->new();
+        $checksums->add_from_control($pchanges);
+
+        push(@cfiles, $checksums->get_files());
+
     } else {
-	$self->log_info("Built successfully\n");
+        $self->log_error("Can't find $changes -- can't dump info\n");
+    }
 
-	if ($session->test_regular_file_readable("$dscdir/debian/files")) {
-	    my @files = $self->debian_files_list("$dscdir/debian/files");
+    if ($self->get_conf('SOURCE_ONLY_CHANGES')) {
+        my $so_changes = $self->get('Package_SVersion') . "_source.changes";
+        $self->log_subsubsection("$so_changes:");
+        my $genchangescmd = ['dpkg-genchanges', '--build=source'];
+        if (defined $self->get_conf('SIGNING_OPTIONS')) {
+            if (ref($self->get_conf('SIGNING_OPTIONS')) eq 'ARRAY') {
+                push(
+                    @{$genchangescmd},
+                    @{ $self->get_conf('SIGNING_OPTIONS') });
+            } elsif (length $self->get_conf('SIGNING_OPTIONS')) {
+                push(@{$genchangescmd}, $self->get_conf('SIGNING_OPTIONS'));
+            }
+        }
+        my $changes_opts = $self->get_changes_opts();
+        if ($changes_opts) {
+            push(@{$genchangescmd}, @{$changes_opts});
+        }
+        my $cfile = $session->read_command({
+            COMMAND  => $genchangescmd,
+            USER     => $self->get_conf('BUILD_USER'),
+            PRIORITY => 0,
+            DIR      => $dscdir
+        });
+        if (!$cfile) {
+            $self->log_error("dpkg-genchanges --build=source failed\n");
+            Sbuild::Exception::Build->throw(
+                error     => "dpkg-genchanges --build=source failed",
+                failstage => "source-only-changes"
+            );
+        }
+        if (!$session->write_file("$build_dir/$so_changes", $cfile)) {
+            $self->log_error(
+                "cannot write content to $build_dir/$so_changes\n");
+            Sbuild::Exception::Build->throw(
+                error     => "cannot write content to $build_dir/$so_changes",
+                failstage => "source-only-changes"
+            );
+        }
 
-	    foreach (@files) {
-		if (!$session->test_regular_file("$build_dir/$_")) {
-		    $self->log_error("Package claims to have built ".basename($_).", but did not.  This is a bug in the packaging.\n");
-		    next;
-		}
-		if (/_all.u?deb$/ and not $self->get_conf('BUILD_ARCH_ALL')) {
-		    $self->log_error("Package builds ".basename($_)." when binary-indep target is not called.  This is a bug in the packaging.\n");
-		    $session->unlink("$build_dir/$_");
-		    next;
-		}
-	    }
-	}
+        my $pchanges = &$copy_changes($so_changes);
+    }
 
-	# Restore write access to build tree now build is complete.
-	if (!$session->chmod($self->get('Build Dir'), 'g+w', { RECURSIVE => 1 })) {
-	    $self->log_error("chmod g+w " . $self->get('Build Dir') . " failed.\n");
-	    return 0;
-	}
+    $self->log_subsection_t("Buildinfo", time);
 
-	$self->log_subsection_t("Changes", time);
+    foreach (@cfiles) {
+        my $deb = "$build_dir/$_";
+        next if $deb !~ /\.buildinfo$/;
+        my $buildinfo = $session->read_file($deb);
+        if (!$buildinfo) {
+            $self->log_error("Cannot read $deb\n");
+        } else {
+            $self->log($buildinfo);
+            $self->log("\n");
+        }
+    }
 
-	# we use an anonymous subroutine so that the referenced variables are
-	# automatically rebound to their current values
-	my $copy_changes = sub {
-	    my $changes = shift;
+    $self->log_subsection_t("Package contents", time);
 
-	    my $F = $session->get_read_file_handle("$build_dir/$changes");
-	    if (!$F) {
-		$self->log_error("cannot get read file handle for $build_dir/$changes\n");
-		Sbuild::Exception::Build->throw(error => "cannot get read file handle for $build_dir/$changes",
-		    failstage => "parse-changes");
-	    }
-	    my $pchanges = Dpkg::Control->new(type => CTRL_FILE_CHANGES);
-	    if (!$pchanges->parse($F, "$build_dir/$changes")) {
-		$self->log_error("cannot parse $build_dir/$changes\n");
-		Sbuild::Exception::Build->throw(error => "cannot parse $build_dir/$changes",
-		    failstage => "parse-changes");
-	    }
-	    close($F);
+    my @debcfiles = @cfiles;
+    foreach (@debcfiles) {
+        my $deb = "$build_dir/$_";
+        next if $deb !~ /(\Q$host_arch\E|all)\.(udeb|deb)$/;
 
+        $self->log_subsubsection("$_");
+        my $dpkg_info
+          = $session->read_command({ COMMAND => ["dpkg", "--info", $deb] });
+        if (!$dpkg_info) {
+            $self->log_error("Can't spawn dpkg: $! -- can't dump info\n");
+        } else {
+            $self->log($dpkg_info);
+        }
+        $self->log("\n");
+        my $dpkg_contents = $session->read_command({
+                COMMAND => ["sh", "-c", "dpkg --contents $deb 2>&1 | sort -k6"]
+            });
+        if (!$dpkg_contents) {
+            $self->log_error("Can't spawn dpkg: $! -- can't dump info\n");
+        } else {
+            $self->log($dpkg_contents);
+        }
+        $self->log("\n");
+    }
 
-	    if ($self->get_conf('OVERRIDE_DISTRIBUTION')) {
-		$pchanges->{Distribution} = $self->get_conf('DISTRIBUTION');
-	    }
-
-	    my $sys_build_dir = $self->get_conf('BUILD_DIR');
-	    my $F2 = $session->get_write_file_handle("$build_dir/$changes.new");
-	    if (!$F2) {
-		$self->log("Cannot create $build_dir/$changes.new\n");
-		$self->log("Distribution field may be wrong!!!\n");
-		if ($build_dir) {
-		    if(!$session->copy_from_chroot("$build_dir/$changes", ".")) {
-			$self->log_error("Could not copy $build_dir/$changes to .\n");
-		    }
-		}
-	    } else {
-		$pchanges->output(\*STDOUT);
-		$pchanges->output(\*$F2);
-
-		close( $F2 );
-
-		$session->rename("$build_dir/$changes.new", "$build_dir/$changes");
-		if ($?) {
-		    $self->log("$build_dir/$changes.new could not be " .
-			    "renamed to $build_dir/$changes: $?\n");
-		    $self->log("Distribution field may be wrong!!!");
-		}
-		if ($build_dir) {
-		    if (!$session->copy_from_chroot("$build_dir/$changes", "$sys_build_dir")) {
-			$self->log("Could not copy $build_dir/$changes to $sys_build_dir");
-		    }
-		}
-	    }
-
-	    return $pchanges;
-	};
-
-	$changes = $self->get_changes();
-	if (!defined($changes)) {
-	    $self->log_error(".changes is undef. Cannot copy build results.\n");
-	    return 0;
-	}
-	my @cfiles;
-	if ($session->test_regular_file_readable("$build_dir/$changes")) {
-	    my(@do_dists, @saved_dists);
-	    $self->log_subsubsection("$changes:");
-
-	    my $pchanges = &$copy_changes($changes);
-	    $self->set('Changes File', $self->get_conf('BUILD_DIR') . "/$changes");
-
-	    my $checksums = Dpkg::Checksums->new();
-	    $checksums->add_from_control($pchanges);
-
-	    push(@cfiles, $checksums->get_files());
-
-	}
-	else {
-	    $self->log_error("Can't find $changes -- can't dump info\n");
-	}
-
-	if ($self->get_conf('SOURCE_ONLY_CHANGES')) {
-	    my $so_changes = $self->get('Package_SVersion') . "_source.changes";
-	    $self->log_subsubsection("$so_changes:");
-	    my $genchangescmd = ['dpkg-genchanges', '--build=source'];
-	    if (defined $self->get_conf('SIGNING_OPTIONS')) {
-		if (ref($self->get_conf('SIGNING_OPTIONS')) eq 'ARRAY') {
-		    push (@{$genchangescmd}, @{$self->get_conf('SIGNING_OPTIONS')});
-		} elsif (length $self->get_conf('SIGNING_OPTIONS')) {
-		    push (@{$genchangescmd}, $self->get_conf('SIGNING_OPTIONS'));
-		}
-	    }
-	    my $changes_opts = $self->get_changes_opts();
-	    if ($changes_opts) {
-		    push (@{$genchangescmd}, @{$changes_opts});
-	    }
-	    my $cfile = $session->read_command(
-		{ COMMAND => $genchangescmd,
-		    USER => $self->get_conf('BUILD_USER'),
-		    PRIORITY => 0,
-		    DIR => $dscdir});
-	    if (!$cfile) {
-		$self->log_error("dpkg-genchanges --build=source failed\n");
-		Sbuild::Exception::Build->throw(error => "dpkg-genchanges --build=source failed",
-		    failstage => "source-only-changes");
-	    }
-	    if (!$session->write_file("$build_dir/$so_changes", $cfile)) {
-		$self->log_error("cannot write content to $build_dir/$so_changes\n");
-		Sbuild::Exception::Build->throw(error => "cannot write content to $build_dir/$so_changes",
-		    failstage => "source-only-changes");
-	    }
-
-	    my $pchanges = &$copy_changes($so_changes);
-	}
-
-	$self->log_subsection_t("Buildinfo", time);
-
-	foreach (@cfiles) {
-	    my $deb = "$build_dir/$_";
-	    next if $deb !~ /\.buildinfo$/;
-	    my $buildinfo = $session->read_file($deb);
-	    if (!$buildinfo) {
-		$self->log_error("Cannot read $deb\n");
-	    } else {
-		$self->log($buildinfo);
-		$self->log("\n");
-	    }
-	}
-
-	$self->log_subsection_t("Package contents", time);
-
-	my @debcfiles = @cfiles;
-	foreach (@debcfiles) {
-	    my $deb = "$build_dir/$_";
-	    next if $deb !~ /(\Q$host_arch\E|all)\.(udeb|deb)$/;
-
-	    $self->log_subsubsection("$_");
-	    my $dpkg_info = $session->read_command({COMMAND => ["dpkg", "--info", $deb]});
-	    if (!$dpkg_info) {
-		$self->log_error("Can't spawn dpkg: $! -- can't dump info\n");
-	    }
-	    else {
-		$self->log($dpkg_info);
-	    }
-	    $self->log("\n");
-	    my $dpkg_contents = $session->read_command({COMMAND => ["sh", "-c", "dpkg --contents $deb 2>&1 | sort -k6"]});
-	    if (!$dpkg_contents) {
-		$self->log_error("Can't spawn dpkg: $! -- can't dump info\n");
-	    }
-	    else {
-		$self->log($dpkg_contents);
-	    }
-	    $self->log("\n");
-	}
-
-	foreach (@cfiles) {
-	    push( @space_files, $self->get_conf('BUILD_DIR') . "/$_");
-	    if (!$session->copy_from_chroot("$build_dir/$_", $self->get_conf('BUILD_DIR'))) {
-		$self->log_error("Could not copy $build_dir/$_ to " . $self->get_conf('BUILD_DIR') . "\n");
-	    }
-	}
+    foreach (@cfiles) {
+        push(@space_files, $self->get_conf('BUILD_DIR') . "/$_");
+        if (
+            !$session->copy_from_chroot(
+                "$build_dir/$_", $self->get_conf('BUILD_DIR'))
+        ) {
+            $self->log_error("Could not copy $build_dir/$_ to "
+                  . $self->get_conf('BUILD_DIR')
+                  . "\n");
+        }
     }
 
     $self->set('This Space', $self->check_space(@space_files));
 
-    return $rv == 0 ? 1 : 0;
+    return 1;
 }
 
 # Produce a hash suitable for ENV export
