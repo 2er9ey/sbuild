@@ -2758,8 +2758,18 @@ sub build {
     $self->log_subsubsection("Finished");
 
     if ($rv != 0) {
+        my $msg = '';
+        if (POSIX::WIFEXITED($rv)) {
+            my $ret = POSIX::WEXITSTATUS($rv);
+            $msg = "exit $ret";
+        } elsif (POSIX::WIFSIGNALED($rv)) {
+            my $sig = POSIX::WTERMSIG($rv);
+            $msg = "signal $sig";
+        } else {
+            $msg = "unknown status $rv";
+        }
         Sbuild::Exception::Build->throw(
-            error     => "Build failure (dpkg-buildpackage died)",
+            error     => "Build failure (dpkg-buildpackage died with $msg)",
             failstage => "build"
         );
         $self->set('This Space', $self->check_space(@space_files));
