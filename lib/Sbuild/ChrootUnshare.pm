@@ -30,6 +30,7 @@ use File::Path qw(make_path);
 use File::Copy;
 use Cwd qw(abs_path);
 use Sbuild qw(shellescape);
+use POSIX qw(SIGPIPE ceil);
 
 BEGIN {
     use Exporter ();
@@ -450,42 +451,179 @@ sub begin_session {
             return 0;
         }
 
-        print STDERR "I: Unpacking $tarball to $rootdir...\n";
-        @cmd = (
-            "/usr/libexec/sbuild-usernsexec",
-            (map { join ":", @{$_} } @idmap),
-            '--',
-            'tar',
-            '--exclude=./dev/urandom',
-            '--exclude=./dev/random',
-            '--exclude=./dev/full',
-            '--exclude=./dev/null',
-            '--exclude=./dev/console',
-            '--exclude=./dev/zero',
-            '--exclude=./dev/tty',
-            '--exclude=./dev/ptmx',
-            '--directory',
-            $rootdir,
-            '--extract'
-        );
-        push @cmd, get_tar_compress_options($tarball);
+        my @decompress = ();
+        # from GNU tar's src/buffer.c
+        {
+            open(my $fh, '<', $tarball);
+            my $chunk;
+            my $ret = read $fh, $chunk, 512;
+            if ($ret < 512) {
+                print STDERR "failed reading 512 bytes from $tarball\n";
+                return 0;
+            }
+            close $fh;
 
-        if ($self->get_conf('DEBUG')) {
-            printf STDERR "running @cmd\n";
+            my $chksum_matches = 0;
+            {
+                my $tmpchunk = $chunk;
+                # replace checksum with spaces to verify it
+                my $oldchksum = substr $tmpchunk, 148, 7, " " x 7;
+                my $newchksum = sprintf("%06o\0", unpack("%16C*", $tmpchunk));
+                $chksum_matches = ($oldchksum eq $newchksum);
+            }
+            if ($chksum_matches && "ustar" eq substr $chunk, 257, 5) {
+                @decompress = ('cat');
+            } elsif ("\037\235" eq substr $chunk, 0, 2) {
+                @decompress = ('uncompress.real', '-c');
+            } elsif ("\037\213" eq substr $chunk, 0, 2) {
+                @decompress = ('gzip', '--decompress', '--stdout');
+            } elsif ("BZh" eq substr $chunk, 0, 3) {
+                @decompress = ('bzip2', '--decompress', '--stdout');
+            } elsif ("LZIP" eq substr $chunk, 0, 4) {
+                @decompress = ('lzip', '--decompress', '--stdout');
+            } elsif (
+                "\xFFLZMA" eq substr $chunk,
+                0, 5 || "\x5d\x00\x00" eq substr $chunk,
+                0, 3
+            ) {
+                @decompress = ('lzma', '--decompress', '--stdout');
+            } elsif ("\211LZO" eq substr $chunk, 0, 4) {
+                @decompress = ('lzop', '--decompress,', '--stdout');
+            } elsif ("\xFD7zXZ" eq substr $chunk, 0, 5) {
+                @decompress = ('xz', '--decompress', '--stdout');
+            } elsif ("\x28\xB5\x2F\xFD" eq substr $chunk, 0, 4) {
+                @decompress = ('zstd', '--decompress', '--stdout');
+            } elsif ("\x04\x22\x4d\x18" eq substr $chunk, 0, 4) {
+                # tar does not seem to support lz4 magic, but we do
+                @decompress = ('lz4', '--decompress', '--stdout');
+            } else {
+                print STDERR
+                  "failed to deduce format from magic for $tarball\n";
+                return 0;
+            }
         }
-        my $pid = open(my $out, '|-', @cmd);
-        if (!defined($pid)) {
-            print STDERR "Can't fork: $!\n";
+
+        print STDERR "I: Unpacking $tarball to $rootdir...\n";
+
+        pipe my $filter_reader, my $decompress_writer;
+        pipe my $tar_reader,    my $filter_writer;
+        my $pid_decompress = fork();
+        if ($pid_decompress == 0) {
+            open(STDOUT, '>&', $decompress_writer);
+            close $filter_reader;
+            close $tar_reader;
+            close $filter_writer;
+            if ($self->get_conf('DEBUG')) {
+                printf STDERR (
+                    "running $decompress[0] --decompress --stdout $tarball\n");
+            }
+            exec @decompress, $tarball;
+        }
+        my $pid_filter = fork();
+        if ($pid_filter == 0) {
+            close $decompress_writer;
+            close $tar_reader;
+            my $tar_end = "\0" x 512;
+
+            while (1) {
+                my $chunk;
+                my $ret = read $filter_reader, $chunk, 512;
+                if (!defined $ret || $ret == 0) {
+                    last;
+                }
+                if ($chunk eq $tar_end) {
+                    print $filter_writer $chunk;
+                    next;
+                }
+                if ("ustar" ne substr $chunk, 257, 5) {
+                    print STDERR "E: Bad tar magic $chunk found\n";
+                    last;
+                }
+                my $size = substr $chunk, 124, 11;
+                if ($size =~ /[^0-7]/) {
+                    my $name = substr $chunk, 0, 100;
+                    # bad size value, better not touch a broken tarball
+                    print STDERR "E: Bad octal digit found for $name: $size\n";
+                    last;
+                }
+                $size = oct($size);
+                my $typeflag = substr $chunk, 156, 1;
+                if ($size == 0 && ($typeflag eq "3" || $typeflag eq "4")) {
+                    # this is a CHRTYPE or BLKTYPE
+                    my $tmpchunk = $chunk;
+                    # replace checksum with spaces to verify it
+                    my $oldchksum = substr $tmpchunk, 148, 7, " " x 7;
+                    my $newchksum
+                      = sprintf("%06o\0", unpack("%16C*", $tmpchunk));
+                    if ($oldchksum ne $newchksum) {
+                        my $name = substr $chunk, 0, 100;
+                        # checksum does not match, better not touch a broken
+                        # tarball
+                        print STDERR ("E: Checksum does not match for $name: "
+                              . "'$oldchksum' != '$newchksum'\n");
+                        last;
+                    }
+                    # skip CHRTYPE and BLKTYPE entries
+                    next;
+                }
+                print $filter_writer $chunk;
+                if ($size == 0) {
+                    next;
+                }
+                my $numchunks = ceil($size / 512);
+                for (my $i = 0 ; $i < $numchunks ; $i++) {
+                    $ret = read $filter_reader, $chunk, 512;
+                    if (!defined $ret || $ret == 0) {
+                        last;
+                    }
+                    print $filter_writer $chunk;
+                }
+            }
+
+            # if the loop aborted early due to an error, forward the rest as-is
+            while (1) {
+                my $chunk;
+                my $ret = read $filter_reader, $chunk, 4096;
+                if (!defined $ret || $ret == 0) {
+                    last;
+                }
+                print $filter_writer $chunk;
+            }
+            exit(0);
+        }
+        my $pid_tar = fork();
+        if ($pid_tar == 0) {
+            open(STDIN, '<&', $tar_reader);
+            close $filter_reader;
+            close $decompress_writer;
+            close $filter_writer;
+            @cmd = (
+                "/usr/libexec/sbuild-usernsexec",
+                (map { join ":", @{$_} } @idmap),
+                '--', 'tar', '--directory', $rootdir, '--extract'
+            );
+            if ($self->get_conf('DEBUG')) {
+                printf STDERR ("running " . (join " ", @cmd) . "\n");
+            }
+            exec @cmd;
+        }
+        close $filter_reader;
+        close $decompress_writer;
+        close $tar_reader;
+        close $filter_writer;
+        waitpid($pid_tar, 0);
+        if ($? != 0 && $? != SIGPIPE) {
+            print STDERR "bad exit status ($?) for tar\n";
             return 0;
         }
-        if (copy($tarball, $out) != 1) {
-            print STDERR "copy() failed: $!\n";
+        waitpid($pid_filter, 0);
+        if ($? != 0 && $? != SIGPIPE) {
+            print STDERR "bad exit status ($?) for filter program\n";
             return 0;
         }
-        close($out);
-        $exit = $? >> 8;
-        if ($exit) {
-            print STDERR "bad exit status ($exit): @cmd\n";
+        waitpid($pid_decompress, 0);
+        if ($? != 0 && $? != SIGPIPE) {
+            print STDERR "bad exit status ($?) for decompress program\n";
             return 0;
         }
     }
