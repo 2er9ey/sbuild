@@ -451,6 +451,8 @@ sub begin_session {
             return 0;
         }
 
+        print STDERR "I: Unpacking $tarball to $rootdir...\n";
+
         my @decompress = ();
         # from GNU tar's src/buffer.c
         {
@@ -502,8 +504,6 @@ sub begin_session {
                 return 0;
             }
         }
-
-        print STDERR "I: Unpacking $tarball to $rootdir...\n";
 
         pipe my $filter_reader, my $decompress_writer;
         pipe my $tar_reader,    my $filter_writer;

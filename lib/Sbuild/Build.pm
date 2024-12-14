@@ -449,6 +449,7 @@ sub run_chroot_session {
 					    $self->get('Package'),
 					    failstage => "create-session");
 	}
+	$self->log_info("Creating chroot session...\n");
 
 	$self->set('Session', $session);
 
@@ -556,6 +557,9 @@ END
 	}
 
 	# Log colouring
+        if ($self->get_conf('LOG_COLOUR')) {
+            $self->log_info("Setting up log color...\n");
+        }
 	$self->build_log_colour('red', '^E: ');
 	$self->build_log_colour('yellow', '^W: ');
 	$self->build_log_colour('green', '^I: ');
@@ -681,6 +685,7 @@ sub run_chroot_session_locked {
 
 
 	$self->check_abort();
+	$self->log_info("Setting up apt archive...\n");
 	if (!$resolver->setup()) {
 		Sbuild::Exception::Build->throw(error => "resolver setup failed",
 						failstage => "resolver setup");

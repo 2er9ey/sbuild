@@ -47,6 +47,8 @@ sub basesetup ($$) {
     my $session = shift;
     my $conf = shift;
 
+    $session->log_info("Setting up the chroot...\n");
+
     # Add sbuild group
     $session->run_command(
 	{ COMMAND => ['getent', 'group', 'sbuild'],
