@@ -1,3 +1,62 @@
+sbuild (0.88.0) UNRELEASED; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * Breaking change: UNSHARE_MMDEBSTRAP_EXTRA_ARGS now supports globs and
+    regexes as keys and is a list instead of a hash. The last part means that
+    if you set $unshare_mmdebstrap_extra_args in your ~/.sbuildrc, you have to
+    convert it to a list. See sbuild.conf(5) for examples and documentation.
+    (Closes: #1088653)
+  * lib/Sbuild/ChrootUnshare.pm:
+     - eval replacement string to be able to reference matches in the regex
+     - support distro mangle replacement strings containing a prefix to $1
+     - filter out CHRTYPE and BLKTYPE entries from tarballs (Closes: #1068382)
+  * lib/Sbuild/Conf.pm: also replace percent-escapes in the mmdebstrap
+    arguments
+  * debian/tests/unshare:
+     - disable cross-builds until #1088971 is fixed in autopkgtest
+     - use --bd-uninstallable-explainer=apt because the dose explainer does not
+       respect apt pinning and thus presents useless successes
+  * lib/Sbuild/Build.pm:
+     - don't copy in /usr/lib/apt/solvers/apt from the outside (Closes:
+       #1088836)
+     - refactor condition to avoid nesting and reduce indentation
+     - be more verbose about dpkg-buildpackage failures
+  * bin/sbuild-cross-resolver: support debug output when used by the apt
+    BD_UNINSTALLABLE_EXPLAINER for cross building
+  * Add a few more 'I:' status messages
+
+  [ Samuel Henrique ]
+  * Add .*-security to UNSHARE_MMDEBSTRAP_DISTRO_MANGLE (closes: #1088655)
+
+  [ Chris Hofstaedtler ]
+  * example.sbuildrc: drop "1;"
+
+  [ Jochen Sprickerhof ]
+  * Pass host architecture to piuparts
+  * Fix mmdebstrap command when keep_tarball is not set
+  * Add newline to uidmap error message (Closes: #1089126)
+  * Map any UNRELEASED.* string to unstable
+
+  [ Emanuele Rocca ]
+  * bin/sbuild-usernsexec: fix passwd typos
+
+  [ Julian Andres Klode ]
+  * d/t/build-procenv: Cat the debootstrap.log if it fails
+
+  [ Matthias Klose ]
+  * add timestamps to subsection logging (Closes: #1088662)
+
+  [ Niko Tyni ]
+  * Use build start time when generating binNMU timestamp (Closes: #1089088)
+
+  [ Richard Lewis ]
+  * Remove old dependencies
+
+  [ Santiago Vila ]
+  * Use standard location for perl
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sun, 15 Dec 2024 22:15:39 +0100
+
 sbuild (0.87.1) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
