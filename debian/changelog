@@ -1,4 +1,4 @@
-sbuild (0.88.0) UNRELEASED; urgency=medium
+sbuild (0.88.0) unstable; urgency=medium
 
   [ Johannes Schauer Marin Rodrigues ]
   * Breaking change: UNSHARE_MMDEBSTRAP_EXTRA_ARGS now supports globs and
@@ -55,7 +55,7 @@ sbuild (0.88.0) UNRELEASED; urgency=medium
   [ Santiago Vila ]
   * Use standard location for perl
 
- -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sun, 15 Dec 2024 22:15:39 +0100
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sun, 15 Dec 2024 22:39:40 +0100
 
 sbuild (0.87.1) unstable; urgency=medium
 
