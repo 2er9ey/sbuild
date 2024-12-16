@@ -1,8 +1,13 @@
-sbuild (0.88.1) UNRELEASED; urgency=medium
+sbuild (0.88.1) unstable; urgency=medium
 
-  * 
+  [ Helmut Grohne ]
+  * configure apt's barbarian architectures for the cross build profile
 
- -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 16 Dec 2024 08:06:24 +0100
+  [ Johannes Schauer Marin Rodrigues ]
+  * lib/Sbuild/ResolverBase.pm: disable the sbuild-cross-resolver without
+    apt-utils in the chroot
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 16 Dec 2024 13:55:17 +0100
 
 sbuild (0.88.0) unstable; urgency=medium
 
