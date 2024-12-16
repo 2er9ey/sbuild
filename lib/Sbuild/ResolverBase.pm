@@ -864,9 +864,15 @@ sub run_apt {
     push @apt_command, '--allow-unauthenticated' if
 	($self->get_conf('APT_ALLOW_UNAUTHENTICATED'));
     if ( $self->get('Host Arch') ne $self->get('Build Arch') ) {
-	# drop m-a:foreign and essential:yes packages that are not arch:all
-	# and not arch:native
-	push @apt_command, '--solver', 'sbuild-cross-resolver';
+        my $session = $self->get('Session');
+        if (!$session->test_regular_file('/usr/lib/apt/solvers/apt')) {
+            $self->log_info("Not using sbuild-cross-resolver because apt-utils"
+                  . " is not installed inside the chroot\n");
+        } else {
+            # drop m-a:foreign and essential:yes packages that are not arch:all
+            # and not arch:native
+            push @apt_command, '--solver', 'sbuild-cross-resolver';
+        }
     }
     push @apt_command, "$mode", $action, @packages;
     my $pipe =
