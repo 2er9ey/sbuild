@@ -30,7 +30,7 @@ use POSIX qw(getgroups getgid);
 use Sbuild qw(isin);
 use Sbuild::ConfBase;
 use Sbuild::Sysconfig;
-use Dpkg::Build::Info;
+use Dpkg::BuildInfo;
 use Sbuild::Utility qw(glob_to_regex natatime);
 
 BEGIN {
@@ -990,10 +990,10 @@ $environment_filter = [\'^PATH$\',
 			\'^TERM$\',
 			\'^SHELL$\'];
 # Appending FOOBAR to the default
-use Dpkg::Build::Info;
+use Dpkg::BuildInfo;
 $environment_filter = [Dpkg::BuildInfo::get_build_env_allowed(), \'FOOBAR\'];
 # Removing FOOBAR from the default
-use Dpkg::Build::Info;
+use Dpkg::BuildInfo;
 $environment_filter = [map /^FOOBAR$/ ? () : $_, Dpkg::BuildInfo::get_build_env_allowed()];
 '
 	},
