@@ -483,7 +483,7 @@ This command line option sets the \fBNOLOG\fP configuration variable. See
 .BR sbuild.conf (5)
 for more information.
 .TP
-.BR \-\-profiles=\fIprofile[,...]\fP"
+.BR \-\-profiles=\fIprofile[,...]\fP
 Specify the profile(s) we build, as a comma-separated list. Defaults to the
 space separated list of profiles in the \fBDEB_BUILD_PROFILES\fP environment
 variable when building natively or the \fBcross\fP and \fBnocheck\fP profiles
