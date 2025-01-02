@@ -428,6 +428,8 @@ sub run_chroot_session {
 	    $chroot_info = Sbuild::ChrootInfoAutopkgtest->new($self->get('Config'));
 	} elsif ($self->get_conf('CHROOT_MODE') eq 'unshare') {
 	    $chroot_info = Sbuild::ChrootInfoUnshare->new($self->get('Config'));
+	} elsif ($self->get_conf('CHROOT_MODE') eq 'plain') {
+	    $chroot_info = Sbuild::ChrootInfoPlain->new($self->get('Config'));
 	} else {
 	    $chroot_info = Sbuild::ChrootInfoSudo->new($self->get('Config'));
 	}
