@@ -858,7 +858,7 @@ $unshare_mmdebstrap_extra_args = [
 
 		die "Bad chroot mode \'" . $conf->get('CHROOT_MODE') . "\'"
 		    if !isin($conf->get('CHROOT_MODE'),
-			     qw(schroot sudo autopkgtest unshare));
+			     qw(schroot sudo autopkgtest unshare plain));
 		if (!defined($conf->_get($entry->{'NAME'}))) {
                     my $config_path = '~/.config/sbuild/config.pl';
                     if (length($ENV{'XDG_CONFIG_HOME'})) {
