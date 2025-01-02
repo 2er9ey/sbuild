@@ -51,6 +51,7 @@ use Sbuild::Base;
 use Sbuild::ChrootInfoSchroot;
 use Sbuild::ChrootInfoUnshare;
 use Sbuild::ChrootInfoSudo;
+use Sbuild::ChrootInfoPlain;
 use Sbuild::ChrootInfoAutopkgtest;
 use Sbuild::ChrootRoot;
 use Sbuild::Sysconfig qw($version $release_date);
