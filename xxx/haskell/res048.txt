@@ -1,0 +1,111 @@
+>>> AMD64
+git-annex -> 10.20241202-1
+New stage for adaptation
+haskell-copilot-language -> 4.0-2
+New stage for adaptation
+haskell-debian -> 4.0.5-2
+New stage for adaptation
+haskell-diagrams-cairo -> 1.4.2.1-2
+New stage for adaptation
+haskell-gi-cairo-connector -> 0.1.1-3
+New stage for adaptation
+haskell-gtk -> 0.15.9-1
+haskell-gtk3 -> 0.15.9-1
+New stage for adaptation
+haskell-hakyll -> 4.16.2.2-1
+New stage for adaptation
+haskell-hopenpgp -> 2.10.0-1
+New stage for adaptation
+haskell-pandoc-lua-engine -> 0.2.1.2-1
+New stage for adaptation
+haskell-pandoc-server -> 0.1.0.5-1
+New stage for adaptation
+haskell-yi-keymap-emacs -> 0.19.0-4
+New stage for adaptation
+xmobar -> 0.48.1-1
+New stage for adaptation
+xmonad -> 0.17.2-2
+New stage for adaptation
+>>> ALL
+haskell-copilot-language -> 4.0-2
+haskell-debian -> 4.0.5-2
+haskell-diagrams-cairo -> 1.4.2.1-2
+haskell-gi-cairo-connector -> 0.1.1-3
+haskell-gtk -> 0.15.9-1
+haskell-gtk3 -> 0.15.9-1
+haskell-hakyll -> 4.16.2.2-1
+haskell-hopenpgp -> 2.10.0-1
+haskell-pandoc-lua-engine -> 0.2.1.2-1
+haskell-pandoc-server -> 0.1.0.5-1
+haskell-yi-keymap-emacs -> 0.19.0-4
+xmonad -> 0.17.2-2
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:17:38 haskell-diagrams-cairo_1.4.2.1-2 (all, sid, previous: 1.4.2.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:17:38 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:17:38 haskell-yi-keymap-emacs_0.19.0-4 (all, sid, previous: 0.19.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-pandoc-server_0.1.0.5-1 (all, sid, previous: 0.1.0.5-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-copilot-language_4.0-2 (all, sid, previous: 4.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-debian_4.0.5-2 (all, sid, previous: 4.0.5-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-gi-cairo-connector_0.1.1-3 (all, sid, previous: 0.1.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-gtk3_0.15.9-1 (all, sid, previous: 0.15.9-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:17:38 haskell-gtk_0.15.9-1 (all, sid, previous: 0.15.9-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-pandoc-lua-engine_0.2.1.2-1 (all, sid, previous: 0.2.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-hopenpgp_2.10.0-1 (all, sid, previous: 2.10.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-hakyll_4.16.2.2-1 (all, sid, previous: 4.16.2.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 xmonad_0.17.2-2 (all, sid, previous: 0.17.2-2, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.30350-t3bII
+merge-v3 2024 дек 31 12:17:38 haskell-gtk3_0.15.9-1 (amd64, sid, previous: 0.15.9-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-hakyll_4.16.2.2-1;b1 (amd64, sid, previous: 4.16.2.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 xmobar_0.48.1-1 (amd64, sid, previous: 0.48.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-copilot-language_4.0-2;b2 (amd64, sid, previous: 4.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-hopenpgp_2.10.0-1;b2 (amd64, sid, previous: 2.10.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-pandoc-lua-engine_0.2.1.2-1;b1 (amd64, sid, previous: 0.2.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-gi-cairo-connector_0.1.1-3;b1 (amd64, sid, previous: 0.1.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-pandoc-server_0.1.0.5-1;b1 (amd64, sid, previous: 0.1.0.5-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-yi-keymap-emacs_0.19.0-4 (amd64, sid, previous: 0.19.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-diagrams-cairo_1.4.2.1-2;b2 (amd64, sid, previous: 1.4.2.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:17:38 xmonad_0.17.2-2;b1 (amd64, sid, previous: 0.17.2-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 haskell-debian_4.0.5-2;b2 (amd64, sid, previous: 4.0.5-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:17:38 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:17:38 haskell-gtk_0.15.9-1 (amd64, sid, previous: 0.15.9-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:17:38 git-annex_10.20241202-1 (amd64, sid, previous: 10.20241202-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.30351-T59m1
+dose-builddebcheck changed state of haskell-gtk-traymanager_1.0.1-7 (all) to Needs-Build
+dose-builddebcheck changed state of xmonad-wallpaper_0.0.1.5-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-copilot-libraries_4.0-2 (all) to Needs-Build
+dose-builddebcheck changed state of xmonad-contrib_0.18.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-gtk-sni-tray_0.1.8.1-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-frontend-pango_0.19.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of xmonad-wallpaper_0.0.1.5-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-frontend-pango_0.19.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hopenpgp-tools_0.23.10-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of xmonad-contrib_0.18.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-copilot-libraries_4.0-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-gtk-traymanager_1.0.1-7 (amd64) to Needs-Build
+dose-builddebcheck changed state of cabal-debian_5.2.4-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of yi_0.19.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-gtk-sni-tray_0.1.8.1-3 (amd64) to Needs-Build
+AMD64
+utils/cabal-debian_5.2.4-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-copilot-libraries_4.0-2 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-gtk-sni-tray_0.1.8.1-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-gtk-traymanager_1.0.1-7 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-hopenpgp-tools_0.23.10-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-frontend-pango_0.19.2-1 [extra:uncompiled:calprio{18}:days{0}]
+x11/xmonad-contrib_0.18.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/xmonad-wallpaper_0.0.1.5-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/yi_0.19.3-1 [optional:uncompiled:calprio{18}:days{0}]
+Total 9 package(s)
+ALL
+misc/haskell-copilot-libraries_4.0-2 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-gtk-sni-tray_0.1.8.1-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-gtk-traymanager_1.0.1-7 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-frontend-pango_0.19.2-1 [extra:uncompiled:calprio{18}:days{0}]
+x11/xmonad-contrib_0.18.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/xmonad-wallpaper_0.0.1.5-4 [optional:uncompiled:calprio{18}:days{0}]
+Total 6 package(s)

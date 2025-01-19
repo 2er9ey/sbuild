@@ -1,0 +1,283 @@
+>>> AMD64
+elm-compiler -> 0.19.1-4
+New stage for adaptation
+haskell-active -> 0.2.1-1
+New stage for adaptation
+haskell-aeson-qq -> 0.8.4-3
+New stage for adaptation
+haskell-attoparsec-aeson -> 2.1.0.0-3
+New stage for adaptation
+haskell-binary-instances -> 1.0.4-2
+New stage for adaptation
+haskell-cborg -> 0.2.10.0-1
+New stage for adaptation
+haskell-criterion-measurement -> 0.2.2.0-1
+New stage for adaptation
+haskell-deriving-aeson -> 0.2.9-2
+New stage for adaptation
+haskell-diagrams-core -> 1.5.1.1-1
+New stage for adaptation
+haskell-doctemplates -> 0.11.0.1-1
+New stage for adaptation
+haskell-elm-bridge -> 0.8.4-1
+New stage for adaptation
+haskell-enummapset -> 0.7.3.0-1
+New stage for adaptation
+haskell-futhark-manifest -> 1.4.0.0-2
+New stage for adaptation
+haskell-git-lfs -> 1.2.2-1
+New stage for adaptation
+haskell-hackage-security -> 0.6.2.4-1
+New stage for adaptation
+haskell-hedgehog-classes -> 0.2.5.4-2
+New stage for adaptation
+haskell-heist -> 1.1.1.2-1
+New stage for adaptation
+haskell-hslua-aeson -> 2.3.1.1-1
+New stage for adaptation
+haskell-hslua-list -> 1.1.4-1
+New stage for adaptation
+haskell-hslua-objectorientation -> 2.3.1-1
+New stage for adaptation
+haskell-hsyaml-aeson -> 0.2.0.1-3
+New stage for adaptation
+haskell-http-client-restricted -> 0.1.0-1
+New stage for adaptation
+haskell-ipynb -> 0.2-3
+New stage for adaptation
+haskell-jmacro -> 0.6.18-2
+New stage for adaptation
+haskell-jwt -> 0.11.0-3
+New stage for adaptation
+haskell-lens-aeson -> 1.2.3-2
+New stage for adaptation
+haskell-microlens-aeson -> 2.5.2-1
+New stage for adaptation
+haskell-microstache -> 1.0.2.3-2
+New stage for adaptation
+haskell-pandoc-types -> 1.23.1-2
+New stage for adaptation
+haskell-path -> 0.9.5-1
+haskell-postgresql-simple -> 0.7.0.0-1
+New stage for adaptation
+haskell-quickcheck-classes -> 0.6.5.0-3
+haskell-sdl2 -> 2.5.5.0-2
+New stage for adaptation
+haskell-servant -> 0.20.2-1
+New stage for adaptation
+haskell-shakespeare -> 2.1.1-1
+New stage for adaptation
+haskell-twitter-types -> 0.11.0-3
+New stage for adaptation
+haskell-uri-bytestring-aeson -> 0.1.0.8-4
+New stage for adaptation
+>>> ALL
+haskell-active -> 0.2.1-1
+haskell-aeson-qq -> 0.8.4-3
+haskell-attoparsec-aeson -> 2.1.0.0-3
+haskell-binary-instances -> 1.0.4-2
+haskell-cborg -> 0.2.10.0-1
+haskell-criterion-measurement -> 0.2.2.0-1
+haskell-deriving-aeson -> 0.2.9-2
+haskell-diagrams-core -> 1.5.1.1-1
+haskell-doctemplates -> 0.11.0.1-1
+haskell-elm-bridge -> 0.8.4-1
+haskell-enummapset -> 0.7.3.0-1
+haskell-futhark-manifest -> 1.4.0.0-2
+haskell-git-lfs -> 1.2.2-1
+haskell-hackage-security -> 0.6.2.4-1
+haskell-hedgehog-classes -> 0.2.5.4-2
+haskell-heist -> 1.1.1.2-1
+haskell-hslua-aeson -> 2.3.1.1-1
+haskell-hslua-list -> 1.1.4-1
+haskell-hslua-objectorientation -> 2.3.1-1
+haskell-hsyaml-aeson -> 0.2.0.1-3
+haskell-http-client-restricted -> 0.1.0-1
+haskell-ipynb -> 0.2-3
+haskell-jmacro -> 0.6.18-2
+haskell-jwt -> 0.11.0-3
+haskell-lens-aeson -> 1.2.3-2
+haskell-microlens-aeson -> 2.5.2-1
+haskell-microstache -> 1.0.2.3-2
+haskell-pandoc-types -> 1.23.1-2
+haskell-path -> 0.9.5-1
+haskell-postgresql-simple -> 0.7.0.0-1
+haskell-quickcheck-classes -> 0.6.5.0-3
+haskell-sdl2 -> 2.5.5.0-2
+haskell-servant -> 0.20.2-1
+haskell-shakespeare -> 2.1.1-1
+haskell-twitter-types -> 0.11.0-3
+haskell-uri-bytestring-aeson -> 0.1.0.8-4
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:01:12 haskell-jmacro_0.6.18-2 (all, sid, previous: 0.6.18-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-servant_0.20.2-1 (all, sid, previous: 0.20.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-doctemplates_0.11.0.1-1 (all, sid, previous: 0.11.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-aeson-qq_0.8.4-3 (all, sid, previous: 0.8.4-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-cborg_0.2.10.0-1 (all, sid, previous: 0.2.10.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-diagrams-core_1.5.1.1-1 (all, sid, previous: 1.5.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-heist_1.1.1.2-1 (all, sid, previous: 1.1.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-ipynb_0.2-3 (all, sid, previous: 0.2-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-path_0.9.5-1 (all, sid, previous: 0.9.5-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-futhark-manifest_1.4.0.0-2 (all, sid, previous: 1.4.0.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-jwt_0.11.0-3 (all, sid, previous: 0.11.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:01:12 haskell-lens-aeson_1.2.3-2 (all, sid, previous: 1.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-microlens-aeson_2.5.2-1 (all, sid, previous: 2.5.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hackage-security_0.6.2.4-1 (all, sid, previous: 0.6.2.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-list_1.1.4-1 (all, sid, previous: 1.1.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-postgresql-simple_0.7.0.0-1 (all, sid, previous: 0.7.0.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-criterion-measurement_0.2.2.0-1 (all, sid, previous: 0.2.2.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-enummapset_0.7.3.0-1 (all, sid, previous: 0.7.3.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-binary-instances_1.0.4-2 (all, sid, previous: 1.0.4-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:01:12 haskell-git-lfs_1.2.2-1 (all, sid, previous: 1.2.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-active_0.2.1-1 (all, sid, previous: 0.2.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-twitter-types_0.11.0-3 (all, sid, previous: 0.11.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-objectorientation_2.3.1-1 (all, sid, previous: 2.3.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-deriving-aeson_0.2.9-2 (all, sid, previous: 0.2.9-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hsyaml-aeson_0.2.0.1-3 (all, sid, previous: 0.2.0.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-quickcheck-classes_0.6.5.0-3 (all, sid, previous: 0.6.5.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-attoparsec-aeson_2.1.0.0-3 (all, sid, previous: 2.1.0.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-pandoc-types_1.23.1-2 (all, sid, previous: 1.23.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hedgehog-classes_0.2.5.4-2 (all, sid, previous: 0.2.5.4-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-http-client-restricted_0.1.0-1 (all, sid, previous: 0.1.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-sdl2_2.5.5.0-2 (all, sid, previous: 2.5.5.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:01:12 haskell-shakespeare_2.1.1-1 (all, sid, previous: 2.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-aeson_2.3.1.1-1 (all, sid, previous: 2.3.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-microstache_1.0.2.3-2 (all, sid, previous: 1.0.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-uri-bytestring-aeson_0.1.0.8-4 (all, sid, previous: 0.1.0.8-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-elm-bridge_0.8.4-1 (all, sid, previous: 0.8.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.25354-Ob2hv
+merge-v3 2024 дек 31 12:01:12 haskell-active_0.2.1-1;b1 (amd64, sid, previous: 0.2.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-sdl2_2.5.5.0-2;b1 (amd64, sid, previous: 2.5.5.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-doctemplates_0.11.0.1-1 (amd64, sid, previous: 0.11.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-diagrams-core_1.5.1.1-1;b1 (amd64, sid, previous: 1.5.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-aeson-qq_0.8.4-3 (amd64, sid, previous: 0.8.4-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-git-lfs_1.2.2-1;b1 (amd64, sid, previous: 1.2.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-futhark-manifest_1.4.0.0-2 (amd64, sid, previous: 1.4.0.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-aeson_2.3.1.1-1 (amd64, sid, previous: 2.3.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-criterion-measurement_0.2.2.0-1 (amd64, sid, previous: 0.2.2.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-heist_1.1.1.2-1 (amd64, sid, previous: 1.1.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-uri-bytestring-aeson_0.1.0.8-4 (amd64, sid, previous: 0.1.0.8-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-jwt_0.11.0-3;b1 (amd64, sid, previous: 0.11.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-servant_0.20.2-1;b1 (amd64, sid, previous: 0.20.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-binary-instances_1.0.4-2 (amd64, sid, previous: 1.0.4-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:01:12 haskell-postgresql-simple_0.7.0.0-1 (amd64, sid, previous: 0.7.0.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-microlens-aeson_2.5.2-1 (amd64, sid, previous: 2.5.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-list_1.1.4-1 (amd64, sid, previous: 1.1.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 elm-compiler_0.19.1-4 (amd64, sid, previous: 0.19.1-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-shakespeare_2.1.1-1 (amd64, sid, previous: 2.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-deriving-aeson_0.2.9-2 (amd64, sid, previous: 0.2.9-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-pandoc-types_1.23.1-2 (amd64, sid, previous: 1.23.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hslua-objectorientation_2.3.1-1 (amd64, sid, previous: 2.3.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hedgehog-classes_0.2.5.4-2;b1 (amd64, sid, previous: 0.2.5.4-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hackage-security_0.6.2.4-1 (amd64, sid, previous: 0.6.2.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:01:12 haskell-lens-aeson_1.2.3-2;b1 (amd64, sid, previous: 1.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-http-client-restricted_0.1.0-1;b1 (amd64, sid, previous: 0.1.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-twitter-types_0.11.0-3 (amd64, sid, previous: 0.11.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-jmacro_0.6.18-2 (amd64, sid, previous: 0.6.18-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-microstache_1.0.2.3-2 (amd64, sid, previous: 1.0.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-path_0.9.5-1 (amd64, sid, previous: 0.9.5-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-cborg_0.2.10.0-1 (amd64, sid, previous: 0.2.10.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-enummapset_0.7.3.0-1 (amd64, sid, previous: 0.7.3.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-elm-bridge_0.8.4-1 (amd64, sid, previous: 0.8.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-attoparsec-aeson_2.1.0.0-3 (amd64, sid, previous: 2.1.0.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-ipynb_0.2-3 (amd64, sid, previous: 0.2-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-hsyaml-aeson_0.2.0.1-3 (amd64, sid, previous: 0.2.0.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:01:12 haskell-quickcheck-classes_0.6.5.0-3 (amd64, sid, previous: 0.6.5.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.25355-zZ7vS
+dose-builddebcheck changed state of haskell-sdl2-image_2.1.0.0-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-rio-prettyprint_0.1.8.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-bitvec_1.1.5.0-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-path-io_1.8.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-parameterized-utils_2.1.9.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-happstack-jmacro_7.0.12.6-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-heterocephalus_1.0.5.7-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-commonmark-pandoc_0.2.2.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-extra_0.5.1.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-sdl2-ttf_2.1.3-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-sdl2-mixer_1.2.0.0-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-texmath_0.12.8.7-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-http-streams_0.8.9.9-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-servant-client-core_0.20.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-packaging_2.3.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-twitter-types-lens_0.11.0-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-pretty_0.8.10-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-serialise_0.2.6.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-arithmoi_0.13.0.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-weigh_0.0.17-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-diagrams-lib_1.4.6.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-rio-prettyprint_0.1.8.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-parameterized-utils_2.1.9.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-bitvec_1.1.5.0-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-arithmoi_0.13.0.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-commonmark-pandoc_0.2.2.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-sdl2-image_2.1.0.0-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-path-io_1.8.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-diagrams-lib_1.4.6.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-texmath_0.12.8.7-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-sdl2-ttf_2.1.3-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-extra_0.5.1.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-servant-client-core_0.20.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-twitter-types-lens_0.11.0-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-http-streams_0.8.9.9-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-happstack-jmacro_7.0.12.6-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-sdl2-mixer_1.2.0.0-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-packaging_2.3.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-serialise_0.2.6.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-weigh_0.0.17-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-heterocephalus_1.0.5.7-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-cabal-install_3.10.3.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-pretty_0.8.10-1 (amd64) to Needs-Build
+AMD64
+misc/haskell-aeson-extra_0.5.1.3-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-aeson-pretty_0.8.10-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-arithmoi_0.13.0.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-bitvec_1.1.5.0-4 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-cabal-install_3.10.3.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-commonmark-pandoc_0.2.2.2-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-diagrams-lib_1.4.6.2-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-happstack-jmacro_7.0.12.6-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-heterocephalus_1.0.5.7-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-packaging_2.3.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-http-streams_0.8.9.9-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-parameterized-utils_2.1.9.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-path-io_1.8.2-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-rio-prettyprint_0.1.8.0-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-image_2.1.0.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-mixer_1.2.0.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-ttf_2.1.3-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-serialise_0.2.6.1-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-servant-client-core_0.20.2-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-texmath_0.12.8.7-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-twitter-types-lens_0.11.0-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-weigh_0.0.17-1 [extra:uncompiled:calprio{18}:days{0}]
+Total 22 package(s)
+ALL
+misc/haskell-aeson-extra_0.5.1.3-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-aeson-pretty_0.8.10-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-arithmoi_0.13.0.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-bitvec_1.1.5.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-commonmark-pandoc_0.2.2.2-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-diagrams-lib_1.4.6.2-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-happstack-jmacro_7.0.12.6-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-heterocephalus_1.0.5.7-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-packaging_2.3.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-http-streams_0.8.9.9-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-parameterized-utils_2.1.9.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-path-io_1.8.2-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-rio-prettyprint_0.1.8.0-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-image_2.1.0.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-mixer_1.2.0.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-sdl2-ttf_2.1.3-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-serialise_0.2.6.1-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-servant-client-core_0.20.2-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-texmath_0.12.8.7-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-twitter-types-lens_0.11.0-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-weigh_0.0.17-1 [extra:uncompiled:calprio{18}:days{0}]
+Total 21 package(s)

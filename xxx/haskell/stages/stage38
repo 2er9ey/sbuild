@@ -1,0 +1,10 @@
+haskell-esqueleto
+haskell-gi-gmodule
+haskell-gi-gobject
+haskell-hledger-ui
+haskell-hspec-wai
+haskell-http-conduit
+haskell-status-notifier-item
+haskell-wai-app-static
+haskell-yesod-bin
+haskell-yesod-core

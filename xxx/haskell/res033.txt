@@ -1,0 +1,81 @@
+>>> AMD64
+haskell-conduit -> 1.3.6-1
+New stage for adaptation
+haskell-focuslist -> 0.1.1.0-3
+New stage for adaptation
+haskell-mono-traversable-instances -> 0.1.1.0-4
+New stage for adaptation
+haskell-mutable-containers -> 0.3.4.1-3
+New stage for adaptation
+haskell-statistics -> 0.16.2.1-2
+New stage for adaptation
+haskell-store -> 0.7.18-2
+>>> ALL
+haskell-conduit -> 1.3.6-1
+haskell-focuslist -> 0.1.1.0-3
+haskell-mono-traversable-instances -> 0.1.1.0-4
+haskell-mutable-containers -> 0.3.4.1-3
+haskell-statistics -> 0.16.2.1-2
+haskell-store -> 0.7.18-2
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:04:33 haskell-mutable-containers_0.3.4.1-3 (all, sid, previous: 0.3.4.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:04:33 haskell-statistics_0.16.2.1-2 (all, sid, previous: 0.16.2.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-mono-traversable-instances_0.1.1.0-4 (all, sid, previous: 0.1.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-focuslist_0.1.1.0-3 (all, sid, previous: 0.1.1.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-conduit_1.3.6-1 (all, sid, previous: 1.3.6-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-store_0.7.18-2 (all, sid, previous: 0.7.18-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:04:33 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.26551-ZcCJN
+merge-v3 2024 дек 31 12:04:33 haskell-mono-traversable-instances_0.1.1.0-4;b1 (amd64, sid, previous: 0.1.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-statistics_0.16.2.1-2;b1 (amd64, sid, previous: 0.16.2.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-conduit_1.3.6-1;b1 (amd64, sid, previous: 1.3.6-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-mutable-containers_0.3.4.1-3;b1 (amd64, sid, previous: 0.3.4.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 haskell-focuslist_0.1.1.0-3;b2 (amd64, sid, previous: 0.1.1.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:04:33 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:04:33 haskell-store_0.7.18-2;b1 (amd64, sid, previous: 0.7.18-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:04:33 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.26552-2XzC5
+dose-builddebcheck changed state of haskell-cereal-conduit_0.8.0-7 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-libyaml_0.1.4-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-conduit-extra_1.3.6-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-sandi_0.5-6 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-classy-prelude_1.5.0.3-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-dice-entropy-conduit_1.0.0.3-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-wai-conduit_3.0.0.4-6 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-binary-conduit_1.3.1-5 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-criterion_1.6.3.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-conduit-extra_1.3.6-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-criterion_1.6.3.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-dice-entropy-conduit_1.0.0.3-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-classy-prelude_1.5.0.3-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-binary-conduit_1.3.1-5 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-sandi_0.5-6 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-cereal-conduit_0.8.0-7 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-wai-conduit_3.0.0.4-6 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-libyaml_0.1.4-1 (amd64) to Needs-Build
+AMD64
+misc/haskell-binary-conduit_1.3.1-5 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-cereal-conduit_0.8.0-7 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-classy-prelude_1.5.0.3-2 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-conduit-extra_1.3.6-3 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-criterion_1.6.3.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-dice-entropy-conduit_1.0.0.3-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-libyaml_0.1.4-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-sandi_0.5-6 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-wai-conduit_3.0.0.4-6 [optional:uncompiled:calprio{18}:days{0}]
+Total 9 package(s)
+ALL
+misc/haskell-binary-conduit_1.3.1-5 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-cereal-conduit_0.8.0-7 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-classy-prelude_1.5.0.3-2 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-conduit-extra_1.3.6-3 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-criterion_1.6.3.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-dice-entropy-conduit_1.0.0.3-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-libyaml_0.1.4-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-sandi_0.5-6 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-wai-conduit_3.0.0.4-6 [optional:uncompiled:calprio{18}:days{0}]
+Total 9 package(s)

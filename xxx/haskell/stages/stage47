@@ -1,0 +1,15 @@
+glirc
+haskell-alsa-mixer
+haskell-bz2
+haskell-chart-cairo
+haskell-copilot-theorem
+haskell-gi-cairo-render
+haskell-gio
+haskell-pango
+haskell-yesod-static
+haskell-yi-frontend-vty
+haskell-yi-keymap-vim
+haskell-yi-misc-modes
+haskell-yi-mode-haskell
+haskell-yi-mode-javascript
+hlint

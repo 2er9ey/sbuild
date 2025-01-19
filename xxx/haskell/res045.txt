@@ -1,0 +1,123 @@
+>>> AMD64
+agda -> 2.6.4.3-1
+New stage for adaptation
+bnfc -> 2.9.5-1
+New stage for adaptation
+gtk2hs-buildtools -> 0.13.11.0-1
+New stage for adaptation
+haskell-bytestring-lexing -> 0.5.0.14-1
+New stage for adaptation
+haskell-config-value -> 0.8.3-4
+New stage for adaptation
+haskell-ghc-lib-parser -> 9.6.6.20240701-1
+New stage for adaptation
+haskell-language-c -> 0.9.4-1
+haskell-language-c-quote -> 0.13.0.2-1
+New stage for adaptation
+haskell-language-javascript -> 0.7.1.0-4
+New stage for adaptation
+haskell-language-python -> 0.5.8-4
+New stage for adaptation
+haskell-toml-parser -> 1.3.2.0-4
+New stage for adaptation
+haskell-yi-language -> 0.19.2-1
+New stage for adaptation
+>>> ALL
+agda -> 2.6.4.3-1
+gtk2hs-buildtools -> 0.13.11.0-1
+haskell-bytestring-lexing -> 0.5.0.14-1
+haskell-config-value -> 0.8.3-4
+haskell-ghc-lib-parser -> 9.6.6.20240701-1
+haskell-language-c -> 0.9.4-1
+haskell-language-c-quote -> 0.13.0.2-1
+haskell-language-javascript -> 0.7.1.0-4
+haskell-language-python -> 0.5.8-4
+haskell-toml-parser -> 1.3.2.0-4
+haskell-yi-language -> 0.19.2-1
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:15:32 haskell-yi-language_0.19.2-1 (all, sid, previous: 0.19.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-language-c_0.9.4-1 (all, sid, previous: 0.9.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-config-value_0.8.3-4 (all, sid, previous: 0.8.3-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:15:32 haskell-bytestring-lexing_0.5.0.14-1 (all, sid, previous: 0.5.0.14-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:15:32 haskell-language-javascript_0.7.1.0-4 (all, sid, previous: 0.7.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-language-c-quote_0.13.0.2-1 (all, sid, previous: 0.13.0.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:15:32 haskell-language-python_0.5.8-4 (all, sid, previous: 0.5.8-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 agda_2.6.4.3-1 (all, sid, previous: 2.6.4.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gtk2hs-buildtools_0.13.11.0-1 (all, sid, previous: 0.13.11.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-ghc-lib-parser_9.6.6.20240701-1 (all, sid, previous: 9.6.6.20240701-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-toml-parser_1.3.2.0-4 (all, sid, previous: 1.3.2.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.29443-1XXXK
+merge-v3 2024 дек 31 12:15:32 haskell-language-javascript_0.7.1.0-4 (amd64, sid, previous: 0.7.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-config-value_0.8.3-4 (amd64, sid, previous: 0.8.3-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-ghc-lib-parser_9.6.6.20240701-1 (amd64, sid, previous: 9.6.6.20240701-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-language-c-quote_0.13.0.2-1 (amd64, sid, previous: 0.13.0.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gtk2hs-buildtools_0.13.11.0-1 (amd64, sid, previous: 0.13.11.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:15:32 haskell-toml-parser_1.3.2.0-4 (amd64, sid, previous: 1.3.2.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-yi-language_0.19.2-1 (amd64, sid, previous: 0.19.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 bnfc_2.9.5-1 (amd64, sid, previous: 2.9.5-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:15:32 haskell-language-python_0.5.8-4 (amd64, sid, previous: 0.5.8-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 agda_2.6.4.3-1 (amd64, sid, previous: 2.6.4.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:15:32 haskell-language-c_0.9.4-1 (amd64, sid, previous: 0.9.4-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:15:32 haskell-bytestring-lexing_0.5.0.14-1 (amd64, sid, previous: 0.5.0.14-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.29444-TUoCM
+dose-builddebcheck changed state of haskell-config-schema_1.3.0.0-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-glib_0.13.11.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hjsmin_0.2.1-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-futhark_0.25.15-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-ghc-lib-parser-ex_9.6.0.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-typst_0.5.0.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-cairo_0.13.11.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-ormolu_0.7.2.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of c2hs_0.28.8-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-core_0.19.4-1 (all) to Needs-Build
+dose-builddebcheck changed state of agda-stdlib_2.1-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-what4_1.5.1-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hedis_0.15.2-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-core_0.19.4-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of c2hs_0.28.8-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-typst_0.5.0.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-config-schema_1.3.0.0-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-what4_1.5.1-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-futhark_0.25.15-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-glib_0.13.11.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hedis_0.15.2-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-cairo_0.13.11.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hjsmin_0.2.1-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-ormolu_0.7.2.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-ghc-lib-parser-ex_9.6.0.2-1 (amd64) to Needs-Build
+AMD64
+haskell/c2hs_0.28.8-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-cairo_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-config-schema_1.3.0.0-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-futhark_0.25.15-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-ghc-lib-parser-ex_9.6.0.2-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-glib_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-hedis_0.15.2-2 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-hjsmin_0.2.1-2 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-ormolu_0.7.2.0-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-typst_0.5.0.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-what4_1.5.1-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-core_0.19.4-1 [extra:uncompiled:calprio{18}:days{0}]
+Total 12 package(s)
+ALL
+libs/agda-stdlib_2.1-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/c2hs_0.28.8-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-cairo_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-config-schema_1.3.0.0-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-futhark_0.25.15-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-ghc-lib-parser-ex_9.6.0.2-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-glib_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-hedis_0.15.2-2 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-hjsmin_0.2.1-2 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-ormolu_0.7.2.0-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-typst_0.5.0.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-what4_1.5.1-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-core_0.19.4-1 [extra:uncompiled:calprio{18}:days{0}]
+Total 13 package(s)

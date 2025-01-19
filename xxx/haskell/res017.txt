@@ -1,0 +1,29 @@
+>>> AMD64
+>>> ALL
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 11:51:46 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 11:51:46 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:51:46 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.21161-PY_vZ
+merge-v3 2024 дек 31 11:51:46 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 11:51:46 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:51:46 happy_1.20.1.1-1 (amd64, sid, previous: 1.20.1.1-1, BD-Uninstallable/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:51:46 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.21162-b6nUh
+dose-builddebcheck changed state of haskell-haskell-src_1.0.4.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-src-exts_1.23.1-5 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-pretty-show_1.10-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-pretty-show_1.10-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-src-exts_1.23.1-5 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-haskell-src_1.0.4.1-1 (amd64) to Needs-Build
+AMD64
+haskell/haskell-haskell-src_1.0.4.1-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-pretty-show_1.10-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-src-exts_1.23.1-5 [source:uncompiled:calprio{18}:days{0}]
+Total 3 package(s)
+ALL
+haskell/haskell-haskell-src_1.0.4.1-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-pretty-show_1.10-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-src-exts_1.23.1-5 [source:uncompiled:calprio{18}:days{0}]
+Total 3 package(s)

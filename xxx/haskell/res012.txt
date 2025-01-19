@@ -1,0 +1,163 @@
+>>> AMD64
+haskell-asn1-parse -> 0.9.5-5
+New stage for adaptation
+haskell-attoparsec-iso8601 -> 1.1.1.0-1
+New stage for adaptation
+haskell-copilot-interpreter -> 4.0-2
+New stage for adaptation
+haskell-crypto-pubkey-types -> 0.4.3-13
+New stage for adaptation
+haskell-css-text -> 0.1.3.0-7
+New stage for adaptation
+haskell-email-validate -> 2.3.2.21-1
+New stage for adaptation
+haskell-fsnotify -> 0.4.1.0-2
+New stage for adaptation
+haskell-generic-data -> 1.1.0.1-1
+New stage for adaptation
+haskell-githash -> 0.1.7.0-2
+New stage for adaptation
+haskell-hookup -> 0.8-1
+New stage for adaptation
+haskell-hspec-attoparsec -> 0.1.0.2-10
+New stage for adaptation
+haskell-http-date -> 0.0.11-3
+New stage for adaptation
+haskell-io-streams -> 1.5.2.2-3
+New stage for adaptation
+haskell-irc -> 0.6.1.1-1
+New stage for adaptation
+haskell-irc-core -> 2.12-2
+New stage for adaptation
+haskell-lambdabot-irc-plugins -> 5.3.1.2-1
+New stage for adaptation
+haskell-lambdabot-misc-plugins -> 5.3.1.2-1
+New stage for adaptation
+haskell-lambdabot-reference-plugins -> 5.3.1.2-1
+New stage for adaptation
+haskell-lambdabot-social-plugins -> 5.3.1.2-1
+New stage for adaptation
+haskell-libmpd -> 0.10.0.1-1
+New stage for adaptation
+haskell-nonce -> 1.0.7-7
+New stage for adaptation
+haskell-openpgp-asciiarmor -> 0.1.2-5
+New stage for adaptation
+haskell-pipes-attoparsec -> 0.6.0-2
+New stage for adaptation
+haskell-say -> 0.1.0.1-6
+New stage for adaptation
+haskell-shelly -> 1.12.1-2
+New stage for adaptation
+haskell-tasty-golden -> 2.3.5-3
+New stage for adaptation
+haskell-time-manager -> 0.0.1-2
+New stage for adaptation
+>>> ALL
+haskell-asn1-parse -> 0.9.5-5
+haskell-copilot-interpreter -> 4.0-2
+haskell-crypto-pubkey-types -> 0.4.3-13
+haskell-fsnotify -> 0.4.1.0-2
+haskell-generic-data -> 1.1.0.1-1
+haskell-githash -> 0.1.7.0-2
+haskell-lambdabot-irc-plugins -> 5.3.1.2-1
+haskell-lambdabot-misc-plugins -> 5.3.1.2-1
+haskell-lambdabot-reference-plugins -> 5.3.1.2-1
+haskell-lambdabot-social-plugins -> 5.3.1.2-1
+haskell-nonce -> 1.0.7-7
+haskell-say -> 0.1.0.1-6
+haskell-shelly -> 1.12.1-2
+haskell-tasty-golden -> 2.3.5-3
+haskell-time-manager -> 0.0.1-2
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 11:41:08 haskell-generic-data_1.1.0.1-1 (all, sid, previous: 1.1.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-asn1-parse_0.9.5-5 (all, sid, previous: 0.9.5-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-reference-plugins_5.3.1.2-1 (all, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-copilot-interpreter_4.0-2 (all, sid, previous: 4.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-shelly_1.12.1-2 (all, sid, previous: 1.12.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-social-plugins_5.3.1.2-1 (all, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-irc-plugins_5.3.1.2-1 (all, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-fsnotify_0.4.1.0-2 (all, sid, previous: 0.4.1.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-misc-plugins_5.3.1.2-1 (all, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 11:41:08 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 11:41:08 haskell-say_0.1.0.1-6 (all, sid, previous: 0.1.0.1-6, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:41:08 haskell-nonce_1.0.7-7 (all, sid, previous: 1.0.7-7, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-githash_0.1.7.0-2 (all, sid, previous: 0.1.7.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-tasty-golden_2.3.5-3 (all, sid, previous: 2.3.5-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-crypto-pubkey-types_0.4.3-13 (all, sid, previous: 0.4.3-13, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-time-manager_0.0.1-2 (all, sid, previous: 0.0.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.20456-zPAkA
+merge-v3 2024 дек 31 11:41:08 haskell-crypto-pubkey-types_0.4.3-13 (amd64, sid, previous: 0.4.3-13, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-nonce_1.0.7-7 (amd64, sid, previous: 1.0.7-7, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-hookup_0.8-1 (amd64, sid, previous: 0.8-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-irc_0.6.1.1-1 (amd64, sid, previous: 0.6.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 11:41:08 haskell-time-manager_0.0.1-2 (amd64, sid, previous: 0.0.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 11:41:08 haskell-css-text_0.1.3.0-7 (amd64, sid, previous: 0.1.3.0-7, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-social-plugins_5.3.1.2-1;b1 (amd64, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-irc-plugins_5.3.1.2-1;b1 (amd64, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-attoparsec-iso8601_1.1.1.0-1 (amd64, sid, previous: 1.1.1.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-copilot-interpreter_4.0-2 (amd64, sid, previous: 4.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-email-validate_2.3.2.21-1 (amd64, sid, previous: 2.3.2.21-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-generic-data_1.1.0.1-1 (amd64, sid, previous: 1.1.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-pipes-attoparsec_0.6.0-2 (amd64, sid, previous: 0.6.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-say_0.1.0.1-6 (amd64, sid, previous: 0.1.0.1-6, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-libmpd_0.10.0.1-1;b1 (amd64, sid, previous: 0.10.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-reference-plugins_5.3.1.2-1;b1 (amd64, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-io-streams_1.5.2.2-3 (amd64, sid, previous: 1.5.2.2-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-lambdabot-misc-plugins_5.3.1.2-1;b1 (amd64, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-irc-core_2.12-2 (amd64, sid, previous: 2.12-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-asn1-parse_0.9.5-5 (amd64, sid, previous: 0.9.5-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-tasty-golden_2.3.5-3 (amd64, sid, previous: 2.3.5-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-shelly_1.12.1-2;b1 (amd64, sid, previous: 1.12.1-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-http-date_0.0.11-3 (amd64, sid, previous: 0.0.11-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-fsnotify_0.4.1.0-2;b1 (amd64, sid, previous: 0.4.1.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-githash_0.1.7.0-2 (amd64, sid, previous: 0.1.7.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-hspec-attoparsec_0.1.0.2-10 (amd64, sid, previous: 0.1.0.2-10, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:41:08 haskell-openpgp-asciiarmor_0.1.2-5 (amd64, sid, previous: 0.1.2-5, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.20457-JyYaC
+dose-builddebcheck changed state of haskell-crypton-x509_1.7.7-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-network-run_0.2.8-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-safecopy_0.10.4.2-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-doclayout_0.4.0.1-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-rsa_2.4.1-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-optparse-simple_0.1.1.4-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-x509_1.7.7-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-optparse-simple_0.1.1.4-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-rsa_2.4.1-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-io-streams-haproxy_1.0.1.0-6 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-network-run_0.2.8-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-git-mediate_1.0.9-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-safecopy_0.10.4.2-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-doclayout_0.4.0.1-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-openssl-streams_1.2.3.0-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-crypton-x509_1.7.7-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-xss-sanitize_0.3.7.2-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-x509_1.7.7-3 (amd64) to Needs-Build
+AMD64
+misc/haskell-crypton-x509_1.7.7-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-doclayout_0.4.0.1-2 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-git-mediate_1.0.9-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-io-streams-haproxy_1.0.1.0-6 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-network-run_0.2.8-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-openssl-streams_1.2.3.0-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-optparse-simple_0.1.1.4-3 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-rsa_2.4.1-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-safecopy_0.10.4.2-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509_1.7.7-3 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-xss-sanitize_0.3.7.2-2 [source:uncompiled:calprio{18}:days{0}]
+Total 11 package(s)
+ALL
+misc/haskell-crypton-x509_1.7.7-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-doclayout_0.4.0.1-2 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-network-run_0.2.8-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-optparse-simple_0.1.1.4-3 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-rsa_2.4.1-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-safecopy_0.10.4.2-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509_1.7.7-3 [optional:uncompiled:calprio{18}:days{0}]
+Total 7 package(s)

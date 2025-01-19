@@ -1,0 +1,63 @@
+>>> AMD64
+>>> ALL
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:14:50 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:14:50 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:14:50 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.29183-g_Jt5
+merge-v3 2024 дек 31 12:14:50 alex_3.4.0.1-1 (amd64, sid, previous: 3.4.0.1-1, BD-Uninstallable/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:14:50 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:14:50 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:14:50 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.29184-6dFbe
+dose-builddebcheck changed state of haskell-language-python_0.5.8-4 (all) to Needs-Build
+dose-builddebcheck changed state of gtk2hs-buildtools_0.13.11.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-language-c_0.9.4-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-language-javascript_0.7.1.0-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-config-value_0.8.3-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-language_0.19.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of agda_2.6.4.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-bytestring-lexing_0.5.0.14-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-language-c-quote_0.13.0.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-toml-parser_1.3.2.0-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-ghc-lib-parser_9.6.6.20240701-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-language-c-quote_0.13.0.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of agda_2.6.4.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-ghc-lib-parser_9.6.6.20240701-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of gtk2hs-buildtools_0.13.11.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-language-python_0.5.8-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-yi-language_0.19.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-language-c_0.9.4-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-config-value_0.8.3-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-toml-parser_1.3.2.0-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of bnfc_2.9.5-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-language-javascript_0.7.1.0-4 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-bytestring-lexing_0.5.0.14-1 (amd64) to Needs-Build
+AMD64
+haskell/agda_2.6.4.3-1 [source:uncompiled:calprio{18}:days{0}]
+devel/bnfc_2.9.5-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/gtk2hs-buildtools_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-bytestring-lexing_0.5.0.14-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-config-value_0.8.3-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-ghc-lib-parser_9.6.6.20240701-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-language-c_0.9.4-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-language-c-quote_0.13.0.2-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-language-javascript_0.7.1.0-4 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-language-python_0.5.8-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-toml-parser_1.3.2.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-language_0.19.2-1 [optional:uncompiled:calprio{18}:days{0}]
+Total 12 package(s)
+ALL
+haskell/agda_2.6.4.3-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/gtk2hs-buildtools_0.13.11.0-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-bytestring-lexing_0.5.0.14-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-config-value_0.8.3-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-ghc-lib-parser_9.6.6.20240701-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-language-c_0.9.4-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-language-c-quote_0.13.0.2-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-language-javascript_0.7.1.0-4 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-language-python_0.5.8-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-toml-parser_1.3.2.0-4 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-yi-language_0.19.2-1 [optional:uncompiled:calprio{18}:days{0}]
+Total 11 package(s)

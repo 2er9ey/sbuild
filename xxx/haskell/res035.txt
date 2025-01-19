@@ -1,0 +1,154 @@
+>>> AMD64
+haskell-classy-prelude-conduit -> 1.5.0-5
+New stage for adaptation
+haskell-crypton-conduit -> 0.2.3-2
+New stage for adaptation
+haskell-cryptonite-conduit -> 0.2.2-8
+New stage for adaptation
+haskell-http-reverse-proxy -> 0.6.1.0-1
+New stage for adaptation
+haskell-monad-logger -> 0.3.40-2
+New stage for adaptation
+haskell-network-conduit-tls -> 1.4.0.1-1
+New stage for adaptation
+haskell-pager -> 0.1.1.0-2
+New stage for adaptation
+haskell-project-template -> 0.2.1.0-4
+New stage for adaptation
+haskell-secret-sharing -> 1.0.1.2-4
+New stage for adaptation
+haskell-shell-conduit -> 5.0.0-3
+New stage for adaptation
+haskell-simple-sendfile -> 0.2.32-3
+New stage for adaptation
+haskell-tar-conduit -> 0.4.1-1
+New stage for adaptation
+haskell-xml-conduit -> 1.9.1.3-2
+New stage for adaptation
+haskell-yaml -> 0.11.11.2-2
+New stage for adaptation
+>>> ALL
+haskell-classy-prelude-conduit -> 1.5.0-5
+haskell-crypton-conduit -> 0.2.3-2
+haskell-cryptonite-conduit -> 0.2.2-8
+haskell-http-reverse-proxy -> 0.6.1.0-1
+haskell-monad-logger -> 0.3.40-2
+haskell-network-conduit-tls -> 1.4.0.1-1
+haskell-pager -> 0.1.1.0-2
+haskell-project-template -> 0.2.1.0-4
+haskell-secret-sharing -> 1.0.1.2-4
+haskell-shell-conduit -> 5.0.0-3
+haskell-simple-sendfile -> 0.2.32-3
+haskell-tar-conduit -> 0.4.1-1
+haskell-xml-conduit -> 1.9.1.3-2
+haskell-yaml -> 0.11.11.2-2
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:05:59 haskell-crypton-conduit_0.2.3-2 (all, sid, previous: 0.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-network-conduit-tls_1.4.0.1-1 (all, sid, previous: 1.4.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-tar-conduit_0.4.1-1 (all, sid, previous: 0.4.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:05:59 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:05:59 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:05:59 haskell-simple-sendfile_0.2.32-3 (all, sid, previous: 0.2.32-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-pager_0.1.1.0-2 (all, sid, previous: 0.1.1.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-shell-conduit_5.0.0-3 (all, sid, previous: 5.0.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-cryptonite-conduit_0.2.2-8 (all, sid, previous: 0.2.2-8, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-monad-logger_0.3.40-2 (all, sid, previous: 0.3.40-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-project-template_0.2.1.0-4 (all, sid, previous: 0.2.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-secret-sharing_1.0.1.2-4 (all, sid, previous: 1.0.1.2-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-xml-conduit_1.9.1.3-2 (all, sid, previous: 1.9.1.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-classy-prelude-conduit_1.5.0-5 (all, sid, previous: 1.5.0-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-yaml_0.11.11.2-2 (all, sid, previous: 0.11.11.2-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-http-reverse-proxy_0.6.1.0-1 (all, sid, previous: 0.6.1.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.27070-mldKi
+merge-v3 2024 дек 31 12:05:59 haskell-crypton-conduit_0.2.3-2;b1 (amd64, sid, previous: 0.2.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:05:59 haskell-shell-conduit_5.0.0-3;b1 (amd64, sid, previous: 5.0.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-cryptonite-conduit_0.2.2-8;b1 (amd64, sid, previous: 0.2.2-8, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-classy-prelude-conduit_1.5.0-5;b1 (amd64, sid, previous: 1.5.0-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-tar-conduit_0.4.1-1;b1 (amd64, sid, previous: 0.4.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-pager_0.1.1.0-2;b1 (amd64, sid, previous: 0.1.1.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-secret-sharing_1.0.1.2-4;b1 (amd64, sid, previous: 1.0.1.2-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-monad-logger_0.3.40-2;b1 (amd64, sid, previous: 0.3.40-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:05:59 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:05:59 haskell-http-reverse-proxy_0.6.1.0-1;b1 (amd64, sid, previous: 0.6.1.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-simple-sendfile_0.2.32-3 (amd64, sid, previous: 0.2.32-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-yaml_0.11.11.2-2;b1 (amd64, sid, previous: 0.11.11.2-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-project-template_0.2.1.0-4;b1 (amd64, sid, previous: 0.2.1.0-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-xml-conduit_1.9.1.3-2;b1 (amd64, sid, previous: 1.9.1.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:05:59 haskell-network-conduit-tls_1.4.0.1-1;b1 (amd64, sid, previous: 1.4.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.27071-gscka
+dose-builddebcheck changed state of haskell-feed_1.3.2.1-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hledger-lib_1.32.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-html-conduit_1.3.2.2-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-persistent_2.14.6.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-citeproc_0.8.1.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-skylighting-core_0.14.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-xml-hamlet_0.5.0.2-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-mustache_2.4.2-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-haskell-gi_0.26.12-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hpack_0.36.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-tagstream-conduit_0.5.6-4 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-dbus_1.3.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-rio-orphans_0.1.2.0-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-diff_1.1.0.13-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-warp_3.3.31-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-markdown_0.1.17.5-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-clash-lib_1.8.1-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hledger-lib_1.32.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-persistent_2.14.6.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-rio-orphans_0.1.2.0-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-mustache_2.4.2-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-markdown_0.1.17.5-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-citeproc_0.8.1.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-feed_1.3.2.1-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-skylighting-core_0.14.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-aeson-diff_1.1.0.13-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hpack_0.36.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-dbus_1.3.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-html-conduit_1.3.2.2-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-clash-lib_1.8.1-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-xml-hamlet_0.5.0.2-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-warp_3.3.31-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-haskell-gi_0.26.12-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-tagstream-conduit_0.5.6-4 (amd64) to Needs-Build
+AMD64
+misc/haskell-aeson-diff_1.1.0.13-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-citeproc_0.8.1.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-clash-lib_1.8.1-2 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-dbus_1.3.3-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-feed_1.3.2.1-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-haskell-gi_0.26.12-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-hledger-lib_1.32.3-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-hpack_0.36.1-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-html-conduit_1.3.2.2-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-markdown_0.1.17.5-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-mustache_2.4.2-2 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-persistent_2.14.6.3-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-rio-orphans_0.1.2.0-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-skylighting-core_0.14.3-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-tagstream-conduit_0.5.6-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-warp_3.3.31-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-xml-hamlet_0.5.0.2-3 [source:uncompiled:calprio{18}:days{0}]
+Total 17 package(s)
+ALL
+misc/haskell-aeson-diff_1.1.0.13-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-citeproc_0.8.1.1-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-clash-lib_1.8.1-2 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-dbus_1.3.3-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-feed_1.3.2.1-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-haskell-gi_0.26.12-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-hledger-lib_1.32.3-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-hpack_0.36.1-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-html-conduit_1.3.2.2-3 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-markdown_0.1.17.5-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-mustache_2.4.2-2 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-persistent_2.14.6.3-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-rio-orphans_0.1.2.0-3 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-skylighting-core_0.14.3-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-tagstream-conduit_0.5.6-4 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-warp_3.3.31-1 [source:uncompiled:calprio{18}:days{0}]
+misc/haskell-xml-hamlet_0.5.0.2-3 [source:uncompiled:calprio{18}:days{0}]
+Total 17 package(s)

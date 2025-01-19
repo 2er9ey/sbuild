@@ -1,0 +1,139 @@
+>>> AMD64
+haskell-aeson-warning-parser -> 0.1.1-1
+New stage for adaptation
+haskell-bv-sized -> 1.0.5-2
+New stage for adaptation
+haskell-cborg-json -> 0.2.6.0-1
+New stage for adaptation
+haskell-diagrams-svg -> 1.4.3.2-1
+New stage for adaptation
+haskell-haxr -> 3000.11.5.1-1
+New stage for adaptation
+haskell-hslua -> 2.3.1-1
+haskell-hslua-module-path -> 1.1.1-1
+New stage for adaptation
+haskell-hslua-module-system -> 1.1.2-1
+New stage for adaptation
+haskell-hslua-module-text -> 1.1.1-1
+New stage for adaptation
+haskell-hslua-module-version -> 1.1.1-1
+New stage for adaptation
+haskell-http-link-header -> 1.2.1-3
+New stage for adaptation
+haskell-http2 -> 5.0.1-1
+New stage for adaptation
+haskell-iso8601-time -> 0.1.5-6
+New stage for adaptation
+haskell-lambdahack -> 0.11.0.1-1
+New stage for adaptation
+haskell-servant-client -> 0.20.2-1
+haskell-snap -> 1.1.3.3-1
+haskell-src-exts-util -> 0.2.5-5
+New stage for adaptation
+haskell-tasty-checklist -> 1.0.6.0-2
+New stage for adaptation
+haskell-vector-algorithms -> 0.9.0.2-1
+New stage for adaptation
+haskell-wreq -> 0.5.4.3-1
+New stage for adaptation
+>>> ALL
+haskell-aeson-warning-parser -> 0.1.1-1
+haskell-bv-sized -> 1.0.5-2
+haskell-cborg-json -> 0.2.6.0-1
+haskell-diagrams-svg -> 1.4.3.2-1
+haskell-haxr -> 3000.11.5.1-1
+haskell-hslua -> 2.3.1-1
+haskell-hslua-module-path -> 1.1.1-1
+haskell-hslua-module-system -> 1.1.2-1
+haskell-hslua-module-text -> 1.1.1-1
+haskell-hslua-module-version -> 1.1.1-1
+haskell-http-link-header -> 1.2.1-3
+haskell-http2 -> 5.0.1-1
+haskell-iso8601-time -> 0.1.5-6
+haskell-lambdahack -> 0.11.0.1-1
+haskell-servant-client -> 0.20.2-1
+haskell-snap -> 1.1.3.3-1
+haskell-src-exts-util -> 0.2.5-5
+haskell-tasty-checklist -> 1.0.6.0-2
+haskell-vector-algorithms -> 0.9.0.2-1
+haskell-wreq -> 0.5.4.3-1
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:03:15 haskell-http-link-header_1.2.1-3 (all, sid, previous: 1.2.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-cborg-json_0.2.6.0-1 (all, sid, previous: 0.2.6.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-version_1.1.1-1 (all, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-haxr_3000.11.5.1-1 (all, sid, previous: 3000.11.5.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-vector-algorithms_0.9.0.2-1 (all, sid, previous: 0.9.0.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:03:15 haskell-lambdahack_0.11.0.1-1 (all, sid, previous: 0.11.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-system_1.1.2-1 (all, sid, previous: 1.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-diagrams-svg_1.4.3.2-1 (all, sid, previous: 1.4.3.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-iso8601-time_0.1.5-6 (all, sid, previous: 0.1.5-6, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-snap_1.1.3.3-1 (all, sid, previous: 1.1.3.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-servant-client_0.20.2-1 (all, sid, previous: 0.20.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-text_1.1.1-1 (all, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-src-exts-util_0.2.5-5 (all, sid, previous: 0.2.5-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-tasty-checklist_1.0.6.0-2 (all, sid, previous: 1.0.6.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-aeson-warning-parser_0.1.1-1 (all, sid, previous: 0.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-bv-sized_1.0.5-2 (all, sid, previous: 1.0.5-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-wreq_0.5.4.3-1 (all, sid, previous: 0.5.4.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-path_1.1.1-1 (all, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:03:15 haskell-http2_5.0.1-1 (all, sid, previous: 5.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua_2.3.1-1 (all, sid, previous: 2.3.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.26244-0p1qA
+merge-v3 2024 дек 31 12:03:15 haskell-diagrams-svg_1.4.3.2-1;b2 (amd64, sid, previous: 1.4.3.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-src-exts-util_0.2.5-5;b1 (amd64, sid, previous: 0.2.5-5, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-snap_1.1.3.3-1;b2 (amd64, sid, previous: 1.1.3.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:03:15 haskell-haxr_3000.11.5.1-1 (amd64, sid, previous: 3000.11.5.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-aeson-warning-parser_0.1.1-1 (amd64, sid, previous: 0.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:03:15 haskell-servant-client_0.20.2-1;b1 (amd64, sid, previous: 0.20.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-http2_5.0.1-1 (amd64, sid, previous: 5.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-tasty-checklist_1.0.6.0-2;b2 (amd64, sid, previous: 1.0.6.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-iso8601-time_0.1.5-6 (amd64, sid, previous: 0.1.5-6, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-cborg-json_0.2.6.0-1 (amd64, sid, previous: 0.2.6.0-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-lambdahack_0.11.0.1-1;b1 (amd64, sid, previous: 0.11.0.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-version_1.1.1-1 (amd64, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-path_1.1.1-1;b2 (amd64, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:03:15 haskell-http-link-header_1.2.1-3;b1 (amd64, sid, previous: 1.2.1-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-text_1.1.1-1;b2 (amd64, sid, previous: 1.1.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua_2.3.1-1 (amd64, sid, previous: 2.3.1-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-wreq_0.5.4.3-1;b2 (amd64, sid, previous: 0.5.4.3-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-hslua-module-system_1.1.2-1;b2 (amd64, sid, previous: 1.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-vector-algorithms_0.9.0.2-1 (amd64, sid, previous: 0.9.0.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:03:15 haskell-bv-sized_1.0.5-2;b2 (amd64, sid, previous: 1.0.5-2, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.26245-hi9qg
+dose-builddebcheck changed state of haskell-pandoc-lua-marshal_0.2.9-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-dense-linear-algebra_0.1.0.0-6 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-module-zip_1.1.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-module-doclayout_1.1.1.2-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-dhall_1.42.1-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-mono-traversable_1.0.20.0-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-dense-linear-algebra_0.1.0.0-6 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-module-doclayout_1.1.1.2-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-dhall_1.42.1-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of allure_0.11.0.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-mono-traversable_1.0.20.0-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-hslua-module-zip_1.1.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-pandoc-lua-marshal_0.2.9-1 (amd64) to Needs-Build
+AMD64
+misc/allure_0.11.0.0-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-dense-linear-algebra_0.1.0.0-6 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-dhall_1.42.1-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-module-doclayout_1.1.1.2-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-module-zip_1.1.3-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-mono-traversable_1.0.20.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-pandoc-lua-marshal_0.2.9-1 [optional:uncompiled:calprio{18}:days{0}]
+Total 7 package(s)
+ALL
+misc/haskell-dense-linear-algebra_0.1.0.0-6 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-dhall_1.42.1-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-module-doclayout_1.1.1.2-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-hslua-module-zip_1.1.3-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-mono-traversable_1.0.20.0-1 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-pandoc-lua-marshal_0.2.9-1 [optional:uncompiled:calprio{18}:days{0}]
+Total 6 package(s)

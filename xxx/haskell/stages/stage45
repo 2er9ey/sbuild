@@ -1,0 +1,11 @@
+agda
+bnfc
+gtk2hs-buildtools
+haskell-bytestring-lexing
+haskell-config-value
+haskell-ghc-lib-parser
+haskell-language-c-quote
+haskell-language-javascript
+haskell-language-python
+haskell-toml-parser
+haskell-yi-language

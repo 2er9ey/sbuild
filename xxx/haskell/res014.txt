@@ -1,0 +1,57 @@
+>>> AMD64
+haskell-acid-state -> 0.16.1.3-2
+New stage for adaptation
+haskell-crypton-x509-store -> 1.6.9-3
+New stage for adaptation
+haskell-gridtables -> 0.1.0.0-2
+New stage for adaptation
+haskell-ixset-typed -> 0.5.1.0-3
+New stage for adaptation
+haskell-x509-store -> 1.6.9-3
+New stage for adaptation
+>>> ALL
+haskell-acid-state -> 0.16.1.3-2
+haskell-crypton-x509-store -> 1.6.9-3
+haskell-gridtables -> 0.1.0.0-2
+haskell-ixset-typed -> 0.5.1.0-3
+haskell-x509-store -> 1.6.9-3
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 11:42:30 haskell-ixset-typed_0.5.1.0-3 (all, sid, previous: 0.5.1.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-gridtables_0.1.0.0-2 (all, sid, previous: 0.1.0.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-x509-store_1.6.9-3 (all, sid, previous: 1.6.9-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 11:42:30 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:42:30 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 11:42:30 haskell-acid-state_0.16.1.3-2 (all, sid, previous: 0.16.1.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-crypton-x509-store_1.6.9-3 (all, sid, previous: 1.6.9-3, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.20792-oxL6D
+merge-v3 2024 дек 31 11:42:30 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 11:42:30 haskell-acid-state_0.16.1.3-2;b1 (amd64, sid, previous: 0.16.1.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-crypton-x509-store_1.6.9-3 (amd64, sid, previous: 1.6.9-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-ixset-typed_0.5.1.0-3;b1 (amd64, sid, previous: 0.5.1.0-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 11:42:30 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 11:42:30 haskell-x509-store_1.6.9-3 (amd64, sid, previous: 1.6.9-3, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 11:42:30 haskell-gridtables_0.1.0.0-2 (amd64, sid, previous: 0.1.0.0-2, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.20793-c5zwL
+dose-builddebcheck changed state of haskell-x509-system_1.6.7-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-crypton-x509-validation_1.6.12-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-x509-validation_1.6.12-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-crypton-x509-system_1.6.7-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-crypton-x509-validation_1.6.12-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-x509-validation_1.6.12-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-crypton-x509-system_1.6.7-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-x509-system_1.6.7-3 (amd64) to Needs-Build
+AMD64
+misc/haskell-crypton-x509-system_1.6.7-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-crypton-x509-validation_1.6.12-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509-system_1.6.7-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509-validation_1.6.12-3 [optional:uncompiled:calprio{18}:days{0}]
+Total 4 package(s)
+ALL
+misc/haskell-crypton-x509-system_1.6.7-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-crypton-x509-validation_1.6.12-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509-system_1.6.7-3 [optional:uncompiled:calprio{18}:days{0}]
+misc/haskell-x509-validation_1.6.12-3 [optional:uncompiled:calprio{18}:days{0}]
+Total 4 package(s)

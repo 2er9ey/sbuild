@@ -1,0 +1,16 @@
+haskell-brick
+haskell-cassava-megaparsec
+haskell-futhark-server
+haskell-hslua-marshalling
+haskell-hslua-repl
+haskell-http-api-data
+haskell-http-client
+haskell-inline-c
+haskell-input-parsers
+haskell-prettyprinter-interp
+haskell-semialign
+haskell-tasty-hslua
+haskell-text-builder-dev
+haskell-time-parsers
+haskell-wai
+haskell-witherable

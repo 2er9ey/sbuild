@@ -1,0 +1,9 @@
+ghc
+haskell-devscripts
+happy
+alex
+dh-buildinfo  -> debhelper 13.23(!!!)
+
+pandoc -> dh-buildinfo  -> debhelper 13.23(!!!)
+
+uuagc

@@ -1,0 +1,8 @@
+cabal-debian
+haskell-copilot-libraries
+haskell-gtk-sni-tray
+haskell-gtk-traymanager
+haskell-hopenpgp-tools
+haskell-yi-frontend-pango
+xmonad-contrib
+xmonad-wallpaper

@@ -1,0 +1,11 @@
+haskell-from-sum
+haskell-glut
+haskell-hashable
+haskell-hdbc-session
+haskell-hspec-contrib
+haskell-lumberjack
+haskell-optparse-applicative
+haskell-prettyprinter-compat-ansi-wl-pprint
+haskell-vty-crossplatform
+hdbc-postgresql
+hdbc-sqlite3

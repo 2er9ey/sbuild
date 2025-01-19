@@ -1,0 +1,67 @@
+>>> AMD64
+haskell-gi-gdkpixbuf -> 2.0.32-1
+New stage for adaptation
+haskell-gi-pango -> 1.0.30-1
+New stage for adaptation
+haskell-lambdabot-haskell-plugins -> 5.3.1.2-1
+New stage for adaptation
+haskell-pantry -> 0.9.3.2-1
+New stage for adaptation
+haskell-wai-cors -> 0.2.7-4
+New stage for adaptation
+haskell-yesod-form -> 1.7.6-2
+New stage for adaptation
+mighttpd2 -> 4.0.3-2
+New stage for adaptation
+>>> ALL
+haskell-gi-gdkpixbuf -> 2.0.32-1
+haskell-gi-pango -> 1.0.30-1
+haskell-lambdabot-haskell-plugins -> 5.3.1.2-1
+haskell-pantry -> 0.9.3.2-1
+haskell-wai-cors -> 0.2.7-4
+haskell-yesod-form -> 1.7.6-2
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on amd64 - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#amd64#--dist=sid#Packages-amd64#.#Sources
+wanna-build 9dd4fc4907a3df1e59442b2b6da38d27067eeeb7 for sid on all - -v#--Pas#/srv/wanna-build/etc/Packages-arch-specific#--merge-v3#-A#all#--dist=sid#Packages-amd64#.#Sources
+merge-v3 2024 дек 31 12:09:50 haskell-lambdabot-haskell-plugins_5.3.1.2-1 (all, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 gtk+3.0_3.24.43-4 (all, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:09:50 haskell-pantry_0.9.3.2-1 (all, sid, previous: 0.9.3.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 gcc-13_13.3.0-11 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:09:50 haskell-wai-cors_0.2.7-4 (all, sid, previous: 0.2.7-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 gcc-14-cross_7 (all, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:09:50 haskell-gi-gdkpixbuf_2.0.32-1 (all, sid, previous: 2.0.32-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-gi-pango_1.0.30-1 (all, sid, previous: 1.0.30-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-yesod-form_1.7.6-2 (all, sid, previous: 1.7.6-2, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.28745-A5DJ0
+merge-v3 2024 дек 31 12:09:50 mighttpd2_4.0.3-2 (amd64, sid, previous: 4.0.3-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-wai-cors_0.2.7-4 (amd64, sid, previous: 0.2.7-4, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-gi-gdkpixbuf_2.0.32-1;b1 (amd64, sid, previous: 2.0.32-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-pantry_0.9.3.2-1 (amd64, sid, previous: 0.9.3.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 gcc-14-cross_7 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-14-x86-64-linux-gnu, 7 vs. 14.2.0-8)
+merge-v3 2024 дек 31 12:09:50 haskell-lambdabot-haskell-plugins_5.3.1.2-1;b1 (amd64, sid, previous: 5.3.1.2-1, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 gtk+3.0_3.24.43-4 (amd64, sid): skipped because binaries (assumed to be) overwritten (gtk-update-icon-cache, 3.24.43-4 vs. 4.16.7+ds-1)
+merge-v3 2024 дек 31 12:09:50 gcc-13_13.3.0-11 (amd64, sid): skipped because binaries (assumed to be) overwritten (gcc-13-alpha-linux-gnu, 13.3.0-11 vs. 19)
+merge-v3 2024 дек 31 12:09:50 haskell-yesod-form_1.7.6-2;b1 (amd64, sid, previous: 1.7.6-2, Needs-Build/uncompiled): set to Installed/uncompiled
+merge-v3 2024 дек 31 12:09:50 haskell-gi-pango_1.0.30-1;b1 (amd64, sid, previous: 1.0.30-1, Needs-Build/uncompiled): set to Installed/uncompiled
+calling: dose-builddebcheck --failures --explain --quiet --deb-emulate-sbuild --deb-native-arch=amd64 --deb-cputable=/srv/wanna-build/etc/dpkg/cputable --deb-tupletable=/srv/wanna-build/etc/dpkg/tupletable Packages-amd64 /tmp/wanna-build-interesting-sources-sid.28746-1fQgY
+dose-builddebcheck changed state of haskell-yesod-test_1.6.16-2 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-gi-gdk_3.0.29-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yesod-auth_1.6.11.3-1 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yesod_1.6.2.1-3 (all) to Needs-Build
+dose-builddebcheck changed state of haskell-yesod_1.6.2.1-3 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-yesod-auth_1.6.11.3-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-yesod-test_1.6.16-2 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-gi-gdk_3.0.29-1 (amd64) to Needs-Build
+dose-builddebcheck changed state of haskell-stack_2.15.7-1 (amd64) to Needs-Build
+AMD64
+misc/haskell-gi-gdk_3.0.29-1 [extra:uncompiled:calprio{18}:days{0}]
+misc/haskell-stack_2.15.7-1 [optional:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod_1.6.2.1-3 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod-auth_1.6.11.3-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod-test_1.6.16-2 [source:uncompiled:calprio{18}:days{0}]
+Total 5 package(s)
+ALL
+misc/haskell-gi-gdk_3.0.29-1 [extra:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod_1.6.2.1-3 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod-auth_1.6.11.3-1 [source:uncompiled:calprio{18}:days{0}]
+haskell/haskell-yesod-test_1.6.16-2 [source:uncompiled:calprio{18}:days{0}]
+Total 4 package(s)

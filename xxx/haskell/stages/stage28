@@ -1,0 +1,17 @@
+haskell-aeson
+haskell-authenticate-oauth
+haskell-chart
+haskell-clash-prelude
+haskell-hslua-classes
+haskell-hslua-cli
+haskell-hslua-typing
+haskell-http-client-tls
+haskell-incremental-parser
+haskell-lens-action
+haskell-linear
+haskell-log-domain
+haskell-tasty-lua
+haskell-trifecta
+haskell-vector-instances
+haskell-wai-logger
+haskell-wai-middleware-static

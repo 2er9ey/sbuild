@@ -1,0 +1,7 @@
+haskell-assert-failure
+haskell-genvalidity-property
+haskell-hedgehog
+haskell-src-exts-simple
+haskell-src-meta
+haskell-tasty-th
+shelltestrunner

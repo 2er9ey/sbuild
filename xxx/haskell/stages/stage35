@@ -1,0 +1,14 @@
+haskell-classy-prelude-conduit
+haskell-crypton-conduit
+haskell-cryptonite-conduit
+haskell-http-reverse-proxy
+haskell-monad-logger
+haskell-network-conduit-tls
+haskell-pager
+haskell-project-template
+haskell-secret-sharing
+haskell-shell-conduit
+haskell-simple-sendfile
+haskell-tar-conduit
+haskell-xml-conduit
+haskell-yaml
