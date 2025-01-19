@@ -37,6 +37,7 @@ MODULES =			\
 	ChrootInfo.pm		\
 	ChrootInfoSchroot.pm	\
 	ChrootInfoSudo.pm	\
+	ChrootInfoPlain.pm	\
 	ChrootInfoAutopkgtest.pm \
 	ChrootInfoUnshare.pm	\
 	Exception.pm		\

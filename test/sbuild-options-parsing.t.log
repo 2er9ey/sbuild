@@ -1,0 +1,346 @@
+# Subtest: setup-hook=s as argument setup-hook
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 1 - setup-hook=s as argument setup-hook
+# Subtest: profiles=s as argument profiles
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 2 - profiles=s as argument profiles
+# Subtest: build=s as argument build
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 3 - build=s as argument build
+# Subtest: chroot-update-failed-commands=s as argument chroot-update-failed-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 4 - chroot-update-failed-commands=s as argument chroot-update-failed-commands
+# Subtest: post-build-failed-commands=s as argument post-build-failed-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 5 - post-build-failed-commands=s as argument post-build-failed-commands
+# Subtest: finished-build-commands=s as argument finished-build-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 6 - finished-build-commands=s as argument finished-build-commands
+# Subtest: build-deps-failed-commands=s as argument build-deps-failed-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 7 - build-deps-failed-commands=s as argument build-deps-failed-commands
+# Subtest: chroot-setup-commands=s as argument chroot-setup-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 8 - chroot-setup-commands=s as argument chroot-setup-commands
+# Subtest: build-failed-commands=s as argument build-failed-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 9 - build-failed-commands=s as argument build-failed-commands
+# Subtest: extra-package=s as argument extra-package
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 10 - extra-package=s as argument extra-package
+# Subtest: pre-build-commands=s as argument pre-build-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 11 - pre-build-commands=s as argument pre-build-commands
+# Subtest: arch-any as argument arch-any
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 12 - arch-any as argument arch-any
+# Subtest: chroot-cleanup-commands=s as argument chroot-cleanup-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 13 - chroot-cleanup-commands=s as argument chroot-cleanup-commands
+# Subtest: add-conflicts=s as argument add-conflicts
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 14 - add-conflicts=s as argument add-conflicts
+# Subtest: add-depends=s as argument add-depends
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 15 - add-depends=s as argument add-depends
+# Subtest: extra-repository=s as argument extra-repository
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 16 - extra-repository=s as argument extra-repository
+# Subtest: starting-build-commands=s as argument starting-build-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 17 - starting-build-commands=s as argument starting-build-commands
+# Subtest: extra-repository-key=s as argument extra-repository-key
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 18 - extra-repository-key=s as argument extra-repository-key
+# Subtest: arch=s as argument arch
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 19 - arch=s as argument arch
+# Subtest: host=s as argument host
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 20 - host=s as argument host
+# Subtest: post-build-commands=s as argument post-build-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 21 - post-build-commands=s as argument post-build-commands
+# Subtest: j|jobs=i as argument jobs
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 22 - j|jobs=i as argument jobs
+# Subtest: A|arch-all as argument arch-all
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1
+    1..1
+ok 23 - A|arch-all as argument arch-all
+# Subtest: anything-failed-commands=s as argument anything-failed-commands
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value
+    1..1
+ok 24 - anything-failed-commands=s as argument anything-failed-commands
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 25 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 26 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 27 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 28 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 29 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 30 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 31 - arguments
+# Subtest: arguments
+The Debian buildds switched to the "unshare" backend and sbuild will default to it in the future.
+To start using "unshare" add this to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "unshare";
+If you want to keep the old "schroot" mode even in the future, add the following to your `~/.config/sbuild/config.pl`:
+	$chroot_mode = "schroot";
+	$schroot = "schroot";
+    ok 1 - check option value value1
+    ok 2 - check option value value2
+    ok 3 - check option value value3
+    ok 4 - check option value value4
+    1..4
+ok 32 - arguments
+1..32
+PASS sbuild-options-parsing.t (exit status: 0)

@@ -1,6 +1,6 @@
 #
-# ChrootInfo.pm: chroot utility library for sbuild
-# Copyright © 2005-2006 Roger Leigh <rleigh@debian.org>
+# ChrootInfoUnshare.pm: chroot utility library for sbuild
+# Copyright © 2018      Johannes Schauer Marin Rodrigues <josch@debian.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
 #
 #######################################################################
 
-package Sbuild::ChrootInfoPlain;
+package Sbuild::ChrootInfoUnshare;
 
 use Sbuild::ChrootInfo;
-use Sbuild::ChrootPlain;
+use Sbuild::ChrootUnshare;
 
 use strict;
 use warnings;
@@ -45,41 +45,47 @@ sub new {
     return $self;
 }
 
-sub get_info {
-    my $self = shift;
-    my $chroot = shift;
-
-    $chroot =~ /(\S+):(\S+)/;
-    my ($namespace, $chrootname) = ($1, $2);
-
-    my $info = undef;
-
-    if (exists($self->get('Chroots')->{$namespace}) &&
-	defined($self->get('Chroots')->{$namespace}) &&
-	exists($self->get('Chroots')->{$namespace}->{$chrootname})) {
-	$info = $self->get('Chroots')->{$namespace}->{$chrootname}
-    }
-
-    return $info;
-}
-
 sub get_info_all {
     my $self = shift;
 
     my $chroots = {};
-    # All sudo chroots are in the chroot namespace.
-    my $namespace = "chroot";
-    $chroots->{$namespace} = {};
+
+    my $xdg_cache_home = $self->get_conf('HOME') . "/.cache/sbuild";
+    if (length($ENV{'XDG_CACHE_HOME'})) {
+        $xdg_cache_home = $ENV{'XDG_CACHE_HOME'} . '/sbuild';
+    }
+
+    my $num_found = 0;
+    if (opendir my $dh, $xdg_cache_home) {
+	while (defined(my $file = readdir $dh)) {
+	    next if $file eq '.' || $file eq '..';
+	    next if $file !~ /^[^-]+-[^-]+(-[^-]+)?(-sbuild)?\.t.+$/;
+	    next if ! -d "$xdg_cache_home/$file" && -z "$xdg_cache_home/$file";
+	    my $isdir = -d "$xdg_cache_home/$file";
+	    $file =~ s/\.t.+$//; # chop off extension
+	    if (! $isdir) {
+		$chroots->{'chroot'}->{$file} = 1;
+	    }
+	    $chroots->{'source'}->{$file} = 1;
+	    $num_found += 1;
+	}
+	closedir $dh;
+    }
+
+    if ($num_found == 0) {
+	print STDERR "I: No tarballs found in $xdg_cache_home\n";
+    }
 
     $self->set('Chroots', $chroots);
 }
 
 sub _create {
-    my $self = shift;
+    my $self      = shift;
     my $chroot_id = shift;
 
-    my $chroot =  Sbuild::ChrootPlain->new($self->get('Config'), '/');
-    $self->set('Split', 0);
+    my $chroot = undef;
+
+    $chroot = Sbuild::ChrootUnshare->new($self->get('Config'), $chroot_id);
 
     return $chroot;
 }

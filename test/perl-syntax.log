@@ -1,0 +1,124 @@
+Checking /home/user/ssbuild/sbuild/bin/buildd
+Subroutine Buildd::Daemon::getcwd redefined at /usr/lib/x86_64-linux-gnu/perl-base/Exporter.pm line 63.
+ at /home/user/ssbuild/sbuild/lib/Buildd/Daemon.pm line 35.
+/home/user/ssbuild/sbuild/bin/buildd syntax OK
+Checking /home/user/ssbuild/sbuild/bin/buildd-mail
+/home/user/ssbuild/sbuild/bin/buildd-mail syntax OK
+Checking /home/user/ssbuild/sbuild/bin/buildd-uploader
+/home/user/ssbuild/sbuild/bin/buildd-uploader syntax OK
+Checking /home/user/ssbuild/sbuild/bin/buildd-vlog
+/home/user/ssbuild/sbuild/bin/buildd-vlog syntax OK
+Checking /home/user/ssbuild/sbuild/bin/buildd-watcher
+/home/user/ssbuild/sbuild/bin/buildd-watcher syntax OK
+Checking /home/user/ssbuild/sbuild/bin/check-old-builds
+/home/user/ssbuild/sbuild/bin/check-old-builds syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild
+Subroutine main::getcwd redefined at /home/user/ssbuild/sbuild/bin/sbuild line 34.
+Constant subroutine Sbuild::Build::ENOENT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENAMETOOLONG redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EDESTADDRREQ redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EINVAL redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOBUFS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ETIMEDOUT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EPFNOSUPPORT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ESRCH redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EOPNOTSUPP redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EMFILE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTCONN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENODEV redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOSYS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EINTR redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EREMOTE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::E2BIG redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ELOOP redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOSPC redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EAGAIN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EROFS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ECHILD redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EDEADLK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOPROTOOPT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ESTALE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EPROTOTYPE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EMSGSIZE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ESOCKTNOSUPPORT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOMEM redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EBUSY redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EEXIST redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EFAULT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EMLINK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTBLK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ERANGE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EXDEV redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EALREADY redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENXIO redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTEMPTY redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EDQUOT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EBADF redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ECONNREFUSED redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTSOCK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EPROTONOSUPPORT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EAFNOSUPPORT redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EISDIR redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EADDRNOTAVAIL redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EDOM redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENFILE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EISCONN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ECONNRESET redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTTY redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EUSERS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EHOSTDOWN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOLCK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ECONNABORTED redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENETDOWN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ETXTBSY redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOTDIR redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EFBIG redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EIO redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ESPIPE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EWOULDBLOCK redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EPIPE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENETRESET redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EHOSTUNREACH redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EADDRINUSE redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EINPROGRESS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENETUNREACH redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EACCES redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ERESTART redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ESHUTDOWN redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ENOEXEC redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::ETOOMANYREFS redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+Constant subroutine Sbuild::Build::EPERM redefined at /home/user/ssbuild/sbuild/bin/sbuild line 41.
+/home/user/ssbuild/sbuild/bin/sbuild syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-abort
+/home/user/ssbuild/sbuild/bin/sbuild-abort syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-adduser
+/home/user/ssbuild/sbuild/bin/sbuild-adduser syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-apt
+/home/user/ssbuild/sbuild/bin/sbuild-apt syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-checkpackages
+/home/user/ssbuild/sbuild/bin/sbuild-checkpackages syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-clean
+/home/user/ssbuild/sbuild/bin/sbuild-clean syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-createchroot
+/home/user/ssbuild/sbuild/bin/sbuild-createchroot syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-cross-resolver
+/home/user/ssbuild/sbuild/bin/sbuild-cross-resolver syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-debian-developer-setup
+/home/user/ssbuild/sbuild/bin/sbuild-debian-developer-setup syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-destroychroot
+/home/user/ssbuild/sbuild/bin/sbuild-destroychroot syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-distupgrade
+/home/user/ssbuild/sbuild/bin/sbuild-distupgrade syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-hold
+/home/user/ssbuild/sbuild/bin/sbuild-hold syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-shell
+/home/user/ssbuild/sbuild/bin/sbuild-shell syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-unhold
+/home/user/ssbuild/sbuild/bin/sbuild-unhold syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-update
+/home/user/ssbuild/sbuild/bin/sbuild-update syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-upgrade
+/home/user/ssbuild/sbuild/bin/sbuild-upgrade syntax OK
+Checking /home/user/ssbuild/sbuild/bin/sbuild-usernsexec
+/home/user/ssbuild/sbuild/bin/sbuild-usernsexec syntax OK
+PASS perl-syntax (exit status: 0)

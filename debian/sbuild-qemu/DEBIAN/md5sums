@@ -1,0 +1,12 @@
+a53e3e9f9d684f77d6f046f51f66dc68  usr/bin/sbuild-qemu
+104d00cd571f1cfa46cc83e9955e1d5f  usr/bin/sbuild-qemu-boot
+9ccaad6408a42f31308431311eed939a  usr/bin/sbuild-qemu-create
+b4810ef2f067f1715cbd903d487c5266  usr/bin/sbuild-qemu-update
+be8d599f3ca84702b0931974a207df46  usr/share/doc/sbuild-qemu/NEWS.Debian.gz
+c7c740d5ef7e77ef490a9a63c7ffe341  usr/share/doc/sbuild-qemu/changelog.gz
+2f1da94ddba701a1d19fbd2d5629774c  usr/share/doc/sbuild-qemu/copyright
+252671c7d348eb63baa4f67aba124e8e  usr/share/man/man1/sbuild-qemu-boot.1.gz
+3dd82055c4c8ba4b82b19251b9ddc50e  usr/share/man/man1/sbuild-qemu-create.1.gz
+e1fb132df48fc1c19a5912a8ef5b20f8  usr/share/man/man1/sbuild-qemu-update.1.gz
+a98375a62d32f3b55851f713e13e51b7  usr/share/man/man1/sbuild-qemu.1.gz
+c5dfc88831b01ea42a89dbd1eb4671cd  usr/share/sbuild/sbuild-qemu-create-modscript

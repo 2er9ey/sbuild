@@ -18,10 +18,10 @@
 #
 #######################################################################
 
-package Sbuild::ChrootInfoPlain;
+package Sbuild::ChrootInfoSudo;
 
 use Sbuild::ChrootInfo;
-use Sbuild::ChrootPlain;
+use Sbuild::ChrootSudo;
 
 use strict;
 use warnings;
@@ -71,6 +71,36 @@ sub get_info_all {
     my $namespace = "chroot";
     $chroots->{$namespace} = {};
 
+    my $build_dir = $self->get_conf('BUILD_DIR');
+
+    # TODO: Configure $build_dir as $sudo_chroot_dir
+    foreach (glob($self->get_conf('SBUILD_MODE') eq "user" ?
+		  "/etc/sbuild/chroot/*" :
+		  "$build_dir/chroot-*")) {
+	my %tmp = ('Priority' => 0,
+		   'Location' => $_,
+		   'Session Purged' => 0);
+	if (-d $tmp{'Location'}) {
+	    my $name = $_;
+	    if ($self->get_conf('SBUILD_MODE') eq "user") {
+		$name =~ s/^\/etc\/sbuild\/chroot\///;
+	    } else {
+		$name =~ s/\Q${build_dir}\/chroot-\E//;
+	    }
+	    if ($self->get_conf('DEBUG')) {
+		print STDERR "Found chroot $name\n";
+		foreach (sort keys %tmp) {
+		    print STDERR "  $_ $tmp{$_}\n";
+		}
+	    }
+
+	    $tmp{'Name'} = $name;
+	    $tmp{'Namespace'} = $namespace;
+
+	    $chroots->{$namespace}->{$name} = \%tmp;
+	}
+    }
+
     $self->set('Chroots', $chroots);
 }
 
@@ -78,8 +108,11 @@ sub _create {
     my $self = shift;
     my $chroot_id = shift;
 
-    my $chroot =  Sbuild::ChrootPlain->new($self->get('Config'), '/');
-    $self->set('Split', 0);
+    my $chroot = undef;
+
+    if (defined($chroot_id)) {
+	$chroot = Sbuild::ChrootSudo->new($self->get('Config'), $chroot_id);
+    }
 
     return $chroot;
 }

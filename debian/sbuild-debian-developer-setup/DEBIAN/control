@@ -1,0 +1,18 @@
+Package: sbuild-debian-developer-setup
+Source: sbuild
+Version: 0.88.2
+Architecture: all
+Maintainer: sbuild maintainers <sbuild@packages.debian.org>
+Installed-Size: 43
+Depends: apt-cacher-ng | apt-cacher, cron | cron-daemon, sbuild (>= 0.77.0-5), schroot, debootstrap, perl:any
+Breaks: sbuild (<< 0.77.0-5)
+Replaces: sbuild (<< 0.77.0-5)
+Section: devel
+Priority: optional
+Description: Convenience script to set up an sbuild environment for Debian Developers
+ Run "sudo sbuild-debian-developer-setup" to add the current user to the sbuild
+ group, create an schroot for building packages for Debian unstable, and create
+ a cronjob which updates said schroot daily.
+ .
+ This script assumes you are on an un-metered internet connection (daily schroot
+ updates might be costly otherwise).

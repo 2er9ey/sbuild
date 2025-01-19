@@ -1,6 +1,6 @@
 #
 # ChrootInfo.pm: chroot utility library for sbuild
-# Copyright © 2005-2006 Roger Leigh <rleigh@debian.org>
+# Copyright © 2005-2009 Roger Leigh <rleigh@debian.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
 #
 #######################################################################
 
-package Sbuild::ChrootInfoPlain;
+package Sbuild::ChrootInfoAutopkgtest;
 
 use Sbuild::ChrootInfo;
-use Sbuild::ChrootPlain;
+use Sbuild::ChrootAutopkgtest;
 
 use strict;
 use warnings;
@@ -45,31 +45,10 @@ sub new {
     return $self;
 }
 
-sub get_info {
-    my $self = shift;
-    my $chroot = shift;
-
-    $chroot =~ /(\S+):(\S+)/;
-    my ($namespace, $chrootname) = ($1, $2);
-
-    my $info = undef;
-
-    if (exists($self->get('Chroots')->{$namespace}) &&
-	defined($self->get('Chroots')->{$namespace}) &&
-	exists($self->get('Chroots')->{$namespace}->{$chrootname})) {
-	$info = $self->get('Chroots')->{$namespace}->{$chrootname}
-    }
-
-    return $info;
-}
-
 sub get_info_all {
     my $self = shift;
 
     my $chroots = {};
-    # All sudo chroots are in the chroot namespace.
-    my $namespace = "chroot";
-    $chroots->{$namespace} = {};
 
     $self->set('Chroots', $chroots);
 }
@@ -78,8 +57,9 @@ sub _create {
     my $self = shift;
     my $chroot_id = shift;
 
-    my $chroot =  Sbuild::ChrootPlain->new($self->get('Config'), '/');
-    $self->set('Split', 0);
+    my $chroot = undef;
+
+    $chroot = Sbuild::ChrootAutopkgtest->new($self->get('Config'), $chroot_id);
 
     return $chroot;
 }
